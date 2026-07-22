@@ -133,6 +133,22 @@ section{padding:96px 0;}
 .sponsor-card.cta{border-style:dashed; align-items:flex-start; justify-content:center;}
 .sponsor-card.cta a{font-size:13px; font-weight:700; color:var(--sky-deep); text-decoration:underline;}
 
+/* donate */
+.donate{background:var(--navy); color:#fff; border-top:4px solid var(--gold);}
+.donate-inner{display:grid; grid-template-columns:1.5fr 1fr; gap:64px; align-items:center;}
+@media (max-width:860px){ .donate-inner{grid-template-columns:1fr; gap:40px;} }
+.donate .eyebrow{color:var(--gold);}
+.donate h2{font-family:'Anton', sans-serif; font-size:clamp(28px,4vw,40px); text-transform:uppercase; letter-spacing:0.01em; margin:14px 0 16px;}
+.donate .lede{font-size:16px; line-height:1.75; color:rgba(255,255,255,0.82); max-width:56ch;}
+.donate-uses{list-style:none; margin:22px 0 0; display:grid; gap:10px;}
+.donate-uses li{position:relative; padding-left:24px; font-size:14.5px; line-height:1.6; color:rgba(255,255,255,0.85);}
+.donate-uses li::before{content:""; position:absolute; left:0; top:8px; width:9px; height:9px; background:var(--gold); transform:rotate(45deg);}
+.donate-cta{background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.14); border-radius:4px; padding:34px 30px; display:flex; flex-direction:column; gap:16px; align-items:flex-start;}
+.donate-cta .proj{font-family:'Anton', sans-serif; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--sky);}
+.donate-btn{background:var(--gold); color:var(--navy-deep) !important; font-family:'Anton', sans-serif; letter-spacing:0.05em; font-size:14px; padding:14px 28px; border-radius:3px; text-transform:uppercase; transition:background .15s ease, transform .15s ease;}
+.donate-btn:hover{background:#f0bd5e; transform:translateY(-1px);}
+.donate-cta .receipt{font-size:13px; line-height:1.6; color:rgba(255,255,255,0.65);}
+
 /* shop */
 .shop-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
 @media (max-width:720px){ .shop-grid{grid-template-columns:1fr;} }
@@ -361,6 +377,7 @@ footer{background:var(--navy-deep); border-top:1px solid rgba(255,255,255,0.08);
       <a href="programs.html">Programs</a>
       <a href="alumni.html">Alumni</a>
       <a href="index.html#sponsors">Sponsors</a>
+      <a href="index.html#donate">Donate</a>
       <a href="index.html#shop">Shop</a>
       <a href="resources.html">Resources</a>
       <a href="index.html#contact">Contact</a>
