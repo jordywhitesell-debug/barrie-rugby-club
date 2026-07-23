@@ -9,6 +9,46 @@ from sponsor_b64 import DONALEIGHS, WESTERN, MITSUBISHI, TODDSMITH
 with open(os.path.join(ASSET_DIR, 'logo_transparent_b64.txt')) as f:
     LOGO = 'data:image/png;base64,' + f.read().strip()
 
+# ---------------------------------------------------------------------------
+# ANNOUNCEMENT BANNER — edit these 4 lines and rerun the script to update
+# ---------------------------------------------------------------------------
+from string import Template
+
+ANNOUNCE_ENABLED = True
+ANNOUNCE_TEXT = "Download the official Rugby Canada app to follow Barrie Rugby Club scores, schedules, and news."
+ANNOUNCE_LINK = "https://get.playhq.com/apps/rugbycanada"
+ANNOUNCE_LINK_TEXT = "Download The App"
+ANNOUNCE_PAGES = {"home"}  # which page(s) show it: any of "home", "programs", "alumni", "resources"
+
+_ANNOUNCE_TEMPLATE = Template("""
+<div class="announce-bar" id="announceBar">
+  <div class="wrap">
+    <span class="msg">$TEXT</span>
+    <a class="cta" href="$LINK" target="_blank" rel="noopener">$LINK_TEXT &rarr;</a>
+    <button class="close" id="announceClose" aria-label="Dismiss announcement">&times;</button>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY = 'barrieAnnounceDismissed_v2';
+  var bar = document.getElementById('announceBar');
+  if(!bar) return;
+  try{
+    if(localStorage.getItem(KEY) === '1'){ bar.style.display = 'none'; return; }
+  }catch(e){}
+  var btn = document.getElementById('announceClose');
+  btn.addEventListener('click', function(){
+    bar.style.display = 'none';
+    try{ localStorage.setItem(KEY, '1'); }catch(e){}
+  });
+})();
+</script>
+""")
+
+ANNOUNCE_BAR = _ANNOUNCE_TEMPLATE.substitute(
+    TEXT=ANNOUNCE_TEXT, LINK=ANNOUNCE_LINK, LINK_TEXT=ANNOUNCE_LINK_TEXT
+) if ANNOUNCE_ENABLED else ""
+
 CSS = """
 :root{
   --navy: #142645; --navy-deep: #0c1a30;
@@ -308,6 +348,15 @@ footer{background:var(--navy-deep); border-top:1px solid rgba(255,255,255,0.08);
 .bchat-send{background:var(--navy); color:#fff; border:0; border-radius:6px; padding:0 16px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s ease;}
 .bchat-send:hover{background:var(--sky-deep);}
 .bchat-send:disabled{opacity:0.5; cursor:default;}
+
+/* announcement bar */
+.announce-bar{background:var(--gold); color:var(--navy-deep); position:relative; z-index:150;}
+.announce-bar .wrap{display:flex; align-items:center; justify-content:center; gap:18px; padding:11px 46px; flex-wrap:wrap; text-align:center; position:relative;}
+.announce-bar .msg{font-size:13.5px; font-weight:700; letter-spacing:0.01em;}
+.announce-bar .cta{font-family:'Anton', sans-serif; font-size:12px; letter-spacing:0.05em; text-transform:uppercase; text-decoration:underline; white-space:nowrap; color:var(--navy-deep) !important;}
+.announce-bar .close{position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:0; cursor:pointer; color:var(--navy-deep); font-size:20px; line-height:1; padding:4px 6px; opacity:0.65;}
+.announce-bar .close:hover{opacity:1;}
+@media (max-width:640px){ .announce-bar .wrap{padding:10px 40px 10px 16px; gap:10px;} .announce-bar .msg{font-size:12.5px;} }
 """
 
 HEAD = """<head>
@@ -474,6 +523,7 @@ CHAT_WIDGET = """
 # ---------------------------------------------------------------------------
 # INDEX.HTML
 # ---------------------------------------------------------------------------
+
 index_body = f"""
 <section class="hero">
   <div class="sash"><span></span><span></span></div>
@@ -943,10 +993,12 @@ resources_body = f"""
 """
 
 def page(title, active, body):
+    banner = ANNOUNCE_BAR if active in ANNOUNCE_PAGES else ""
     return f"""<!DOCTYPE html>
 <html lang="en">
 {HEAD.format(title=title, css=CSS)}
 <body>
+{banner}
 {nav(active)}
 {body}
 {FOOTER}

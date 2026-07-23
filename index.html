@@ -306,9 +306,42 @@ footer{background:var(--navy-deep); border-top:1px solid rgba(255,255,255,0.08);
 .bchat-send{background:var(--navy); color:#fff; border:0; border-radius:6px; padding:0 16px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s ease;}
 .bchat-send:hover{background:var(--sky-deep);}
 .bchat-send:disabled{opacity:0.5; cursor:default;}
+
+/* announcement bar */
+.announce-bar{background:var(--gold); color:var(--navy-deep); position:relative; z-index:150;}
+.announce-bar .wrap{display:flex; align-items:center; justify-content:center; gap:18px; padding:11px 46px; flex-wrap:wrap; text-align:center; position:relative;}
+.announce-bar .msg{font-size:13.5px; font-weight:700; letter-spacing:0.01em;}
+.announce-bar .cta{font-family:'Anton', sans-serif; font-size:12px; letter-spacing:0.05em; text-transform:uppercase; text-decoration:underline; white-space:nowrap; color:var(--navy-deep) !important;}
+.announce-bar .close{position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:0; cursor:pointer; color:var(--navy-deep); font-size:20px; line-height:1; padding:4px 6px; opacity:0.65;}
+.announce-bar .close:hover{opacity:1;}
+@media (max-width:640px){ .announce-bar .wrap{padding:10px 40px 10px 16px; gap:10px;} .announce-bar .msg{font-size:12.5px;} }
 </style>
 </head>
 <body>
+
+<div class="announce-bar" id="announceBar">
+  <div class="wrap">
+    <span class="msg">Download the official Rugby Canada app to follow Barrie Rugby Club scores, schedules, and news.</span>
+    <a class="cta" href="https://get.playhq.com/apps/rugbycanada" target="_blank" rel="noopener">Download The App &rarr;</a>
+    <button class="close" id="announceClose" aria-label="Dismiss announcement">&times;</button>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY = 'barrieAnnounceDismissed_v2';
+  var bar = document.getElementById('announceBar');
+  if(!bar) return;
+  try{
+    if(localStorage.getItem(KEY) === '1'){ bar.style.display = 'none'; return; }
+  }catch(e){}
+  var btn = document.getElementById('announceClose');
+  btn.addEventListener('click', function(){
+    bar.style.display = 'none';
+    try{ localStorage.setItem(KEY, '1'); }catch(e){}
+  });
+})();
+</script>
+
 <header>
   <nav class="wrap">
     <a class="brand" href="index.html">
