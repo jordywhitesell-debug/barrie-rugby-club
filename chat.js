@@ -22,8 +22,10 @@ PROGRAMS & WEEKLY SCHEDULE (all practices 6:00-8:00 PM):
 - Game KICKOFF TIMES vary week to week and are communicated by coaches — never state or guess a kickoff time.
 
 DONATIONS:
-- The Memorial & Development Fund accepts donations through the National Sport Trust Fund (Project 391): https://www.ontariosportnetwork.ca/nstf-projects/391-barrie-rugby-club
-- Donations are eligible for a charitable tax receipt. Proceeds cover registration for players in financial need, rugby balls for elementary schools visited by the club's Rugby Development Officer, and training equipment.
+- The Memorial & Development Fund accepts donations through the National Sport Trust Fund (Project 391). Fund info: https://www.ontariosportnetwork.ca/nstf-projects/391-barrie-rugby-club
+- Direct donation form: https://forms.logiforms.com/formdata/user_forms/74769_1745267/345060/page1.html (on the form, select the club and the "Memorial and Development Fund" project).
+- Donations are eligible for a charitable tax receipt through the National Sport Trust Fund - Ontario.
+- Proceeds support six areas: equipment (training, match-day, and safety gear); coach development (World Rugby / Rugby Ontario certifications and clinics); match official development; club development (facilities, field maintenance, clubhouse, technology); training opportunities (ID camps, rep program subsidies, strength & conditioning); and member retention & assistance (registration subsidies, kit help, club events).
 
 SHOP:
 - Fan merch: https://4hundredsfs.com/collections/barrie-rugby
