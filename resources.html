@@ -170,6 +170,27 @@ section{padding:96px 0;}
 .donate-alt a{color:var(--sky); font-weight:700; text-decoration:underline;}
 .donate-note{font-size:12.5px; color:rgba(255,255,255,0.5); margin-top:20px; line-height:1.6; max-width:640px;}
 
+/* instagram banner */
+.ig-banner{background:linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%); position:relative; overflow:hidden; padding:96px 0;}
+.ig-banner .sash{position:absolute; inset:0; pointer-events:none;}
+.ig-banner .sash span{position:absolute; width:180%; height:130px; left:-40%; background:linear-gradient(90deg, var(--sky), var(--gold)); opacity:0.09; transform:rotate(-9deg);}
+.ig-banner .sash span:nth-child(1){top:-30px;}
+.ig-banner .sash span:nth-child(2){bottom:-10px; opacity:0.05;}
+.ig-banner-inner{position:relative; z-index:1; display:grid; grid-template-columns:1.15fr 0.85fr; gap:60px; align-items:center;}
+@media (max-width:860px){ .ig-banner-inner{grid-template-columns:1fr; text-align:center;} }
+.ig-banner .eyebrow{color:var(--gold);}
+.ig-banner h2{color:#fff; font-size:clamp(30px,4vw,44px); margin:16px 0 18px; line-height:1.05;}
+.ig-banner p.lede{color:rgba(255,255,255,0.72); font-size:16.5px; line-height:1.6; max-width:440px; margin-bottom:30px;}
+@media (max-width:860px){ .ig-banner p.lede{margin-left:auto;margin-right:auto;} }
+.ig-banner .go{display:inline-flex; align-items:center; gap:10px; background:var(--gold); color:var(--navy-deep) !important; font-family:'Anton', sans-serif; font-size:13px; letter-spacing:0.05em; text-transform:uppercase; padding:15px 30px; border-radius:3px; transition:background .15s ease, transform .15s ease;}
+.ig-banner .go:hover{background:#fff; transform:translateY(-1px);}
+.ig-badge-wrap{display:flex; justify-content:center;}
+.ig-badge{width:230px; height:230px; border-radius:50%; background:radial-gradient(circle at 32% 28%, rgba(124,197,234,0.28), rgba(12,26,48,0) 68%); border:1.5px dashed rgba(255,255,255,0.28); display:flex; align-items:center; justify-content:center; position:relative;}
+.ig-badge::before{content:""; position:absolute; inset:16px; border-radius:50%; border:1px solid rgba(255,255,255,0.14);}
+.ig-badge .glyph{position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:10px;}
+.ig-badge .glyph svg{width:52px; height:52px; color:#fff;}
+.ig-badge .glyph span{font-family:'Anton', sans-serif; font-size:13px; letter-spacing:0.08em; color:var(--sky); text-transform:none;}
+
 /* alumni */
 .alumni-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
 @media (max-width:720px){ .alumni-grid{grid-template-columns:1fr;} }
@@ -368,6 +389,10 @@ footer{background:var(--navy-deep); border-top:1px solid rgba(255,255,255,0.08);
       </a>
       <a class="res-link" href="index.html#contact">
         <div><div class="t">Volunteering</div><div class="d">Get involved off the pitch</div></div>
+        <span class="arrow">&rarr;</span>
+      </a>
+      <a class="res-link" href="index.html#sponsors">
+        <div><div class="t">2026 Sponsorship Package</div><div class="d">Tiered levels &amp; direct-item sponsorship menu</div></div>
         <span class="arrow">&rarr;</span>
       </a>
     </div>
