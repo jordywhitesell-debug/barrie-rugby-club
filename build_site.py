@@ -9,45 +9,20 @@ from sponsor_b64 import DONALEIGHS, WESTERN, MITSUBISHI, TODDSMITH
 with open(os.path.join(ASSET_DIR, 'logo_transparent_b64.txt')) as f:
     LOGO = 'data:image/png;base64,' + f.read().strip()
 
-# ---------------------------------------------------------------------------
-# ANNOUNCEMENT BANNER — edit these 4 lines and rerun the script to update
-# ---------------------------------------------------------------------------
-from string import Template
 
-ANNOUNCE_ENABLED = True
-ANNOUNCE_TEXT = "Download the official Rugby Canada app to follow Barrie Rugby Club scores, schedules, and news."
-ANNOUNCE_LINK = "https://get.playhq.com/apps/rugbycanada"
-ANNOUNCE_LINK_TEXT = "Download The App"
-ANNOUNCE_PAGES = {"home"}  # which page(s) show it: any of "home", "programs", "alumni", "resources"
+def _load_b64(fname):
+    path = os.path.join(ASSET_DIR, fname)
+    if os.path.exists(path):
+        with open(path) as f:
+            return f.read().strip()
+    return ''
 
-_ANNOUNCE_TEMPLATE = Template("""
-<div class="announce-bar" id="announceBar">
-  <div class="wrap">
-    <span class="msg">$TEXT</span>
-    <a class="cta" href="$LINK" target="_blank" rel="noopener">$LINK_TEXT &rarr;</a>
-    <button class="close" id="announceClose" aria-label="Dismiss announcement">&times;</button>
-  </div>
-</div>
-<script>
-(function(){
-  var KEY = 'barrieAnnounceDismissed_v2';
-  var bar = document.getElementById('announceBar');
-  if(!bar) return;
-  try{
-    if(localStorage.getItem(KEY) === '1'){ bar.style.display = 'none'; return; }
-  }catch(e){}
-  var btn = document.getElementById('announceClose');
-  btn.addEventListener('click', function(){
-    bar.style.display = 'none';
-    try{ localStorage.setItem(KEY, '1'); }catch(e){}
-  });
-})();
-</script>
-""")
+# background photos (pagehero) + hero video poster frame
+BG_PROGRAMS_B64 = _load_b64('bg_programs_b64.txt')
+BG_ALUMNI_B64 = _load_b64('bg_alumni_b64.txt')
+BG_RESOURCES_B64 = _load_b64('bg_resources_b64.txt')
+BG_HERO_POSTER_B64 = _load_b64('bg_hero_poster_b64.txt')
 
-ANNOUNCE_BAR = _ANNOUNCE_TEMPLATE.substitute(
-    TEXT=ANNOUNCE_TEXT, LINK=ANNOUNCE_LINK, LINK_TEXT=ANNOUNCE_LINK_TEXT
-) if ANNOUNCE_ENABLED else ""
 
 CSS = """
 :root{
@@ -83,7 +58,14 @@ nav.wrap{display:flex; align-items:center; justify-content:space-between; height
 .cta-btn:hover{background:#fff; transform:translateY(-1px);}
 @media (max-width:1080px){ .navlinks{display:none;} }
 
-.pagehero{position:relative; overflow:hidden; background:linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%); padding:88px 0 68px;}
+.pagehero{
+  position:relative; overflow:hidden; padding:88px 0 68px;
+  background-color:var(--navy-deep);
+  background-image: linear-gradient(180deg, rgba(12,26,48,0.58) 0%, rgba(12,26,48,0.38) 45%, rgba(12,26,48,0.84) 100%), var(--section-bg, linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%));
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+}
 .pagehero .sash{position:absolute; inset:0; z-index:0; pointer-events:none;}
 .pagehero .sash span{position:absolute; background:linear-gradient(90deg, var(--sky) 0%, var(--sky-deep) 100%); opacity:0.12; width:180%; height:120px; transform:rotate(-9deg); left:-40%;}
 .pagehero .sash span:nth-child(2){top:220px; opacity:0.07; left:-60%;}
@@ -92,12 +74,15 @@ nav.wrap{display:flex; align-items:center; justify-content:space-between; height
 .pagehero h1{color:#fff; font-size:clamp(34px,5.4vw,58px); line-height:1; margin:16px 0 16px;}
 .pagehero p{color:rgba(255,255,255,0.72); font-size:16.5px; line-height:1.6; max-width:600px;}
 
-.hero{position:relative; overflow:hidden; background:linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%); padding:110px 0 90px;}
-.hero .sash{position:absolute; inset:0; z-index:0; pointer-events:none;}
+.hero{position:relative; overflow:hidden; background:var(--navy-deep); padding:110px 0 90px;}
+.hero-video{position:absolute; inset:0; z-index:0; width:100%; height:100%; object-fit:cover;}
+@media (prefers-reduced-motion: reduce){ .hero-video{display:none;} }
+.hero-scrim{position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(12,26,48,0.55) 0%, rgba(12,26,48,0.32) 45%, rgba(12,26,48,0.8) 100%);}
+.hero .sash{position:absolute; inset:0; z-index:2; pointer-events:none;}
 .hero .sash span{position:absolute; background:linear-gradient(90deg, var(--sky) 0%, var(--sky-deep) 100%); opacity:0.14; width:180%; height:130px; transform:rotate(-9deg);}
 .hero .sash span:nth-child(1){ top:-20px; left:-40%; }
 .hero .sash span:nth-child(2){ top:280px; left:-60%; opacity:0.08; height:90px;}
-.hero-inner{position:relative; z-index:1; display:grid; grid-template-columns:auto 1fr; gap:56px; align-items:center;}
+.hero-inner{position:relative; z-index:3; display:grid; grid-template-columns:auto 1fr; gap:56px; align-items:center;}
 @media (max-width:800px){ .hero-inner{grid-template-columns:1fr; text-align:center; justify-items:center;} }
 .hero-crest img{width:190px; height:190px;}
 @media (max-width:800px){ .hero-crest img{width:140px;height:140px;} }
@@ -367,6 +352,7 @@ HEAD = """<head>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>{css}</style>
+{extra}
 </head>"""
 
 def nav(active):
@@ -521,11 +507,58 @@ CHAT_WIDGET = """
 """
 
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# ANNOUNCEMENT BANNER — content now lives in Cloudflare KV, edited via /admin.
+# This is just the skeleton + fetch script; it's identical on every page and
+# reads live content from /api/banner at load time. No rebuild needed to
+# change the banner text, link, on/off state, or which pages show it.
+# ---------------------------------------------------------------------------
+def announce_bar(page_key):
+    return f"""
+<div class="announce-bar" id="announceBar" style="display:none;">
+  <div class="wrap">
+    <span class="msg" id="announceMsg"></span>
+    <a class="cta" id="announceCta" target="_blank" rel="noopener"></a>
+    <button class="close" id="announceClose" aria-label="Dismiss announcement">&times;</button>
+  </div>
+</div>
+<script>
+(function(){{
+  var PAGE_KEY = "{page_key}";
+  fetch('/api/banner', {{cache: 'no-store'}}).then(function(r){{ return r.ok ? r.json() : null; }}).then(function(data){{
+    if(!data || !data.enabled) return;
+    if(!data.pages || data.pages.indexOf(PAGE_KEY) === -1) return;
+    var DKEY = 'barrieAnnounceDismissed_' + (data.version || '1');
+    try{{ if(localStorage.getItem(DKEY) === '1') return; }}catch(e){{}}
+    var bar = document.getElementById('announceBar');
+    document.getElementById('announceMsg').textContent = data.text || '';
+    var cta = document.getElementById('announceCta');
+    if(data.link){{
+      cta.href = data.link;
+      cta.textContent = (data.linkText || 'Learn More') + ' \u2192';
+      cta.style.display = '';
+    }} else {{
+      cta.style.display = 'none';
+    }}
+    bar.style.display = 'block';
+    document.getElementById('announceClose').addEventListener('click', function(){{
+      bar.style.display = 'none';
+      try{{ localStorage.setItem(DKEY, '1'); }}catch(e){{}}
+    }});
+  }}).catch(function(){{}});
+}})();
+</script>
+"""
+
 # INDEX.HTML
 # ---------------------------------------------------------------------------
 
 index_body = f"""
 <section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline poster="data:image/jpeg;base64,{BG_HERO_POSTER_B64}">
+    <source src="hero-lineout.mp4" type="video/mp4">
+  </video>
+  <div class="hero-scrim"></div>
   <div class="sash"><span></span><span></span></div>
   <div class="wrap hero-inner">
     <div class="hero-crest"><img src="{LOGO}" alt="Barrie Rugby crest"></div>
@@ -992,13 +1025,13 @@ resources_body = f"""
 {CONTACT_SECTION}
 """
 
-def page(title, active, body):
-    banner = ANNOUNCE_BAR if active in ANNOUNCE_PAGES else ""
+def page(title, active, body, bg_b64=None):
+    extra = f'<style>:root{{--section-bg:url(data:image/jpeg;base64,{bg_b64})}}</style>' if bg_b64 else ''
     return f"""<!DOCTYPE html>
 <html lang="en">
-{HEAD.format(title=title, css=CSS)}
+{HEAD.format(title=title, css=CSS, extra=extra)}
 <body>
-{banner}
+{announce_bar(active)}
 {nav(active)}
 {body}
 {FOOTER}
@@ -1013,13 +1046,21 @@ with open(f'{out_dir}/index.html', 'w') as f:
     f.write(page("Barrie Rugby Club", "home", index_body))
 
 with open(f'{out_dir}/programs.html', 'w') as f:
-    f.write(page("Programs | Barrie Rugby Club", "programs", programs_body))
+    f.write(page("Programs | Barrie Rugby Club", "programs", programs_body, bg_b64=BG_PROGRAMS_B64))
 
 with open(f'{out_dir}/alumni.html', 'w') as f:
-    f.write(page("Alumni | Barrie Rugby Club", "alumni", alumni_body))
+    f.write(page("Alumni | Barrie Rugby Club", "alumni", alumni_body, bg_b64=BG_ALUMNI_B64))
 
 with open(f'{out_dir}/resources.html', 'w') as f:
-    f.write(page("Resources | Barrie Rugby Club", "resources", resources_body))
+    f.write(page("Resources | Barrie Rugby Club", "resources", resources_body, bg_b64=BG_RESOURCES_B64))
+
+# hero background video is an external file (can't be base64-embedded like the
+# photos without bloating every load) — copy it alongside the generated HTML.
+video_src = os.path.join(ASSET_DIR, 'hero-lineout.mp4')
+video_dst = os.path.join(out_dir, 'hero-lineout.mp4')
+if os.path.exists(video_src):
+    import shutil
+    shutil.copy(video_src, video_dst)
 
 print("Built index.html, programs.html, alumni.html, resources.html")
 for fn in ['index.html','programs.html','alumni.html','resources.html']:
