@@ -44,9 +44,9 @@ a{color:inherit;text-decoration:none;}
 @media (max-width:640px){.wrap{padding:0 20px;}}
 
 header{position:sticky; top:0; z-index:100; background:rgba(20,38,69,0.96); backdrop-filter:blur(6px); border-bottom:1px solid rgba(255,255,255,0.08);}
-nav.wrap{display:flex; align-items:center; justify-content:space-between; height:76px;}
-.brand{display:flex; align-items:center; gap:12px;}
-.brand img{height:46px; width:46px;}
+nav.wrap{position:relative; display:flex; align-items:center; justify-content:space-between; height:76px; gap:14px;}
+.brand{display:flex; align-items:center; gap:12px; min-width:0;}
+.brand img{height:46px; width:46px; flex-shrink:0;}
 .brand .word{font-family:'Anton', sans-serif; color:#fff; font-size:16px; letter-spacing:0.06em; line-height:1.15;}
 .brand .word span{display:block; color:var(--sky); font-size:11px; letter-spacing:0.28em; margin-top:2px;}
 .navlinks{display:flex; align-items:center; gap:24px;}
@@ -54,9 +54,32 @@ nav.wrap{display:flex; align-items:center; justify-content:space-between; height
 .navlinks a:hover, .navlinks a.active{color:var(--sky);}
 .navlinks a.donate-link{color:var(--gold);}
 .navlinks a.donate-link:hover{color:#fff;}
-.cta-btn{background:var(--sky); color:var(--navy-deep) !important; font-family:'Anton', sans-serif; letter-spacing:0.05em; font-size:13px; padding:12px 22px; border-radius:3px; text-transform:uppercase; transition:background .15s ease, transform .15s ease; white-space:nowrap;}
+.cta-btn{background:var(--sky); color:var(--navy-deep) !important; font-family:'Anton', sans-serif; letter-spacing:0.05em; font-size:13px; padding:12px 22px; border-radius:3px; text-transform:uppercase; transition:background .15s ease, transform .15s ease; white-space:nowrap; flex-shrink:0;}
 .cta-btn:hover{background:#fff; transform:translateY(-1px);}
-@media (max-width:1080px){ .navlinks{display:none;} }
+.nav-toggle{display:none; background:none; border:0; color:#fff; cursor:pointer; padding:6px; width:38px; height:38px; align-items:center; justify-content:center; flex-shrink:0; -webkit-tap-highlight-color:transparent;}
+.nav-toggle svg{width:24px; height:24px;}
+.nav-toggle .icon-close{display:none;}
+.nav-toggle[aria-expanded="true"] .icon-open{display:none;}
+.nav-toggle[aria-expanded="true"] .icon-close{display:block;}
+@media (max-width:1080px){
+  .nav-toggle{display:flex;}
+  .navlinks{
+    display:none; position:absolute; top:100%; left:0; right:0; z-index:99;
+    flex-direction:column; align-items:stretch; gap:0;
+    background:var(--navy-deep); border-top:1px solid rgba(255,255,255,0.1);
+    box-shadow:0 16px 30px rgba(12,26,48,0.4); max-height:calc(100vh - 76px); overflow-y:auto;
+  }
+  .navlinks.open{display:flex;}
+  .navlinks a{padding:16px 32px; border-bottom:1px solid rgba(255,255,255,0.08); width:100%;}
+}
+@media (max-width:480px){
+  nav.wrap{height:64px;}
+  .brand img{height:36px; width:36px;}
+  .brand .word{font-size:12.5px;}
+  .brand .word span{font-size:8.5px; letter-spacing:0.22em;}
+  .cta-btn{padding:9px 14px; font-size:11px;}
+  .navlinks{top:64px; max-height:calc(100vh - 64px);}
+}
 
 .pagehero{
   position:relative; overflow:hidden; padding:88px 0 68px;
@@ -66,30 +89,40 @@ nav.wrap{display:flex; align-items:center; justify-content:space-between; height
   background-position: center, center;
   background-repeat: no-repeat, no-repeat;
 }
+@media (max-width:640px){ .pagehero{padding:64px 0 52px;} }
 .pagehero .sash{position:absolute; inset:0; z-index:0; pointer-events:none;}
 .pagehero .sash span{position:absolute; background:linear-gradient(90deg, var(--sky) 0%, var(--sky-deep) 100%); opacity:0.12; width:180%; height:120px; transform:rotate(-9deg); left:-40%;}
 .pagehero .sash span:nth-child(2){top:220px; opacity:0.07; left:-60%;}
 .pagehero-inner{position:relative; z-index:1;}
-.pagehero .eyebrow{color:var(--sky);}
-.pagehero h1{color:#fff; font-size:clamp(34px,5.4vw,58px); line-height:1; margin:16px 0 16px;}
-.pagehero p{color:rgba(255,255,255,0.72); font-size:16.5px; line-height:1.6; max-width:600px;}
+.pagehero .eyebrow{color:var(--sky); text-shadow:0 1px 6px rgba(0,0,0,0.45);}
+.pagehero h1{color:#fff; font-size:clamp(34px,5.4vw,58px); line-height:1; margin:16px 0 16px; text-shadow:0 2px 18px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.35);}
+.pagehero p{color:rgba(255,255,255,0.85); font-size:16.5px; line-height:1.6; max-width:600px; text-shadow:0 1px 10px rgba(0,0,0,0.4);}
 
 .hero{position:relative; overflow:hidden; background:var(--navy-deep); padding:110px 0 90px;}
+@media (max-width:800px){ .hero{padding:80px 0 60px;} }
 .hero-video{position:absolute; inset:0; z-index:0; width:100%; height:100%; object-fit:cover;}
 @media (prefers-reduced-motion: reduce){ .hero-video{display:none;} }
-.hero-scrim{position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(12,26,48,0.55) 0%, rgba(12,26,48,0.32) 45%, rgba(12,26,48,0.8) 100%);}
+.hero-scrim{
+  position:absolute; inset:0; z-index:1;
+  background-image:
+    linear-gradient(180deg, rgba(12,26,48,0.4) 0%, rgba(12,26,48,0.18) 25%, rgba(12,26,48,0.22) 60%, rgba(12,26,48,0.6) 100%),
+    linear-gradient(100deg, rgba(12,26,48,0.4) 0%, rgba(12,26,48,0.48) 26%, rgba(12,26,48,0.82) 52%, rgba(12,26,48,0.88) 100%);
+}
+@media (max-width:800px){
+  .hero-scrim{ background-image: linear-gradient(180deg, rgba(12,26,48,0.35) 0%, rgba(12,26,48,0.55) 45%, rgba(12,26,48,0.82) 100%); }
+}
 .hero .sash{position:absolute; inset:0; z-index:2; pointer-events:none;}
 .hero .sash span{position:absolute; background:linear-gradient(90deg, var(--sky) 0%, var(--sky-deep) 100%); opacity:0.14; width:180%; height:130px; transform:rotate(-9deg);}
 .hero .sash span:nth-child(1){ top:-20px; left:-40%; }
 .hero .sash span:nth-child(2){ top:280px; left:-60%; opacity:0.08; height:90px;}
 .hero-inner{position:relative; z-index:3; display:grid; grid-template-columns:auto 1fr; gap:56px; align-items:center;}
 @media (max-width:800px){ .hero-inner{grid-template-columns:1fr; text-align:center; justify-items:center;} }
-.hero-crest img{width:190px; height:190px;}
-@media (max-width:800px){ .hero-crest img{width:140px;height:140px;} }
-.hero-copy .eyebrow{color:var(--sky);}
-.hero-copy h1{color:#fff; font-size:clamp(38px, 6vw, 68px); line-height:0.98; margin:18px 0 22px;}
+.hero-crest img{width:190px; height:190px; filter:drop-shadow(0 4px 18px rgba(0,0,0,0.4));}
+@media (max-width:800px){ .hero-crest img{width:130px;height:130px;} }
+.hero-copy .eyebrow{color:var(--sky); text-shadow:0 1px 6px rgba(0,0,0,0.5);}
+.hero-copy h1{color:#fff; font-size:clamp(38px, 6vw, 68px); line-height:0.98; margin:18px 0 22px; text-shadow:0 3px 22px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.4);}
 .hero-copy h1 em{color:var(--sky); font-style:normal;}
-.hero-copy p{color:rgba(255,255,255,0.72); font-size:17px; line-height:1.6; max-width:520px; margin-bottom:34px;}
+.hero-copy p{color:rgba(255,255,255,0.88); font-size:17px; line-height:1.6; max-width:520px; margin-bottom:34px; text-shadow:0 1px 10px rgba(0,0,0,0.45);}
 @media (max-width:800px){ .hero-copy p{margin-left:auto;margin-right:auto;} }
 .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
 @media (max-width:800px){ .hero-actions{justify-content:center;} }
@@ -364,7 +397,7 @@ def nav(active):
       <img src="{LOGO}" alt="Barrie Rugby crest">
       <div class="word">BARRIE RUGBY<span>CLUB &middot; EST. 1967</span></div>
     </a>
-    <div class="navlinks">
+    <div class="navlinks" id="navLinks">
       <a href="index.html#about"{cls('about')}>About</a>
       <a href="programs.html"{cls('programs')}>Programs</a>
       <a href="alumni.html"{cls('alumni')}>Alumni</a>
@@ -375,8 +408,29 @@ def nav(active):
       <a class="donate-link" href="index.html#donate"{cls('donate')}>Donate</a>
     </div>
     <a class="cta-btn" href="https://www.playhq.com/ca/rugby-canada/register/c4290e">Register</a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle menu">
+      <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+    </button>
   </nav>
-</header>"""
+</header>
+<script>
+(function(){{
+  var t=document.getElementById('navToggle'), l=document.getElementById('navLinks');
+  if(!t||!l) return;
+  function close(){{ l.classList.remove('open'); t.setAttribute('aria-expanded','false'); }}
+  function toggle(){{
+    var open=l.classList.toggle('open');
+    t.setAttribute('aria-expanded', open?'true':'false');
+  }}
+  t.addEventListener('click', toggle);
+  l.addEventListener('click', function(e){{ if(e.target.tagName==='A'){{ close(); }} }});
+  document.addEventListener('click', function(e){{
+    if(l.classList.contains('open') && !l.contains(e.target) && !t.contains(e.target)){{ close(); }}
+  }});
+  document.addEventListener('keydown', function(e){{ if(e.key==='Escape'){{ close(); }} }});
+}})();
+</script>"""
 
 FOOTER = f"""<footer>
   <div class="wrap foot-inner">
