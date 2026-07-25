@@ -104,12 +104,10 @@ nav.wrap{position:relative; display:flex; align-items:center; justify-content:sp
 @media (prefers-reduced-motion: reduce){ .hero-video{display:none;} }
 .hero-scrim{
   position:absolute; inset:0; z-index:1;
-  background-image:
-    linear-gradient(180deg, rgba(12,26,48,0.4) 0%, rgba(12,26,48,0.18) 25%, rgba(12,26,48,0.22) 60%, rgba(12,26,48,0.6) 100%),
-    linear-gradient(100deg, rgba(12,26,48,0.4) 0%, rgba(12,26,48,0.48) 26%, rgba(12,26,48,0.82) 52%, rgba(12,26,48,0.88) 100%);
+  background: linear-gradient(100deg, rgba(12,26,48,0.05) 0%, rgba(12,26,48,0.12) 30%, rgba(12,26,48,0.28) 60%, rgba(12,26,48,0.34) 100%);
 }
 @media (max-width:800px){
-  .hero-scrim{ background-image: linear-gradient(180deg, rgba(12,26,48,0.35) 0%, rgba(12,26,48,0.55) 45%, rgba(12,26,48,0.82) 100%); }
+  .hero-scrim{ background: linear-gradient(180deg, rgba(12,26,48,0.1) 0%, rgba(12,26,48,0.22) 55%, rgba(12,26,48,0.4) 100%); }
 }
 .hero .sash{position:absolute; inset:0; z-index:2; pointer-events:none;}
 .hero .sash span{position:absolute; background:linear-gradient(90deg, var(--sky) 0%, var(--sky-deep) 100%); opacity:0.14; width:180%; height:130px; transform:rotate(-9deg);}
@@ -119,10 +117,10 @@ nav.wrap{position:relative; display:flex; align-items:center; justify-content:sp
 @media (max-width:800px){ .hero-inner{grid-template-columns:1fr; text-align:center; justify-items:center;} }
 .hero-crest img{width:190px; height:190px; filter:drop-shadow(0 4px 18px rgba(0,0,0,0.4));}
 @media (max-width:800px){ .hero-crest img{width:130px;height:130px;} }
-.hero-copy .eyebrow{color:var(--sky); text-shadow:0 1px 6px rgba(0,0,0,0.5);}
-.hero-copy h1{color:#fff; font-size:clamp(38px, 6vw, 68px); line-height:0.98; margin:18px 0 22px; text-shadow:0 3px 22px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.4);}
+.hero-copy .eyebrow{color:var(--sky); text-shadow:0 2px 10px rgba(0,0,0,0.75), 0 1px 2px rgba(0,0,0,0.6);}
+.hero-copy h1{color:#fff; font-size:clamp(38px, 6vw, 68px); line-height:0.98; margin:18px 0 22px; text-shadow:0 4px 30px rgba(0,0,0,0.75), 0 2px 8px rgba(0,0,0,0.65), 0 1px 2px rgba(0,0,0,0.5);}
 .hero-copy h1 em{color:var(--sky); font-style:normal;}
-.hero-copy p{color:rgba(255,255,255,0.88); font-size:17px; line-height:1.6; max-width:520px; margin-bottom:34px; text-shadow:0 1px 10px rgba(0,0,0,0.45);}
+.hero-copy p{color:#fff; font-size:17px; line-height:1.6; max-width:520px; margin-bottom:34px; text-shadow:0 2px 16px rgba(0,0,0,0.75), 0 1px 3px rgba(0,0,0,0.6);}
 @media (max-width:800px){ .hero-copy p{margin-left:auto;margin-right:auto;} }
 .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
 @media (max-width:800px){ .hero-actions{justify-content:center;} }
