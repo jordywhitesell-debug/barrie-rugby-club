@@ -32,8 +32,8 @@ nav.wrap{position:relative; display:flex; align-items:center; justify-content:sp
 .brand img{height:46px; width:46px; flex-shrink:0;}
 .brand .word{font-family:'Anton', sans-serif; color:#fff; font-size:16px; letter-spacing:0.06em; line-height:1.15;}
 .brand .word span{display:block; color:var(--sky); font-size:11px; letter-spacing:0.28em; margin-top:2px;}
-.navlinks{display:flex; align-items:center; gap:24px;}
-.navlinks a{color:rgba(255,255,255,0.82); font-size:13px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; transition:color .15s ease; white-space:nowrap;}
+.navlinks{display:flex; align-items:center; gap:20px;}
+.navlinks a{color:rgba(255,255,255,0.82); font-size:12.5px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; transition:color .15s ease; white-space:nowrap;}
 .navlinks a:hover, .navlinks a.active{color:var(--sky);}
 .navlinks a.donate-link{color:var(--gold);}
 .navlinks a.donate-link:hover{color:#fff;}
@@ -44,7 +44,7 @@ nav.wrap{position:relative; display:flex; align-items:center; justify-content:sp
 .nav-toggle .icon-close{display:none;}
 .nav-toggle[aria-expanded="true"] .icon-open{display:none;}
 .nav-toggle[aria-expanded="true"] .icon-close{display:block;}
-@media (max-width:1080px){
+@media (max-width:1120px){
   .nav-toggle{display:flex;}
   .navlinks{
     display:none; position:absolute; top:100%; left:0; right:0; z-index:99;
@@ -359,6 +359,53 @@ footer{background:var(--navy-deep); border-top:1px solid rgba(255,255,255,0.08);
 .announce-bar .close{position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:0; cursor:pointer; color:var(--navy-deep); font-size:20px; line-height:1; padding:4px 6px; opacity:0.65;}
 .announce-bar .close:hover{opacity:1;}
 @media (max-width:640px){ .announce-bar .wrap{padding:10px 40px 10px 16px; gap:10px;} .announce-bar .msg{font-size:12.5px;} }
+
+/* ---- RUGBYCAN app band ---- */
+.hero-actions .btn-app{display:inline-flex; align-items:center; gap:9px; background:rgba(255,255,255,0.10); color:#fff !important; font-family:'Anton', sans-serif; letter-spacing:0.05em; font-size:13px; padding:12px 20px; border-radius:3px; text-transform:uppercase; transition:background .15s ease, transform .15s ease;}
+.hero-actions .btn-app:hover{background:rgba(255,255,255,0.2); transform:translateY(-1px);}
+.hero-actions .btn-app svg{width:15px; height:15px; flex-shrink:0;}
+
+.appband{background:var(--navy); position:relative; overflow:hidden; padding:96px 0; border-top:1px solid var(--line);}
+.appband .sash{position:absolute; inset:0; pointer-events:none;}
+.appband .sash span{position:absolute; width:180%; height:150px; left:-40%; background:linear-gradient(90deg, var(--sky), var(--sky-deep)); opacity:0.10; transform:rotate(-9deg);}
+.appband .sash span:nth-child(1){top:-40px;}
+.appband .sash span:nth-child(2){bottom:-30px; opacity:0.05;}
+.appband-inner{position:relative; z-index:1; display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px; align-items:center;}
+@media (max-width:900px){ .appband-inner{grid-template-columns:1fr; gap:52px;} }
+.appband .eyebrow{color:var(--sky);}
+.appband h2{font-family:'Anton', sans-serif; text-transform:uppercase; color:#fff; font-size:clamp(30px,4vw,46px); line-height:1.03; margin:16px 0 18px;}
+.appband h2 em{font-style:normal; color:var(--sky);}
+.appband p.lede{color:rgba(255,255,255,0.74); font-size:16.5px; line-height:1.62; max-width:470px;}
+.appband .fine{margin-top:26px; font-size:12.5px; color:rgba(255,255,255,0.5); letter-spacing:0.04em;}
+.appband .fine a{color:var(--sky); text-decoration:underline;}
+
+.store-row{display:flex; gap:14px; flex-wrap:wrap; margin-top:30px;}
+.store-btn{display:inline-flex; align-items:center; gap:12px; background:#fff; color:var(--navy-deep) !important; border-radius:5px; padding:11px 20px 11px 17px; transition:transform .15s ease, box-shadow .15s ease;}
+.store-btn:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,0.28);}
+.store-btn svg{width:24px; height:24px; flex-shrink:0;}
+.store-btn .lbl{display:flex; flex-direction:column; line-height:1.15;}
+.store-btn .lbl small{font-size:9.5px; letter-spacing:0.14em; text-transform:uppercase; color:#5a6274;}
+.store-btn .lbl strong{font-family:'Anton', sans-serif; font-size:16px; letter-spacing:0.02em; font-weight:400;}
+.store-btn:focus-visible, .hero-actions .btn-app:focus-visible, .appband a:focus-visible{outline:2px solid var(--sky); outline-offset:3px;}
+
+.phone-wrap{display:flex; justify-content:center;}
+.phone{width:250px; border-radius:30px; background:linear-gradient(160deg,#1d3560,#0c1a30); border:1px solid rgba(255,255,255,0.16); padding:12px; box-shadow:0 28px 60px rgba(0,0,0,0.45); position:relative;}
+.phone::before{content:""; position:absolute; top:20px; left:50%; transform:translateX(-50%); width:64px; height:5px; border-radius:3px; background:rgba(255,255,255,0.18);}
+.phone-screen{background:var(--navy-deep); border-radius:22px; padding:38px 16px 18px; border:1px solid rgba(255,255,255,0.08);}
+.phone-mark{text-align:center; padding-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.1);}
+.phone-mark b{display:block; font-family:'Anton', sans-serif; font-size:21px; letter-spacing:0.09em; color:#fff; font-weight:400;}
+.phone-mark span{display:block; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--sky); margin-top:5px;}
+.phone-row{display:flex; align-items:center; gap:11px; padding:13px 4px; border-bottom:1px solid rgba(255,255,255,0.06);}
+.phone-row:last-child{border-bottom:0;}
+.phone-row .pic{width:30px; height:30px; border-radius:7px; background:rgba(124,197,234,0.14); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+.phone-row .pic svg{width:15px; height:15px; color:var(--sky);}
+.phone-row .ptxt{font-size:12.5px; font-weight:600; color:rgba(255,255,255,0.88); flex:1;}
+.phone-row .chev{color:rgba(255,255,255,0.3); font-size:13px;}
+.phone-row .live{display:inline-flex; align-items:center; gap:5px; font-family:'Anton', sans-serif; font-size:9.5px; letter-spacing:0.12em; color:#fff; background:var(--red); padding:3px 7px; border-radius:3px;}
+.phone-row .live i{width:5px; height:5px; border-radius:50%; background:#fff; display:inline-block; animation:livePulse 1.6s ease-in-out infinite;}
+@keyframes livePulse{0%,100%{opacity:1;}50%{opacity:0.25;}}
+@media (prefers-reduced-motion:reduce){ .phone-row .live i{animation:none;} }
+@media (max-width:900px){ .phone{width:225px;} }
 </style>
 
 </head>
@@ -411,6 +458,7 @@ footer{background:var(--navy-deep); border-top:1px solid rgba(255,255,255,0.08);
       <a href="index.html#sponsors">Sponsors</a>
       <a href="index.html#shop">Shop</a>
       <a href="resources.html">Resources</a>
+      <a href="index.html#app">Get The App</a>
       <a href="index.html#contact">Contact</a>
       <a class="donate-link" href="index.html#donate">Donate</a>
     </div>
@@ -454,6 +502,10 @@ footer{background:var(--navy-deep); border-top:1px solid rgba(255,255,255,0.08);
       <div class="hero-actions">
         <a class="cta-btn" href="https://www.playhq.com/ca/rugby-canada/register/c4290e">Register Now</a>
         <a class="btn-ghost" href="#contact">Get In Touch</a>
+        <a class="btn-app" href="#app">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg>
+          Get The App
+        </a>
       </div>
     </div>
   </div>
@@ -523,6 +575,55 @@ footer{background:var(--navy-deep); border-top:1px solid rgba(255,255,255,0.08);
       <div class="card"><span class="tag">In Schools</span><h3>Rugby Development Officers</h3><p>Our RDO program brings rugby into Barrie-area elementary and high schools.</p></div>
       <div class="card"><span class="tag">Access</span><h3>Financial Assistance</h3><p>The RUK program helps cover registration costs, because cost shouldn't decide who plays.</p></div>
       <div class="card"><span class="tag">Officiating</span><h3>Match Officials</h3><p>Rugby Ontario-registered officiating pathway for members who want to referee.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="appband" id="app">
+  <div class="sash"><span></span><span></span></div>
+  <div class="wrap appband-inner">
+    <div>
+      <span class="eyebrow">Matchday</span>
+      <h2>Every fixture.<br>Every result.<br><em>In your pocket.</em></h2>
+      <p class="lede">Barrie Rugby Club runs its competitions on PlayHQ &mdash; and <strong style="color:#fff;">RUGBYCAN</strong> is the official free app that goes with it. Schedules, live scores, results and club communications for every team, from the minis to the senior sides.</p>
+      <div class="store-row">
+        <a class="store-btn" href="https://apps.apple.com/ca/app/rugbycan/id6756593343" target="_blank" rel="noopener" aria-label="Download RUGBYCAN on the App Store">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.53c-.02-2.2 1.8-3.26 1.88-3.31-1.02-1.5-2.61-1.7-3.18-1.73-1.35-.14-2.64.8-3.33.8-.69 0-1.75-.78-2.87-.76-1.48.02-2.84.86-3.6 2.18-1.53 2.66-.39 6.6 1.1 8.76.73 1.06 1.6 2.25 2.74 2.2 1.1-.04 1.52-.71 2.85-.71s1.7.71 2.87.69c1.18-.02 1.93-1.08 2.65-2.14.83-1.23 1.18-2.42 1.2-2.48-.03-.01-2.29-.88-2.31-3.5zM14.9 5.5c.6-.74 1.01-1.76.9-2.78-.87.04-1.93.58-2.56 1.31-.56.65-1.06 1.7-.93 2.7.97.08 1.97-.49 2.59-1.23z"/></svg>
+          <span class="lbl"><small>Download on the</small><strong>App Store</strong></span>
+        </a>
+        <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.playhq.rugbycanada" target="_blank" rel="noopener" aria-label="Get RUGBYCAN on Google Play">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.3c-.24.26-.38.66-.38 1.18v17.04c0 .52.14.92.38 1.18l.06.06 9.55-9.55v-.22L3.66 2.44l-.06-.14zM16.6 15.4l-3.18-3.19v-.22l3.19-3.19.07.04 3.77 2.14c1.08.61 1.08 1.62 0 2.24l-3.77 2.14-.08.04zM15.9 16.1L12.64 12.85 3.03 22.46c.36.38.94.42 1.6.05l11.27-6.41M15.9 7.9L4.63 1.49c-.66-.38-1.24-.33-1.6.05l9.61 9.61L15.9 7.9z"/></svg>
+          <span class="lbl"><small>Get it on</small><strong>Google Play</strong></span>
+        </a>
+      </div>
+      <p class="fine">Free on iOS and Android &middot; Powered by PlayHQ &middot; Search <strong style="color:rgba(255,255,255,0.75);">Barrie Rugby Club</strong> once you're in. Not registered yet? <a href="https://www.playhq.com/ca/rugby-canada/register/c4290e">Start here</a>.</p>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone" aria-hidden="true">
+        <div class="phone-screen">
+          <div class="phone-mark"><b>RUGBYCAN</b><span>Powered by PlayHQ</span></div>
+          <div class="phone-row">
+            <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg></div>
+            <span class="ptxt">Live Scores</span>
+            <span class="live"><i></i>LIVE</span>
+          </div>
+          <div class="phone-row">
+            <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+            <span class="ptxt">Fixtures &amp; Results</span>
+            <span class="chev">&rsaquo;</span>
+          </div>
+          <div class="phone-row">
+            <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16v12H7l-3 3V4z"/></svg></div>
+            <span class="ptxt">Club Communications</span>
+            <span class="chev">&rsaquo;</span>
+          </div>
+          <div class="phone-row">
+            <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.5 5.9.85-4.3 4.2 1.05 5.95L12 16.7l-5.25 2.8L7.8 13.55 3.5 9.35l5.9-.85L12 3z"/></svg></div>
+            <span class="ptxt">Favourite Your Teams</span>
+            <span class="chev">&rsaquo;</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -663,6 +764,7 @@ footer{background:var(--navy-deep); border-top:1px solid rgba(255,255,255,0.08);
       <a href="index.html#sponsors">Sponsors</a>
       <a href="index.html#shop">Shop</a>
       <a href="resources.html">Resources</a>
+      <a href="index.html#app">Get The App</a>
       <a href="index.html#contact">Contact</a>
       <a href="index.html#donate">Donate</a>
     </div>
