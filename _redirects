@@ -1,0 +1,23 @@
+# Old Wix site -> new site (301 permanent)
+/home / 301
+/history /alumni 301
+/what-we-offer /programs 301
+/teams /programs#teams 301
+/u14-boys-team /programs#teams 301
+/u14-girls-team /programs#teams 301
+/u16-boys-team /programs#teams 301
+/u16-girls-team /programs#teams 301
+/u18-boys-team /programs#teams 301
+/u18-girls-team /programs#teams 301
+/mens-team /programs#teams 301
+/womens-team /programs#teams 301
+/executive /#about 301
+/our-sponsors /#sponsors 301
+/become-a-sponsor /#sponsors 301
+/contact-us /#contact 301
+/club-calendar /programs#matrix 301
+/ruk /programs#ruk 301
+/jaguars-festival /programs 301
+
+# Convenience short link -> PlayHQ registration
+/register https://www.playhq.com/ca/rugby-canada/register/c4290e 302

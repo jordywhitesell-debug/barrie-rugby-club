@@ -433,11 +433,27 @@ HEAD = """<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
+<meta name="description" content="{description}">
+<link rel="canonical" href="{canonical}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Barrie Rugby Club">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{description}">
+<meta property="og:url" content="{canonical}">
+<meta property="og:image" content="https://www.barrierugby.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_CA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#142645">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>{css}</style>
-{extra}
+{extra}{jsonld}
 </head>"""
 
 def nav(active):
@@ -966,7 +982,7 @@ programs_body = f"""
       </div>
     </div>
 
-    <div class="prog-row">
+    <div class="prog-row" id="ruk">
       <div><div class="lbl">Access</div><div class="age">RUK</div></div>
       <div class="body">
         <h3>Financial Assistance Program</h3>
@@ -996,7 +1012,7 @@ programs_body = f"""
         <p>The full Rugby Ontario-aligned breakdown of which age group your player belongs in, contact rules, and format by age.</p>
         <a class="back" href="resources.html">&larr; Back to Resources</a>
       </div>
-      <a class="go" href="https://www.barrierugby.com/_files/ugd/95a192_ac77f1b87a694696b5e5ce6cb2b75ec5.pdf" target="_blank" rel="noopener">View PDF &rarr;</a>
+      <a class="go" href="AgeGradeMatrix_2025.pdf" target="_blank" rel="noopener">View PDF &rarr;</a>
     </div>
 
     <div class="sec-head">
@@ -1219,11 +1235,53 @@ ANCHOR_FIX = """<script>
 })();
 </script>"""
 
-def page(title, active, body, bg_b64=None):
+# ---------------------------------------------------------------------------
+# SEO — canonical host is https://www.barrierugby.com (Cloudflare Pages serves
+# pretty URLs, so /programs.html canonicalizes to /programs). Descriptions use
+# locked club facts only. JSON-LD (SportsOrganization) goes on the homepage.
+# ---------------------------------------------------------------------------
+CANONICAL_HOST = 'https://www.barrierugby.com'
+
+JSONLD_INDEX = """
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SportsOrganization",
+  "name": "Barrie Rugby Club",
+  "sport": "Rugby Union",
+  "foundingDate": "1967",
+  "url": "https://www.barrierugby.com/",
+  "logo": "https://www.barrierugby.com/crest-512.png",
+  "email": "info@barrierugbyclub.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "2100 Nursery Rd",
+    "addressLocality": "Barrie",
+    "addressRegion": "ON",
+    "addressCountry": "CA"
+  },
+  "location": {
+    "@type": "Place",
+    "name": "Jim Hamilton Field, Barrie Community Sports Complex",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "2100 Nursery Rd",
+      "addressLocality": "Barrie",
+      "addressRegion": "ON",
+      "addressCountry": "CA"
+    }
+  },
+  "sameAs": ["https://www.facebook.com/groups/barrierugby/"]
+}
+</script>"""
+
+
+def page(title, active, body, bg_b64=None, description='', path='/', jsonld=''):
     extra = f'<style>:root{{--section-bg:url(data:image/jpeg;base64,{bg_b64})}}</style>' if bg_b64 else ''
+    canonical = CANONICAL_HOST + path
     return f"""<!DOCTYPE html>
 <html lang="en">
-{HEAD.format(title=title, css=CSS, extra=extra)}
+{HEAD.format(title=title, css=CSS, extra=extra, description=description, canonical=canonical, jsonld=jsonld)}
 <body>
 {announce_bar(active)}
 {nav(active)}
@@ -1238,16 +1296,32 @@ out_dir = '/mnt/user-data/outputs' if os.path.isdir('/mnt/user-data') else os.pa
 os.makedirs(out_dir, exist_ok=True)
 
 with open(f'{out_dir}/index.html', 'w') as f:
-    f.write(page("Barrie Rugby Club", "home", index_body))
+    f.write(page(
+        "Barrie Rugby Club | Youth & Senior Rugby in Barrie, Ontario",
+        "home", index_body,
+        description="Barrie Rugby Club — competitive and instructional rugby in Barrie, Ontario since 1967. Programs from U6 minis to Senior Men's and Women's at Jim Hamilton Field.",
+        path='/', jsonld=JSONLD_INDEX))
 
 with open(f'{out_dir}/programs.html', 'w') as f:
-    f.write(page("Programs | Barrie Rugby Club", "programs", programs_body, bg_b64=BG_PROGRAMS_B64))
+    f.write(page(
+        "Programs & Teams | Barrie Rugby Club",
+        "programs", programs_body, bg_b64=BG_PROGRAMS_B64,
+        description="Every Barrie Rugby Club program — Youth & Minis (U6–U12), U14/U16/U18 boys and girls, and Senior Men's & Women's — plus the weekly practice and game day schedule.",
+        path='/programs'))
 
 with open(f'{out_dir}/alumni.html', 'w') as f:
-    f.write(page("Alumni | Barrie Rugby Club", "alumni", alumni_body, bg_b64=BG_ALUMNI_B64))
+    f.write(page(
+        "Alumni | Barrie Rugby Club",
+        "alumni", alumni_body, bg_b64=BG_ALUMNI_B64,
+        description="Players who wore the Barrie Rugby Club crest — alumni drawn from the club's own written history, dating back to its founding in 1967.",
+        path='/alumni'))
 
 with open(f'{out_dir}/resources.html', 'w') as f:
-    f.write(page("Resources | Barrie Rugby Club", "resources", resources_body, bg_b64=BG_RESOURCES_B64))
+    f.write(page(
+        "Resources & Documents | Barrie Rugby Club",
+        "resources", resources_body, bg_b64=BG_RESOURCES_B64,
+        description="Club documents, registration links, kit and merch stores, and key resources for Barrie Rugby Club players, parents, and supporters.",
+        path='/resources'))
 
 # hero background video is an external file (can't be base64-embedded like the
 # photos without bloating every load) — copy it alongside the generated HTML.
@@ -1257,7 +1331,121 @@ if os.path.exists(video_src):
     import shutil
     shutil.copy(video_src, video_dst)
 
+# ---------------------------------------------------------------------------
+# SEO SUPPORT FILES — 404.html, robots.txt, sitemap.xml, _redirects.
+# The presence of 404.html switches Cloudflare Pages out of SPA-fallback mode,
+# so unmatched URLs return a real 404 instead of serving index.html with a 200
+# (the "soft 404" that made every old Wix URL look like a duplicate homepage).
+# _redirects 301-maps every old Wix path Google still has indexed.
+# ---------------------------------------------------------------------------
+
+NOT_FOUND = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found | Barrie Rugby Club</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#142645">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{{margin:0;padding:0;box-sizing:border-box;}}
+body{{font-family:'Public Sans',sans-serif;background:#0c1a30;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:32px;}}
+.sash{{position:absolute;inset:0;pointer-events:none;}}
+.sash span{{position:absolute;background:linear-gradient(90deg,#7cc5ea 0%,#4fa3d1 100%);opacity:0.1;width:180%;height:120px;transform:rotate(-9deg);left:-40%;top:18%;}}
+.sash span:nth-child(2){{top:60%;opacity:0.06;left:-60%;}}
+.box{{position:relative;z-index:1;text-align:center;max-width:560px;}}
+.box img{{width:96px;height:96px;margin:0 auto 24px;display:block;}}
+.eyebrow{{font-family:'Anton',sans-serif;font-size:13px;letter-spacing:0.24em;text-transform:uppercase;color:#7cc5ea;}}
+h1{{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(38px,7vw,64px);line-height:1.02;margin:14px 0 16px;}}
+h1 em{{font-style:normal;color:#7cc5ea;}}
+p{{color:rgba(255,255,255,0.82);font-size:16px;line-height:1.6;margin-bottom:28px;}}
+.links{{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}}
+.links a{{color:#0c1a30;background:#7cc5ea;font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:0.05em;font-size:13px;padding:11px 20px;border-radius:3px;text-decoration:none;transition:background .15s ease;}}
+.links a:hover{{background:#fff;}}
+.links a.ghost{{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.35);}}
+.links a.ghost:hover{{border-color:#7cc5ea;color:#7cc5ea;background:transparent;}}
+.links a:focus-visible{{outline:2px solid #7cc5ea;outline-offset:3px;}}
+</style>
+</head>
+<body>
+<div class="sash"><span></span><span></span></div>
+<main class="box">
+  <img src="{LOGO}" alt="Barrie Rugby crest">
+  <span class="eyebrow">404 &middot; Page Not Found</span>
+  <h1>KICKED INTO <em>TOUCH.</em></h1>
+  <p>This page doesn't exist &mdash; or it moved when we rebuilt the site. The lineout below will throw you back in.</p>
+  <nav class="links">
+    <a href="/">Home</a>
+    <a href="/programs">Programs</a>
+    <a href="/alumni">Alumni</a>
+    <a href="/resources">Resources</a>
+    <a class="ghost" href="/#contact">Contact</a>
+  </nav>
+</main>
+</body>
+</html>"""
+
+SITEMAP_LASTMOD = '2026-08-09'
+SITEMAP = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>{CANONICAL_HOST}/</loc><lastmod>{SITEMAP_LASTMOD}</lastmod></url>
+  <url><loc>{CANONICAL_HOST}/programs</loc><lastmod>{SITEMAP_LASTMOD}</lastmod></url>
+  <url><loc>{CANONICAL_HOST}/alumni</loc><lastmod>{SITEMAP_LASTMOD}</lastmod></url>
+  <url><loc>{CANONICAL_HOST}/resources</loc><lastmod>{SITEMAP_LASTMOD}</lastmod></url>
+</urlset>
+"""
+
+ROBOTS = f"""User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+Sitemap: {CANONICAL_HOST}/sitemap.xml
+"""
+
+# Every old Wix URL Google still has indexed (verified via site: search,
+# 2026-08-09), 301-mapped to its closest new home. /alumni maps 1:1
+# automatically (same path), so it needs no rule.
+REDIRECTS = """# Old Wix site -> new site (301 permanent)
+/home / 301
+/history /alumni 301
+/what-we-offer /programs 301
+/teams /programs#teams 301
+/u14-boys-team /programs#teams 301
+/u14-girls-team /programs#teams 301
+/u16-boys-team /programs#teams 301
+/u16-girls-team /programs#teams 301
+/u18-boys-team /programs#teams 301
+/u18-girls-team /programs#teams 301
+/mens-team /programs#teams 301
+/womens-team /programs#teams 301
+/executive /#about 301
+/our-sponsors /#sponsors 301
+/become-a-sponsor /#sponsors 301
+/contact-us /#contact 301
+/club-calendar /programs#matrix 301
+/ruk /programs#ruk 301
+/jaguars-festival /programs 301
+
+# Convenience short link -> PlayHQ registration
+/register https://www.playhq.com/ca/rugby-canada/register/c4290e 302
+"""
+
+with open(f'{out_dir}/404.html', 'w') as f:
+    f.write(NOT_FOUND)
+with open(f'{out_dir}/sitemap.xml', 'w') as f:
+    f.write(SITEMAP)
+with open(f'{out_dir}/robots.txt', 'w') as f:
+    f.write(ROBOTS)
+with open(f'{out_dir}/_redirects', 'w') as f:
+    f.write(REDIRECTS)
+
 print("Built index.html, programs.html, alumni.html, resources.html")
+print("Built 404.html, sitemap.xml, robots.txt, _redirects")
 for fn in ['index.html','programs.html','alumni.html','resources.html']:
     p = f'{out_dir}/{fn}'
     print(fn, round(os.path.getsize(p)/1024,1), 'KB')
