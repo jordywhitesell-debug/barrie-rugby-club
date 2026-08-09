@@ -4,7 +4,7 @@ import sys
 _BASE = os.path.dirname(os.path.abspath(__file__))
 ASSET_DIR = '/home/claude' if os.path.exists('/home/claude/sponsor_b64.py') else _BASE
 sys.path.insert(0, ASSET_DIR)
-from sponsor_b64 import DONALEIGHS, WESTERN, MITSUBISHI, TODDSMITH
+from sponsor_b64 import DONALEIGHS, WESTERN, MITSUBISHI, TODDSMITH, JONES, MINDTOMUSCLE
 
 with open(os.path.join(ASSET_DIR, 'logo_transparent_b64.txt')) as f:
     LOGO = 'data:image/png;base64,' + f.read().strip()
@@ -34,6 +34,7 @@ CSS = """
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
+[id]{scroll-margin-top:96px;} /* keep anchor targets clear of the sticky header */
 body{font-family:'Public Sans', sans-serif; color:var(--ink); background:var(--paper); -webkit-font-smoothing:antialiased;}
 img{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}
@@ -49,8 +50,8 @@ nav.wrap{position:relative; display:flex; align-items:center; justify-content:sp
 .brand img{height:46px; width:46px; flex-shrink:0;}
 .brand .word{font-family:'Anton', sans-serif; color:#fff; font-size:16px; letter-spacing:0.06em; line-height:1.15;}
 .brand .word span{display:block; color:var(--sky); font-size:11px; letter-spacing:0.28em; margin-top:2px;}
-.navlinks{display:flex; align-items:center; gap:24px;}
-.navlinks a{color:rgba(255,255,255,0.82); font-size:13px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; transition:color .15s ease; white-space:nowrap;}
+.navlinks{display:flex; align-items:center; gap:20px;}
+.navlinks a{color:rgba(255,255,255,0.82); font-size:12.5px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; transition:color .15s ease; white-space:nowrap;}
 .navlinks a:hover, .navlinks a.active{color:var(--sky);}
 .navlinks a.donate-link{color:var(--gold);}
 .navlinks a.donate-link:hover{color:#fff;}
@@ -61,7 +62,7 @@ nav.wrap{position:relative; display:flex; align-items:center; justify-content:sp
 .nav-toggle .icon-close{display:none;}
 .nav-toggle[aria-expanded="true"] .icon-open{display:none;}
 .nav-toggle[aria-expanded="true"] .icon-close{display:block;}
-@media (max-width:1080px){
+@media (max-width:1120px){
   .nav-toggle{display:flex;}
   .navlinks{
     display:none; position:absolute; top:100%; left:0; right:0; z-index:99;
@@ -185,6 +186,9 @@ section{padding:96px 0;}
 .sponsor-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
 @media (max-width:760px){ .sponsor-grid{grid-template-columns:1fr 1fr;} }
 @media (max-width:480px){ .sponsor-grid{grid-template-columns:1fr;} }
+.sponsor-grid.wide{grid-template-columns:repeat(4,1fr);}
+@media (max-width:900px){ .sponsor-grid.wide{grid-template-columns:1fr 1fr;} }
+@media (max-width:480px){ .sponsor-grid.wide{grid-template-columns:1fr;} }
 .sponsor-card{background:#fff; border:1px solid var(--line); border-radius:4px; padding:26px 22px; display:flex; flex-direction:column; gap:6px; justify-content:center; min-height:96px;}
 .sponsor-card.logo{align-items:center; justify-content:center; padding:22px;}
 .sponsor-card.logo img{max-height:56px; max-width:100%; width:auto; object-fit:contain;}
@@ -274,6 +278,9 @@ section{padding:96px 0;}
 .matrix-callout .txt p{color:rgba(255,255,255,0.68); font-size:14.5px; margin-top:6px; max-width:420px;}
 .matrix-callout .go{position:relative; z-index:1; flex-shrink:0; font-family:'Anton', sans-serif; font-size:13px; letter-spacing:0.05em; text-transform:uppercase; background:var(--sky); color:var(--navy-deep) !important; padding:14px 26px; border-radius:3px; transition:background .15s ease;}
 .matrix-callout .go:hover{background:#fff;}
+.matrix-callout .back{position:relative; z-index:1; display:inline-flex; align-items:center; gap:6px; margin-top:14px; font-size:12px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--sky); opacity:0.8; transition:opacity .15s ease, color .15s ease;}
+.matrix-callout .back:hover{opacity:1; color:#fff;}
+.matrix-callout:target{box-shadow:0 0 0 3px var(--sky);} /* confirm arrival when jumped to from Resources */
 
 /* schedule */
 .sched-table{width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); border-radius:4px; overflow:hidden;}
@@ -373,6 +380,53 @@ footer{background:var(--navy-deep); border-top:1px solid rgba(255,255,255,0.08);
 .announce-bar .close{position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:0; cursor:pointer; color:var(--navy-deep); font-size:20px; line-height:1; padding:4px 6px; opacity:0.65;}
 .announce-bar .close:hover{opacity:1;}
 @media (max-width:640px){ .announce-bar .wrap{padding:10px 40px 10px 16px; gap:10px;} .announce-bar .msg{font-size:12.5px;} }
+
+/* ---- RUGBYCAN app band ---- */
+.hero-actions .btn-app{display:inline-flex; align-items:center; gap:9px; background:rgba(255,255,255,0.10); color:#fff !important; font-family:'Anton', sans-serif; letter-spacing:0.05em; font-size:13px; padding:12px 20px; border-radius:3px; text-transform:uppercase; transition:background .15s ease, transform .15s ease;}
+.hero-actions .btn-app:hover{background:rgba(255,255,255,0.2); transform:translateY(-1px);}
+.hero-actions .btn-app svg{width:15px; height:15px; flex-shrink:0;}
+
+.appband{background:var(--navy); position:relative; overflow:hidden; padding:96px 0; border-top:1px solid var(--line);}
+.appband .sash{position:absolute; inset:0; pointer-events:none;}
+.appband .sash span{position:absolute; width:180%; height:150px; left:-40%; background:linear-gradient(90deg, var(--sky), var(--sky-deep)); opacity:0.10; transform:rotate(-9deg);}
+.appband .sash span:nth-child(1){top:-40px;}
+.appband .sash span:nth-child(2){bottom:-30px; opacity:0.05;}
+.appband-inner{position:relative; z-index:1; display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px; align-items:center;}
+@media (max-width:900px){ .appband-inner{grid-template-columns:1fr; gap:52px;} }
+.appband .eyebrow{color:var(--sky);}
+.appband h2{font-family:'Anton', sans-serif; text-transform:uppercase; color:#fff; font-size:clamp(30px,4vw,46px); line-height:1.03; margin:16px 0 18px;}
+.appband h2 em{font-style:normal; color:var(--sky);}
+.appband p.lede{color:rgba(255,255,255,0.74); font-size:16.5px; line-height:1.62; max-width:470px;}
+.appband .fine{margin-top:26px; font-size:12.5px; color:rgba(255,255,255,0.5); letter-spacing:0.04em;}
+.appband .fine a{color:var(--sky); text-decoration:underline;}
+
+.store-row{display:flex; gap:14px; flex-wrap:wrap; margin-top:30px;}
+.store-btn{display:inline-flex; align-items:center; gap:12px; background:#fff; color:var(--navy-deep) !important; border-radius:5px; padding:11px 20px 11px 17px; transition:transform .15s ease, box-shadow .15s ease;}
+.store-btn:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,0.28);}
+.store-btn svg{width:24px; height:24px; flex-shrink:0;}
+.store-btn .lbl{display:flex; flex-direction:column; line-height:1.15;}
+.store-btn .lbl small{font-size:9.5px; letter-spacing:0.14em; text-transform:uppercase; color:#5a6274;}
+.store-btn .lbl strong{font-family:'Anton', sans-serif; font-size:16px; letter-spacing:0.02em; font-weight:400;}
+.store-btn:focus-visible, .hero-actions .btn-app:focus-visible, .appband a:focus-visible{outline:2px solid var(--sky); outline-offset:3px;}
+
+.phone-wrap{display:flex; justify-content:center;}
+.phone{width:250px; border-radius:30px; background:linear-gradient(160deg,#1d3560,#0c1a30); border:1px solid rgba(255,255,255,0.16); padding:12px; box-shadow:0 28px 60px rgba(0,0,0,0.45); position:relative;}
+.phone::before{content:""; position:absolute; top:20px; left:50%; transform:translateX(-50%); width:64px; height:5px; border-radius:3px; background:rgba(255,255,255,0.18);}
+.phone-screen{background:var(--navy-deep); border-radius:22px; padding:38px 16px 18px; border:1px solid rgba(255,255,255,0.08);}
+.phone-mark{text-align:center; padding-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.1);}
+.phone-mark b{display:block; font-family:'Anton', sans-serif; font-size:21px; letter-spacing:0.09em; color:#fff; font-weight:400;}
+.phone-mark span{display:block; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--sky); margin-top:5px;}
+.phone-row{display:flex; align-items:center; gap:11px; padding:13px 4px; border-bottom:1px solid rgba(255,255,255,0.06);}
+.phone-row:last-child{border-bottom:0;}
+.phone-row .pic{width:30px; height:30px; border-radius:7px; background:rgba(124,197,234,0.14); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+.phone-row .pic svg{width:15px; height:15px; color:var(--sky);}
+.phone-row .ptxt{font-size:12.5px; font-weight:600; color:rgba(255,255,255,0.88); flex:1;}
+.phone-row .chev{color:rgba(255,255,255,0.3); font-size:13px;}
+.phone-row .live{display:inline-flex; align-items:center; gap:5px; font-family:'Anton', sans-serif; font-size:9.5px; letter-spacing:0.12em; color:#fff; background:var(--red); padding:3px 7px; border-radius:3px;}
+.phone-row .live i{width:5px; height:5px; border-radius:50%; background:#fff; display:inline-block; animation:livePulse 1.6s ease-in-out infinite;}
+@keyframes livePulse{0%,100%{opacity:1;}50%{opacity:0.25;}}
+@media (prefers-reduced-motion:reduce){ .phone-row .live i{animation:none;} }
+@media (max-width:900px){ .phone{width:225px;} }
 """
 
 HEAD = """<head>
@@ -402,6 +456,7 @@ def nav(active):
       <a href="index.html#sponsors"{cls('sponsors')}>Sponsors</a>
       <a href="index.html#shop"{cls('shop')}>Shop</a>
       <a href="resources.html"{cls('resources')}>Resources</a>
+      <a href="index.html#app"{cls('app')}>Get The App</a>
       <a href="index.html#contact"{cls('contact')}>Contact</a>
       <a class="donate-link" href="index.html#donate"{cls('donate')}>Donate</a>
     </div>
@@ -443,6 +498,7 @@ FOOTER = f"""<footer>
       <a href="index.html#sponsors">Sponsors</a>
       <a href="index.html#shop">Shop</a>
       <a href="resources.html">Resources</a>
+      <a href="index.html#app">Get The App</a>
       <a href="index.html#contact">Contact</a>
       <a href="index.html#donate">Donate</a>
     </div>
@@ -621,6 +677,10 @@ index_body = f"""
       <div class="hero-actions">
         <a class="cta-btn" href="https://www.playhq.com/ca/rugby-canada/register/c4290e">Register Now</a>
         <a class="btn-ghost" href="#contact">Get In Touch</a>
+        <a class="btn-app" href="#app">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg>
+          Get The App
+        </a>
       </div>
     </div>
   </div>
@@ -694,12 +754,62 @@ index_body = f"""
   </div>
 </section>
 
+<section class="appband" id="app">
+  <div class="sash"><span></span><span></span></div>
+  <div class="wrap appband-inner">
+    <div>
+      <span class="eyebrow">Matchday</span>
+      <h2>Every fixture.<br>Every result.<br><em>In your pocket.</em></h2>
+      <p class="lede">Barrie Rugby Club runs its competitions on PlayHQ &mdash; and <strong style="color:#fff;">RUGBYCAN</strong> is the official free app that goes with it. Schedules, live scores, results and club communications for every team, from the minis to the senior sides.</p>
+      <div class="store-row">
+        <a class="store-btn" href="https://apps.apple.com/ca/app/rugbycan/id6756593343" target="_blank" rel="noopener" aria-label="Download RUGBYCAN on the App Store">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.53c-.02-2.2 1.8-3.26 1.88-3.31-1.02-1.5-2.61-1.7-3.18-1.73-1.35-.14-2.64.8-3.33.8-.69 0-1.75-.78-2.87-.76-1.48.02-2.84.86-3.6 2.18-1.53 2.66-.39 6.6 1.1 8.76.73 1.06 1.6 2.25 2.74 2.2 1.1-.04 1.52-.71 2.85-.71s1.7.71 2.87.69c1.18-.02 1.93-1.08 2.65-2.14.83-1.23 1.18-2.42 1.2-2.48-.03-.01-2.29-.88-2.31-3.5zM14.9 5.5c.6-.74 1.01-1.76.9-2.78-.87.04-1.93.58-2.56 1.31-.56.65-1.06 1.7-.93 2.7.97.08 1.97-.49 2.59-1.23z"/></svg>
+          <span class="lbl"><small>Download on the</small><strong>App Store</strong></span>
+        </a>
+        <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.playhq.rugbycanada" target="_blank" rel="noopener" aria-label="Get RUGBYCAN on Google Play">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.3c-.24.26-.38.66-.38 1.18v17.04c0 .52.14.92.38 1.18l.06.06 9.55-9.55v-.22L3.66 2.44l-.06-.14zM16.6 15.4l-3.18-3.19v-.22l3.19-3.19.07.04 3.77 2.14c1.08.61 1.08 1.62 0 2.24l-3.77 2.14-.08.04zM15.9 16.1L12.64 12.85 3.03 22.46c.36.38.94.42 1.6.05l11.27-6.41M15.9 7.9L4.63 1.49c-.66-.38-1.24-.33-1.6.05l9.61 9.61L15.9 7.9z"/></svg>
+          <span class="lbl"><small>Get it on</small><strong>Google Play</strong></span>
+        </a>
+      </div>
+      <p class="fine">Free on iOS and Android &middot; Powered by PlayHQ &middot; Search <strong style="color:rgba(255,255,255,0.75);">Barrie Rugby Club</strong> once you're in. Not registered yet? <a href="https://www.playhq.com/ca/rugby-canada/register/c4290e">Start here</a>.</p>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone" aria-hidden="true">
+        <div class="phone-screen">
+          <div class="phone-mark"><b>RUGBYCAN</b><span>Powered by PlayHQ</span></div>
+          <div class="phone-row">
+            <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg></div>
+            <span class="ptxt">Live Scores</span>
+            <span class="live"><i></i>LIVE</span>
+          </div>
+          <div class="phone-row">
+            <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+            <span class="ptxt">Fixtures &amp; Results</span>
+            <span class="chev">&rsaquo;</span>
+          </div>
+          <div class="phone-row">
+            <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16v12H7l-3 3V4z"/></svg></div>
+            <span class="ptxt">Club Communications</span>
+            <span class="chev">&rsaquo;</span>
+          </div>
+          <div class="phone-row">
+            <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.5 5.9.85-4.3 4.2 1.05 5.95L12 16.7l-5.25 2.8L7.8 13.55 3.5 9.35l5.9-.85L12 3z"/></svg></div>
+            <span class="ptxt">Favourite Your Teams</span>
+            <span class="chev">&rsaquo;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="sponsors" style="background:#fff; border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Thank You</span>
       <h2>Our Sponsors</h2>
       <p class="lede">Barrie Rugby runs on the back of local businesses who back the club year after year.</p>
+      <p class="lede"><a href="sponsorship-package-2026.pdf" target="_blank" rel="noopener" style="color:var(--sky-deep); font-weight:700;">View the 2026 Sponsorship Package (PDF) &rarr;</a></p>
     </div>
 
     <div class="tier-block">
@@ -713,14 +823,16 @@ index_body = f"""
       <div class="tier-label"><span class="badge gold">Gold</span><span class="line"></span></div>
       <div class="sponsor-grid">
         <div class="sponsor-card logo"><img src="{DONALEIGHS}" alt="Donaleigh's"></div>
+        <div class="sponsor-card logo"><img src="{MITSUBISHI}" alt="Barrie Mitsubishi"></div>
       </div>
     </div>
 
     <div class="tier-block">
       <div class="tier-label"><span class="badge direct">Direct</span><span class="line"></span></div>
-      <div class="sponsor-grid">
+      <div class="sponsor-grid wide">
         <div class="sponsor-card logo"><img src="{TODDSMITH}" alt="Todd Smith Mortgages"></div>
-        <div class="sponsor-card logo"><img src="{MITSUBISHI}" alt="Barrie Mitsubishi"></div>
+        <div class="sponsor-card logo"><img src="{MINDTOMUSCLE}" alt="Mind to Muscle Strength &amp; Conditioning Centre"></div>
+        <div class="sponsor-card logo"><img src="{JONES}" alt="Jones Consulting Group Ltd."></div>
         <div class="sponsor-card cta"><div class="sname">Become a Sponsor</div><a href="mailto:info@barrierugbyclub.com">info@barrierugbyclub.com &rarr;</a></div>
       </div>
     </div>
@@ -764,8 +876,8 @@ index_body = f"""
         <div class="body">
           <span class="tag">Fan Store</span>
           <h3>Official Online Merch</h3>
-          <p>Casual fan apparel and lifestyle wear in club colours &mdash; the everyday store for supporters, alumni, and families on the sideline. Hosted by 4th &amp; Standard.</p>
-          <a class="go" href="https://4hundredsfs.com/collections/barrie-rugby" target="_blank" rel="noopener">Shop Merch &rarr;</a>
+          <p>Casual fan apparel and lifestyle wear in club colours &mdash; the everyday store for supporters, alumni, and families on the sideline. Hosted by Source for Sports Barrie.</p>
+          <a class="go" href="https://sfsbarrie.com/collections/barrie-rugby" target="_blank" rel="noopener">Shop Merch &rarr;</a>
         </div>
       </div>
       <div class="shop-card">
@@ -882,6 +994,7 @@ programs_body = f"""
         <span class="eyebrow">Reference</span>
         <h3>Age Grade Matrix</h3>
         <p>The full Rugby Ontario-aligned breakdown of which age group your player belongs in, contact rules, and format by age.</p>
+        <a class="back" href="resources.html">&larr; Back to Resources</a>
       </div>
       <a class="go" href="https://www.barrierugby.com/_files/ugd/95a192_ac77f1b87a694696b5e5ce6cb2b75ec5.pdf" target="_blank" rel="noopener">View PDF &rarr;</a>
     </div>
@@ -1037,6 +1150,10 @@ resources_body = f"""
         <div><div class="t">Registration (PlayHQ)</div><div class="d">Register for the current season</div></div>
         <span class="arrow">&rarr;</span>
       </a>
+      <a class="res-link" href="index.html#app">
+        <div><div class="t">RUGBYCAN App</div><div class="d">Official free app &mdash; fixtures, live scores &amp; results</div></div>
+        <span class="arrow">&rarr;</span>
+      </a>
     </div>
 
     <div class="res-group-label">Player Safety</div>
@@ -1069,6 +1186,10 @@ resources_body = f"""
         <div><div class="t">Volunteering</div><div class="d">Get involved off the pitch</div></div>
         <span class="arrow">&rarr;</span>
       </a>
+      <a class="res-link" href="sponsorship-package-2026.pdf" target="_blank" rel="noopener">
+        <div><div class="t">2026 Sponsorship Package</div><div class="d">Tiered levels &amp; direct-item sponsorship menu (PDF)</div></div>
+        <span class="arrow">&rarr;</span>
+      </a>
     </div>
 
   </div>
@@ -1076,6 +1197,27 @@ resources_body = f"""
 
 {CONTACT_SECTION}
 """
+
+# On cross-page anchor jumps (e.g. resources.html -> programs.html#matrix) the
+# browser scrolls before the base64-embedded images finish decoding, so layout
+# shifts under the scroll position and the target lands off-screen. After full
+# load, re-snap to the hash target instantly (suppressing smooth-scroll so the
+# correction isn't a visible animation).
+ANCHOR_FIX = """<script>
+(function(){
+  if(!location.hash) return;
+  function snap(){
+    var el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(!el) return;
+    var html = document.documentElement;
+    var prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
+    el.scrollIntoView({block:'start'});
+    html.style.scrollBehavior = prev;
+  }
+  window.addEventListener('load', function(){ requestAnimationFrame(snap); setTimeout(snap, 250); });
+})();
+</script>"""
 
 def page(title, active, body, bg_b64=None):
     extra = f'<style>:root{{--section-bg:url(data:image/jpeg;base64,{bg_b64})}}</style>' if bg_b64 else ''
@@ -1088,6 +1230,7 @@ def page(title, active, body, bg_b64=None):
 {body}
 {FOOTER}
 {CHAT_WIDGET}
+{ANCHOR_FIX}
 </body>
 </html>"""
 

@@ -17,6 +17,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
+[id]{scroll-margin-top:96px;} /* keep anchor targets clear of the sticky header */
 body{font-family:'Public Sans', sans-serif; color:var(--ink); background:var(--paper); -webkit-font-smoothing:antialiased;}
 img{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}
@@ -260,6 +261,9 @@ section{padding:96px 0;}
 .matrix-callout .txt p{color:rgba(255,255,255,0.68); font-size:14.5px; margin-top:6px; max-width:420px;}
 .matrix-callout .go{position:relative; z-index:1; flex-shrink:0; font-family:'Anton', sans-serif; font-size:13px; letter-spacing:0.05em; text-transform:uppercase; background:var(--sky); color:var(--navy-deep) !important; padding:14px 26px; border-radius:3px; transition:background .15s ease;}
 .matrix-callout .go:hover{background:#fff;}
+.matrix-callout .back{position:relative; z-index:1; display:inline-flex; align-items:center; gap:6px; margin-top:14px; font-size:12px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--sky); opacity:0.8; transition:opacity .15s ease, color .15s ease;}
+.matrix-callout .back:hover{opacity:1; color:#fff;}
+.matrix-callout:target{box-shadow:0 0 0 3px var(--sky);} /* confirm arrival when jumped to from Resources */
 
 /* schedule */
 .sched-table{width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); border-radius:4px; overflow:hidden;}
@@ -689,5 +693,20 @@ footer{background:var(--navy-deep); border-top:1px solid rgba(255,255,255,0.08);
 })();
 </script>
 
+<script>
+(function(){
+  if(!location.hash) return;
+  function snap(){
+    var el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(!el) return;
+    var html = document.documentElement;
+    var prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
+    el.scrollIntoView({block:'start'});
+    html.style.scrollBehavior = prev;
+  }
+  window.addEventListener('load', function(){ requestAnimationFrame(snap); setTimeout(snap, 250); });
+})();
+</script>
 </body>
 </html>
