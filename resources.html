@@ -441,26 +441,45 @@ footer{background:var(--navy-deep); border-top:1px solid rgba(255,255,255,0.08);
 <script>
 (function(){
   var PAGE_KEY = "resources";
-  fetch('/api/banner', {cache: 'no-store'}).then(function(r){ return r.ok ? r.json() : null; }).then(function(data){
-    if(!data || !data.enabled) return;
-    if(!data.pages || data.pages.indexOf(PAGE_KEY) === -1) return;
-    var DKEY = 'barrieAnnounceDismissed_' + (data.version || '1');
-    try{ if(localStorage.getItem(DKEY) === '1') return; }catch(e){}
-    var bar = document.getElementById('announceBar');
-    document.getElementById('announceMsg').textContent = data.text || '';
-    var cta = document.getElementById('announceCta');
+  var BAKED = {"enabled": true, "text": "Rugby 7s is coming this fall. Coach and dates are being finalized with Rugby Ontario. No additional registration cost for current members \u2014 pricing for new registrants to follow.", "link": "", "linkText": "", "pages": ["home", "programs"], "version": "3", "expires": "2026-08-30T23:59:59-04:00"};
+  var bar = document.getElementById('announceBar');
+  var msg = document.getElementById('announceMsg');
+  var cta = document.getElementById('announceCta');
+  var closeBtn = document.getElementById('announceClose');
+  if(!bar) return;
+  var dkey = 'barrieAnnounceDismissed_1';
+
+  function render(data){
+    if(!data || !data.enabled){ bar.style.display = 'none'; return; }
+    if(data.expires){
+      var exp = new Date(data.expires);
+      if(!isNaN(exp) && new Date() > exp){ bar.style.display = 'none'; return; }
+    }
+    if(!data.pages || data.pages.indexOf(PAGE_KEY) === -1){ bar.style.display = 'none'; return; }
+    dkey = 'barrieAnnounceDismissed_' + (data.version || '1');
+    try{ if(localStorage.getItem(dkey) === '1'){ bar.style.display = 'none'; return; } }catch(e){}
+    msg.textContent = data.text || '';
     if(data.link){
       cta.href = data.link;
       cta.textContent = (data.linkText || 'Learn More') + ' →';
       cta.style.display = '';
     } else {
+      cta.removeAttribute('href');
+      cta.textContent = '';
       cta.style.display = 'none';
     }
     bar.style.display = 'block';
-    document.getElementById('announceClose').addEventListener('click', function(){
-      bar.style.display = 'none';
-      try{ localStorage.setItem(DKEY, '1'); }catch(e){}
-    });
+  }
+
+  closeBtn.addEventListener('click', function(){
+    bar.style.display = 'none';
+    try{ localStorage.setItem(dkey, '1'); }catch(e){}
+  });
+
+  // Baked-in content paints immediately; KV overrides it when available.
+  render(BAKED);
+  fetch('/api/banner', {cache: 'no-store'}).then(function(r){ return r.ok ? r.json() : null; }).then(function(data){
+    if(data) render(data);
   }).catch(function(){});
 })();
 </script>

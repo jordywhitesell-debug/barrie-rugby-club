@@ -1,5 +1,6 @@
 import os
 import sys
+import json
 
 _BASE = os.path.dirname(os.path.abspath(__file__))
 ASSET_DIR = '/home/claude' if os.path.exists('/home/claude/sponsor_b64.py') else _BASE
@@ -631,12 +632,44 @@ CHAT_WIDGET = """
 """
 
 # ---------------------------------------------------------------------------
+# ANNOUNCEMENT BANNER
 # ---------------------------------------------------------------------------
-# ANNOUNCEMENT BANNER — content now lives in Cloudflare KV, edited via /admin.
-# This is just the skeleton + fetch script; it's identical on every page and
-# reads live content from /api/banner at load time. No rebuild needed to
-# change the banner text, link, on/off state, or which pages show it.
+# Content is baked in here at build time (the constants below) AND can be
+# overridden at runtime by Cloudflare KV via /api/banner, edited from /admin.
+#
+#   - If /api/banner returns valid JSON, it wins - no rebuild needed to change
+#     the text, link, on/off state, or which pages show the banner.
+#   - If /api/banner is missing, erroring, or not yet wired up, the baked-in
+#     values below render immediately with no network wait.
+#
+# So: edit these constants + rerun this script for a permanent change; use
+# /admin for a quick change once the KV Function is deployed.
+#
+# ANNOUNCE_PAGES valid values: "home", "programs", "alumni", "resources"
+# Bump ANNOUNCE_VERSION whenever the message changes, so people who already
+# dismissed the previous banner are shown the new one.
 # ---------------------------------------------------------------------------
+ANNOUNCE_ENABLED = True
+ANNOUNCE_TEXT = (
+    "Rugby 7s is coming this fall. Coach and dates are being finalized with "
+    "Rugby Ontario. No additional registration cost for current members — "
+    "pricing for new registrants to follow."
+)
+ANNOUNCE_LINK = ""
+ANNOUNCE_LINK_TEXT = ""
+ANNOUNCE_PAGES = {"home", "programs"}
+ANNOUNCE_VERSION = "3"
+
+_ANNOUNCE_DEFAULT = json.dumps({
+    "enabled": ANNOUNCE_ENABLED,
+    "text": ANNOUNCE_TEXT,
+    "link": ANNOUNCE_LINK,
+    "linkText": ANNOUNCE_LINK_TEXT,
+    "pages": sorted(ANNOUNCE_PAGES),
+    "version": ANNOUNCE_VERSION,
+})
+
+
 def announce_bar(page_key):
     return f"""
 <div class="announce-bar" id="announceBar" style="display:none;">
@@ -649,26 +682,41 @@ def announce_bar(page_key):
 <script>
 (function(){{
   var PAGE_KEY = "{page_key}";
-  fetch('/api/banner', {{cache: 'no-store'}}).then(function(r){{ return r.ok ? r.json() : null; }}).then(function(data){{
-    if(!data || !data.enabled) return;
-    if(!data.pages || data.pages.indexOf(PAGE_KEY) === -1) return;
-    var DKEY = 'barrieAnnounceDismissed_' + (data.version || '1');
-    try{{ if(localStorage.getItem(DKEY) === '1') return; }}catch(e){{}}
-    var bar = document.getElementById('announceBar');
-    document.getElementById('announceMsg').textContent = data.text || '';
-    var cta = document.getElementById('announceCta');
+  var BAKED = {_ANNOUNCE_DEFAULT};
+  var bar = document.getElementById('announceBar');
+  var msg = document.getElementById('announceMsg');
+  var cta = document.getElementById('announceCta');
+  var closeBtn = document.getElementById('announceClose');
+  if(!bar) return;
+  var dkey = 'barrieAnnounceDismissed_1';
+
+  function render(data){{
+    if(!data || !data.enabled){{ bar.style.display = 'none'; return; }}
+    if(!data.pages || data.pages.indexOf(PAGE_KEY) === -1){{ bar.style.display = 'none'; return; }}
+    dkey = 'barrieAnnounceDismissed_' + (data.version || '1');
+    try{{ if(localStorage.getItem(dkey) === '1'){{ bar.style.display = 'none'; return; }} }}catch(e){{}}
+    msg.textContent = data.text || '';
     if(data.link){{
       cta.href = data.link;
-      cta.textContent = (data.linkText || 'Learn More') + ' \u2192';
+      cta.textContent = (data.linkText || 'Learn More') + ' →';
       cta.style.display = '';
     }} else {{
+      cta.removeAttribute('href');
+      cta.textContent = '';
       cta.style.display = 'none';
     }}
     bar.style.display = 'block';
-    document.getElementById('announceClose').addEventListener('click', function(){{
-      bar.style.display = 'none';
-      try{{ localStorage.setItem(DKEY, '1'); }}catch(e){{}}
-    }});
+  }}
+
+  closeBtn.addEventListener('click', function(){{
+    bar.style.display = 'none';
+    try{{ localStorage.setItem(dkey, '1'); }}catch(e){{}}
+  }});
+
+  // Baked-in content paints immediately; KV overrides it when available.
+  render(BAKED);
+  fetch('/api/banner', {{cache: 'no-store'}}).then(function(r){{ return r.ok ? r.json() : null; }}).then(function(data){{
+    if(data) render(data);
   }}).catch(function(){{}});
 }})();
 </script>
