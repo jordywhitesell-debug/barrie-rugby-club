@@ -35,7 +35,7 @@ SHOP:
 - Fan merch: https://4hundredsfs.com/collections/barrie-rugby
 - On-field kit (Gilbert): https://gilbertrugbycanada.com/collections/barrie-rugby-club
 
-SPONSORS: Western (Platinum), Donaleigh's (Gold), Todd Smith Mortgages, Barrie Mitsubishi, Mind to Muscle Strength & Conditioning Centre, and Jones Consulting Group Ltd. (Direct). Sponsorship inquiries: info@barrierugbyclub.com.
+SPONSORS: Western (Platinum), Donaleigh's and Barrie Mitsubishi (Title), Todd Smith Mortgages, Mind to Muscle Strength & Conditioning Centre, and Jones Consulting Group Ltd. (Direct). Sponsorship inquiries: info@barrierugbyclub.com.
 
 CLUB HIGHLIGHTS: U16 girls placed 3rd at the Tropical 7s in Tampa Bay. U18 girls toured Portugal; U18 boys toured France in 2026.
 
