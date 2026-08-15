@@ -181,6 +181,7 @@ section{padding:96px 0;}
 .tier-label .badge{font-family:'Anton', sans-serif; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; padding:6px 14px; border-radius:3px; color:#fff;}
 .badge.platinum{background:#5b6472;}
 .badge.gold{background:#c79a3c;}
+.badge.title{background:var(--navy);}
 .badge.direct{background:var(--sky-deep);}
 .badge.open{background:transparent; color:var(--navy); border:1.5px dashed var(--line);}
 .tier-label .line{flex:1; height:1px; background:var(--line);}
@@ -659,15 +660,22 @@ ANNOUNCE_LINK = ""
 ANNOUNCE_LINK_TEXT = ""
 ANNOUNCE_PAGES = {"home", "programs"}
 ANNOUNCE_VERSION = "3"
+# ISO datetime with Toronto offset ("-04:00" EDT / "-05:00" EST). After this
+# moment the banner hides itself client-side for everyone, no redeploy needed.
+# "" = never expires.
+ANNOUNCE_EXPIRES = "2026-08-30T23:59:59-04:00"
 
-_ANNOUNCE_DEFAULT = json.dumps({
+_ANNOUNCE_PAYLOAD = {
     "enabled": ANNOUNCE_ENABLED,
     "text": ANNOUNCE_TEXT,
     "link": ANNOUNCE_LINK,
     "linkText": ANNOUNCE_LINK_TEXT,
     "pages": sorted(ANNOUNCE_PAGES),
     "version": ANNOUNCE_VERSION,
-})
+}
+if ANNOUNCE_EXPIRES:
+    _ANNOUNCE_PAYLOAD["expires"] = ANNOUNCE_EXPIRES
+_ANNOUNCE_DEFAULT = json.dumps(_ANNOUNCE_PAYLOAD)
 
 
 def announce_bar(page_key):
@@ -692,6 +700,10 @@ def announce_bar(page_key):
 
   function render(data){{
     if(!data || !data.enabled){{ bar.style.display = 'none'; return; }}
+    if(data.expires){{
+      var exp = new Date(data.expires);
+      if(!isNaN(exp) && new Date() > exp){{ bar.style.display = 'none'; return; }}
+    }}
     if(!data.pages || data.pages.indexOf(PAGE_KEY) === -1){{ bar.style.display = 'none'; return; }}
     dkey = 'barrieAnnounceDismissed_' + (data.version || '1');
     try{{ if(localStorage.getItem(dkey) === '1'){{ bar.style.display = 'none'; return; }} }}catch(e){{}}
@@ -884,7 +896,7 @@ index_body = f"""
     </div>
 
     <div class="tier-block">
-      <div class="tier-label"><span class="badge gold">Gold</span><span class="line"></span></div>
+      <div class="tier-label"><span class="badge title">Title</span><span class="line"></span></div>
       <div class="sponsor-grid">
         <div class="sponsor-card logo"><img src="{DONALEIGHS}" alt="Donaleigh's"></div>
         <div class="sponsor-card logo"><img src="{MITSUBISHI}" alt="Barrie Mitsubishi"></div>
