@@ -427,6 +427,127 @@ footer{background:var(--navy-deep); border-top:1px solid rgba(255,255,255,0.08);
 @keyframes livePulse{0%,100%{opacity:1;}50%{opacity:0.25;}}
 @media (prefers-reduced-motion:reduce){ .phone-row .live i{animation:none;} }
 @media (max-width:900px){ .phone{width:225px;} }
+
+/* ---------------------------------------------------------------------------
+   registration fees page (fees.html)
+   Data colours reuse the existing brand tokens: Rugby Canada = --red,
+   Rugby Ontario = --gold, Barrie Rugby Club = --sky-deep. Ink on each fill is
+   picked for contrast (white on red, navy on gold and sky).
+   --------------------------------------------------------------------------- */
+.fee-panel{background:#fff; border:1px solid var(--line); border-radius:4px; padding:34px 32px 36px;}
+@media (max-width:640px){ .fee-panel{padding:26px 20px 28px;} }
+.fee-panel .lbl{font-family:'Anton', sans-serif; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--sky-deep);}
+.fee-chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
+.fee-chip{font-family:'Public Sans', sans-serif; font-size:13px; font-weight:700; line-height:1; cursor:pointer; padding:10px 15px; border-radius:20px; border:1px solid var(--line); background:var(--paper); color:var(--navy); transition:background .15s ease, color .15s ease, border-color .15s ease;}
+.fee-chip:hover{border-color:var(--sky-deep); color:var(--sky-deep);}
+.fee-chip[aria-pressed="true"]{background:var(--navy); border-color:var(--navy); color:#fff;}
+.fee-chip:focus-visible{outline:3px solid var(--sky-deep); outline-offset:2px;}
+.fee-readout{margin-top:28px; padding-top:26px; border-top:1px solid var(--line);}
+.fee-readout .top{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:6px 22px; margin-bottom:14px;}
+.fee-readout .who{font-family:'Anton', sans-serif; font-size:clamp(22px,3.4vw,30px); text-transform:uppercase; color:var(--navy); line-height:1.05;}
+.fee-readout .who small{display:block; font-family:'Public Sans', sans-serif; font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#6b7284; margin-top:8px;}
+.fee-readout .amt{font-family:'Anton', sans-serif; font-size:clamp(30px,5.2vw,46px); line-height:0.95; color:var(--sky-deep);}
+.fee-bar{display:flex; gap:2px; width:100%; height:20px; border-radius:3px; overflow:hidden;}
+.fee-bar.big{height:58px; border-radius:4px;}
+.fee-bar .s{display:flex; align-items:center; justify-content:center; overflow:hidden; width:var(--w); transition:width .5s cubic-bezier(.22,.7,.25,1);}
+.fee-bar .s.rc{background:var(--red); color:#fff;}
+.fee-bar .s.ro{background:var(--gold); color:var(--navy-deep);}
+.fee-bar .s.club{background:var(--sky-deep); color:var(--navy-deep);}
+.fee-bar .v{font-size:13.5px; font-weight:700; white-space:nowrap; padding:0 8px;}
+.fee-bar .v.off{opacity:0;}
+@media (max-width:640px){ .fee-bar.big .v{display:none;} }
+@media (prefers-reduced-motion: reduce){ .fee-bar .s{transition:none;} }
+.fee-legend{list-style:none; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:20px;}
+@media (max-width:640px){ .fee-legend{grid-template-columns:1fr;} }
+.fee-legend li{background:#fff; padding:16px 18px;}
+.fee-legend .k{display:flex; align-items:center; gap:9px; font-family:'Anton', sans-serif; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:#6b7284;}
+.fee-legend .k::before{content:""; width:11px; height:11px; border-radius:2px; background:var(--c); flex-shrink:0;}
+.fee-legend li:nth-child(1){--c:var(--red);}
+.fee-legend li:nth-child(2){--c:var(--gold);}
+.fee-legend li:nth-child(3){--c:var(--sky-deep);}
+.fee-legend .n{display:block; font-family:'Anton', sans-serif; font-size:24px; color:var(--navy); margin-top:7px;}
+.fee-legend .s{display:block; font-size:12.5px; color:#6b7284; margin-top:3px;}
+
+.card.org-rc::before{background:var(--red);}
+.card.org-ro::before{background:var(--gold);}
+.card .amt{font-family:'Anton', sans-serif; font-size:22px; color:var(--navy); margin:12px 0 2px;}
+.card .amt-l{font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:#6b7284; margin-bottom:12px;}
+
+.fee-key{display:flex; flex-wrap:wrap; gap:10px 24px; font-size:13px; font-weight:700; color:#5a6274; padding-bottom:18px; border-bottom:1px solid var(--line);}
+.fee-key span{display:flex; align-items:center; gap:9px;}
+.fee-key span::before{content:""; width:11px; height:11px; border-radius:2px; background:var(--c); flex-shrink:0;}
+.fee-key .r{--c:var(--red);} .fee-key .o{--c:var(--gold);} .fee-key .c{--c:var(--sky-deep);}
+.fee-tablewrap{overflow-x:auto;}
+table.fee-table{width:100%; border-collapse:collapse;}
+table.fee-table th, table.fee-table td{text-align:left; vertical-align:top; padding:16px 0;}
+table.fee-table tr.grp th{padding:28px 0 9px; font-family:'Anton', sans-serif; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--sky-deep); border-bottom:1px solid var(--line);}
+table.fee-table tr.grp:first-child th{padding-top:8px;}
+.fee-c1{width:200px; padding-right:26px !important;}
+.fee-c1 .l{display:block; font-weight:700; color:var(--navy); font-size:15px;}
+.fee-c1 .s{display:block; font-weight:400; font-size:12.5px; color:#6b7284; margin-top:2px;}
+.fee-c3{width:140px; padding-left:26px !important; text-align:right;}
+.fee-c3 .t{display:block; font-family:'Anton', sans-serif; font-size:22px; color:var(--navy); line-height:1.05;}
+.fee-c3 .p{display:block; font-size:12px; color:#6b7284; margin-top:3px;}
+table.fee-table tbody tr:not(.grp)+tr:not(.grp) .fee-c1,
+table.fee-table tbody tr:not(.grp)+tr:not(.grp) .fee-c2,
+table.fee-table tbody tr:not(.grp)+tr:not(.grp) .fee-c3{border-top:1px solid var(--line);}
+.fee-vals{display:flex; flex-wrap:wrap; gap:6px 20px; margin-top:12px; font-size:13px; font-weight:700; color:#5a6274;}
+.fee-vals b{display:flex; align-items:center; gap:8px; font-weight:700;}
+.fee-vals b::before{content:""; width:9px; height:9px; border-radius:2px; background:var(--c); flex-shrink:0;}
+.fee-vals .r{--c:var(--red);} .fee-vals .o{--c:var(--gold);} .fee-vals .c{--c:var(--sky-deep);}
+.fee-vals .nm{display:none; font-weight:400; color:#6b7284; margin-right:5px;}
+@media (max-width:760px){
+  table.fee-table, table.fee-table tbody, table.fee-table tr, table.fee-table th, table.fee-table td{display:block; width:auto;}
+  table.fee-table th, table.fee-table td{padding:0 !important; border:0 !important;}
+  table.fee-table tr:not(.grp){display:flex; flex-direction:column; gap:11px; padding:20px 0;}
+  table.fee-table tr:not(.grp)+tr:not(.grp){border-top:1px solid var(--line) !important;}
+  table.fee-table tr.grp th{padding:26px 0 9px !important; border-bottom:1px solid var(--line) !important;}
+  .fee-c1{order:1;} .fee-c3{order:2;} .fee-c2{order:3;}
+  .fee-c3{text-align:left; display:flex; align-items:baseline; gap:12px;}
+  .fee-c3 .t{font-size:19px;} .fee-c3 .p{margin-top:0;}
+  .fee-vals b{width:100%;}
+  .fee-vals .nm{display:inline;}
+}
+details.fee-plain{margin-top:30px; border-top:1px solid var(--line); padding-top:20px;}
+details.fee-plain summary{cursor:pointer; font-family:'Anton', sans-serif; font-size:12.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--sky-deep);}
+details.fee-plain summary:hover{color:var(--navy);}
+details.fee-plain .sched-wrap{margin-top:18px;}
+table.sched-table td.num, table.sched-table th.num{text-align:right;}
+
+.fee-kit{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:26px;}
+@media (max-width:700px){ .fee-kit{grid-template-columns:1fr;} }
+.fee-kit .card{display:flex; flex-direction:column;}
+.fee-kit .band{font-family:'Anton', sans-serif; font-size:24px; text-transform:uppercase; color:var(--navy); line-height:1;}
+.fee-kit .band em{font-style:normal; color:var(--sky-deep);}
+.fee-kit ul{margin-top:16px; padding-left:18px;}
+.fee-kit li{font-size:14.5px; line-height:1.8; color:#454d64;}
+.fee-kit .note{margin-top:auto; padding-top:18px; font-size:12.5px; color:#6b7284;}
+
+.fee-change{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:26px;}
+@media (max-width:760px){ .fee-change{grid-template-columns:1fr;} }
+.fee-change > div{background:#fff; padding:26px 24px 28px;}
+.fee-change .t{font-family:'Anton', sans-serif; font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--sky-deep);}
+.fee-change .n{font-family:'Anton', sans-serif; font-size:clamp(30px,4.4vw,40px); line-height:1; color:var(--navy); margin-top:12px;}
+.fee-change .l{font-size:14px; line-height:1.65; color:#5a6274; margin-top:10px;}
+.fee-note{background:#fff; border:1px solid var(--line); border-left:4px solid var(--sky); padding:24px 26px; border-radius:2px; margin-top:26px;}
+.fee-note h3{font-family:'Anton', sans-serif; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:#6b7284;}
+.fee-note ul{margin-top:14px; padding:0; list-style:none; display:grid; gap:10px 32px; grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));}
+.fee-note li{display:flex; gap:10px; font-size:14.5px; line-height:1.6; color:#454d64;}
+.fee-note li::before{content:""; flex-shrink:0; width:6px; height:6px; margin-top:9px; border-radius:50%; background:var(--sky-deep);}
+
+.fee-close{background:var(--navy); color:#fff; position:relative; overflow:hidden; border-top:4px solid var(--sky-deep);}
+.fee-close .sash{position:absolute; inset:0; pointer-events:none;}
+.fee-close .sash span{position:absolute; width:180%; height:110px; left:-45%; background:linear-gradient(90deg, var(--sky), var(--sky-deep)); opacity:0.08; transform:rotate(-9deg);}
+.fee-close .sash span:nth-child(1){top:-10px;}
+.fee-close .sash span:nth-child(2){bottom:10px; opacity:0.05;}
+.fee-close-inner{position:relative; z-index:1;}
+.fee-close .sec-head h2{color:#fff;}
+.fee-close .sec-head .eyebrow{color:var(--sky);}
+.fee-close .sec-head p.lede{color:rgba(255,255,255,0.72);}
+.fee-close .prose p{font-size:16px; line-height:1.75; color:rgba(255,255,255,0.8); max-width:70ch;}
+.fee-close .prose p + p{margin-top:16px;}
+.fee-close .prose strong{color:#fff;}
+.fee-close .donate-card .n{color:var(--sky);}
 </style>
 
 <script type="application/ld+json">
@@ -831,6 +952,7 @@ footer{background:var(--navy-deep); border-top:1px solid rgba(255,255,255,0.08);
     <div class="foot-links">
       <a href="index.html#about">About</a>
       <a href="programs.html">Programs</a>
+      <a href="fees.html">Fees</a>
       <a href="alumni.html">Alumni</a>
       <a href="index.html#sponsors">Sponsors</a>
       <a href="index.html#shop">Shop</a>
@@ -858,6 +980,7 @@ footer{background:var(--navy-deep); border-top:1px solid rgba(255,255,255,0.08);
   <div class="bchat-chips" id="bchatChips">
     <button data-q="When are practices?">When are practices?</button>
     <button data-q="How do I register?">How do I register?</button>
+    <button data-q="Where does my registration fee actually go?">Where do my fees go?</button>
     <button data-q="How can I donate to the club?">How can I donate?</button>
   </div>
   <div class="bchat-inputrow">
@@ -888,7 +1011,7 @@ footer{background:var(--navy-deep); border-top:1px solid rgba(255,255,255,0.08);
     if(!on&&t){t.remove();}}
 
   function open(){panel.classList.add('open'); input.focus();
-    if(!greeted){greeted=true; add('bot',"Hi! I'm the Barrie Rugby Club assistant. Ask me about programs, practice times, registration, donations, or anything else about the club.");}}
+    if(!greeted){greeted=true; add('bot',"Hi! I'm the Barrie Rugby Club assistant. Ask me about programs, practice times, registration, fees, donations, or anything else about the club.");}}
   fab.addEventListener('click',function(){panel.classList.contains('open')?panel.classList.remove('open'):open();});
   document.getElementById('bchatClose').addEventListener('click',function(){panel.classList.remove('open');});
   chips.addEventListener('click',function(e){var b=e.target.closest('button'); if(b){send(b.getAttribute('data-q'));}});

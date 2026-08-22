@@ -429,6 +429,127 @@ footer{background:var(--navy-deep); border-top:1px solid rgba(255,255,255,0.08);
 @keyframes livePulse{0%,100%{opacity:1;}50%{opacity:0.25;}}
 @media (prefers-reduced-motion:reduce){ .phone-row .live i{animation:none;} }
 @media (max-width:900px){ .phone{width:225px;} }
+
+/* ---------------------------------------------------------------------------
+   registration fees page (fees.html)
+   Data colours reuse the existing brand tokens: Rugby Canada = --red,
+   Rugby Ontario = --gold, Barrie Rugby Club = --sky-deep. Ink on each fill is
+   picked for contrast (white on red, navy on gold and sky).
+   --------------------------------------------------------------------------- */
+.fee-panel{background:#fff; border:1px solid var(--line); border-radius:4px; padding:34px 32px 36px;}
+@media (max-width:640px){ .fee-panel{padding:26px 20px 28px;} }
+.fee-panel .lbl{font-family:'Anton', sans-serif; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--sky-deep);}
+.fee-chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
+.fee-chip{font-family:'Public Sans', sans-serif; font-size:13px; font-weight:700; line-height:1; cursor:pointer; padding:10px 15px; border-radius:20px; border:1px solid var(--line); background:var(--paper); color:var(--navy); transition:background .15s ease, color .15s ease, border-color .15s ease;}
+.fee-chip:hover{border-color:var(--sky-deep); color:var(--sky-deep);}
+.fee-chip[aria-pressed="true"]{background:var(--navy); border-color:var(--navy); color:#fff;}
+.fee-chip:focus-visible{outline:3px solid var(--sky-deep); outline-offset:2px;}
+.fee-readout{margin-top:28px; padding-top:26px; border-top:1px solid var(--line);}
+.fee-readout .top{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:6px 22px; margin-bottom:14px;}
+.fee-readout .who{font-family:'Anton', sans-serif; font-size:clamp(22px,3.4vw,30px); text-transform:uppercase; color:var(--navy); line-height:1.05;}
+.fee-readout .who small{display:block; font-family:'Public Sans', sans-serif; font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#6b7284; margin-top:8px;}
+.fee-readout .amt{font-family:'Anton', sans-serif; font-size:clamp(30px,5.2vw,46px); line-height:0.95; color:var(--sky-deep);}
+.fee-bar{display:flex; gap:2px; width:100%; height:20px; border-radius:3px; overflow:hidden;}
+.fee-bar.big{height:58px; border-radius:4px;}
+.fee-bar .s{display:flex; align-items:center; justify-content:center; overflow:hidden; width:var(--w); transition:width .5s cubic-bezier(.22,.7,.25,1);}
+.fee-bar .s.rc{background:var(--red); color:#fff;}
+.fee-bar .s.ro{background:var(--gold); color:var(--navy-deep);}
+.fee-bar .s.club{background:var(--sky-deep); color:var(--navy-deep);}
+.fee-bar .v{font-size:13.5px; font-weight:700; white-space:nowrap; padding:0 8px;}
+.fee-bar .v.off{opacity:0;}
+@media (max-width:640px){ .fee-bar.big .v{display:none;} }
+@media (prefers-reduced-motion: reduce){ .fee-bar .s{transition:none;} }
+.fee-legend{list-style:none; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:20px;}
+@media (max-width:640px){ .fee-legend{grid-template-columns:1fr;} }
+.fee-legend li{background:#fff; padding:16px 18px;}
+.fee-legend .k{display:flex; align-items:center; gap:9px; font-family:'Anton', sans-serif; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:#6b7284;}
+.fee-legend .k::before{content:""; width:11px; height:11px; border-radius:2px; background:var(--c); flex-shrink:0;}
+.fee-legend li:nth-child(1){--c:var(--red);}
+.fee-legend li:nth-child(2){--c:var(--gold);}
+.fee-legend li:nth-child(3){--c:var(--sky-deep);}
+.fee-legend .n{display:block; font-family:'Anton', sans-serif; font-size:24px; color:var(--navy); margin-top:7px;}
+.fee-legend .s{display:block; font-size:12.5px; color:#6b7284; margin-top:3px;}
+
+.card.org-rc::before{background:var(--red);}
+.card.org-ro::before{background:var(--gold);}
+.card .amt{font-family:'Anton', sans-serif; font-size:22px; color:var(--navy); margin:12px 0 2px;}
+.card .amt-l{font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:#6b7284; margin-bottom:12px;}
+
+.fee-key{display:flex; flex-wrap:wrap; gap:10px 24px; font-size:13px; font-weight:700; color:#5a6274; padding-bottom:18px; border-bottom:1px solid var(--line);}
+.fee-key span{display:flex; align-items:center; gap:9px;}
+.fee-key span::before{content:""; width:11px; height:11px; border-radius:2px; background:var(--c); flex-shrink:0;}
+.fee-key .r{--c:var(--red);} .fee-key .o{--c:var(--gold);} .fee-key .c{--c:var(--sky-deep);}
+.fee-tablewrap{overflow-x:auto;}
+table.fee-table{width:100%; border-collapse:collapse;}
+table.fee-table th, table.fee-table td{text-align:left; vertical-align:top; padding:16px 0;}
+table.fee-table tr.grp th{padding:28px 0 9px; font-family:'Anton', sans-serif; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--sky-deep); border-bottom:1px solid var(--line);}
+table.fee-table tr.grp:first-child th{padding-top:8px;}
+.fee-c1{width:200px; padding-right:26px !important;}
+.fee-c1 .l{display:block; font-weight:700; color:var(--navy); font-size:15px;}
+.fee-c1 .s{display:block; font-weight:400; font-size:12.5px; color:#6b7284; margin-top:2px;}
+.fee-c3{width:140px; padding-left:26px !important; text-align:right;}
+.fee-c3 .t{display:block; font-family:'Anton', sans-serif; font-size:22px; color:var(--navy); line-height:1.05;}
+.fee-c3 .p{display:block; font-size:12px; color:#6b7284; margin-top:3px;}
+table.fee-table tbody tr:not(.grp)+tr:not(.grp) .fee-c1,
+table.fee-table tbody tr:not(.grp)+tr:not(.grp) .fee-c2,
+table.fee-table tbody tr:not(.grp)+tr:not(.grp) .fee-c3{border-top:1px solid var(--line);}
+.fee-vals{display:flex; flex-wrap:wrap; gap:6px 20px; margin-top:12px; font-size:13px; font-weight:700; color:#5a6274;}
+.fee-vals b{display:flex; align-items:center; gap:8px; font-weight:700;}
+.fee-vals b::before{content:""; width:9px; height:9px; border-radius:2px; background:var(--c); flex-shrink:0;}
+.fee-vals .r{--c:var(--red);} .fee-vals .o{--c:var(--gold);} .fee-vals .c{--c:var(--sky-deep);}
+.fee-vals .nm{display:none; font-weight:400; color:#6b7284; margin-right:5px;}
+@media (max-width:760px){
+  table.fee-table, table.fee-table tbody, table.fee-table tr, table.fee-table th, table.fee-table td{display:block; width:auto;}
+  table.fee-table th, table.fee-table td{padding:0 !important; border:0 !important;}
+  table.fee-table tr:not(.grp){display:flex; flex-direction:column; gap:11px; padding:20px 0;}
+  table.fee-table tr:not(.grp)+tr:not(.grp){border-top:1px solid var(--line) !important;}
+  table.fee-table tr.grp th{padding:26px 0 9px !important; border-bottom:1px solid var(--line) !important;}
+  .fee-c1{order:1;} .fee-c3{order:2;} .fee-c2{order:3;}
+  .fee-c3{text-align:left; display:flex; align-items:baseline; gap:12px;}
+  .fee-c3 .t{font-size:19px;} .fee-c3 .p{margin-top:0;}
+  .fee-vals b{width:100%;}
+  .fee-vals .nm{display:inline;}
+}
+details.fee-plain{margin-top:30px; border-top:1px solid var(--line); padding-top:20px;}
+details.fee-plain summary{cursor:pointer; font-family:'Anton', sans-serif; font-size:12.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--sky-deep);}
+details.fee-plain summary:hover{color:var(--navy);}
+details.fee-plain .sched-wrap{margin-top:18px;}
+table.sched-table td.num, table.sched-table th.num{text-align:right;}
+
+.fee-kit{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:26px;}
+@media (max-width:700px){ .fee-kit{grid-template-columns:1fr;} }
+.fee-kit .card{display:flex; flex-direction:column;}
+.fee-kit .band{font-family:'Anton', sans-serif; font-size:24px; text-transform:uppercase; color:var(--navy); line-height:1;}
+.fee-kit .band em{font-style:normal; color:var(--sky-deep);}
+.fee-kit ul{margin-top:16px; padding-left:18px;}
+.fee-kit li{font-size:14.5px; line-height:1.8; color:#454d64;}
+.fee-kit .note{margin-top:auto; padding-top:18px; font-size:12.5px; color:#6b7284;}
+
+.fee-change{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:26px;}
+@media (max-width:760px){ .fee-change{grid-template-columns:1fr;} }
+.fee-change > div{background:#fff; padding:26px 24px 28px;}
+.fee-change .t{font-family:'Anton', sans-serif; font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--sky-deep);}
+.fee-change .n{font-family:'Anton', sans-serif; font-size:clamp(30px,4.4vw,40px); line-height:1; color:var(--navy); margin-top:12px;}
+.fee-change .l{font-size:14px; line-height:1.65; color:#5a6274; margin-top:10px;}
+.fee-note{background:#fff; border:1px solid var(--line); border-left:4px solid var(--sky); padding:24px 26px; border-radius:2px; margin-top:26px;}
+.fee-note h3{font-family:'Anton', sans-serif; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:#6b7284;}
+.fee-note ul{margin-top:14px; padding:0; list-style:none; display:grid; gap:10px 32px; grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));}
+.fee-note li{display:flex; gap:10px; font-size:14.5px; line-height:1.6; color:#454d64;}
+.fee-note li::before{content:""; flex-shrink:0; width:6px; height:6px; margin-top:9px; border-radius:50%; background:var(--sky-deep);}
+
+.fee-close{background:var(--navy); color:#fff; position:relative; overflow:hidden; border-top:4px solid var(--sky-deep);}
+.fee-close .sash{position:absolute; inset:0; pointer-events:none;}
+.fee-close .sash span{position:absolute; width:180%; height:110px; left:-45%; background:linear-gradient(90deg, var(--sky), var(--sky-deep)); opacity:0.08; transform:rotate(-9deg);}
+.fee-close .sash span:nth-child(1){top:-10px;}
+.fee-close .sash span:nth-child(2){bottom:10px; opacity:0.05;}
+.fee-close-inner{position:relative; z-index:1;}
+.fee-close .sec-head h2{color:#fff;}
+.fee-close .sec-head .eyebrow{color:var(--sky);}
+.fee-close .sec-head p.lede{color:rgba(255,255,255,0.72);}
+.fee-close .prose p{font-size:16px; line-height:1.75; color:rgba(255,255,255,0.8); max-width:70ch;}
+.fee-close .prose p + p{margin-top:16px;}
+.fee-close .prose strong{color:#fff;}
+.fee-close .donate-card .n{color:var(--sky);}
 """
 
 HEAD = """<head>
@@ -512,6 +633,7 @@ FOOTER = f"""<footer>
     <div class="foot-links">
       <a href="index.html#about">About</a>
       <a href="programs.html">Programs</a>
+      <a href="fees.html">Fees</a>
       <a href="alumni.html">Alumni</a>
       <a href="index.html#sponsors">Sponsors</a>
       <a href="index.html#shop">Shop</a>
@@ -573,6 +695,7 @@ CHAT_WIDGET = """
   <div class="bchat-chips" id="bchatChips">
     <button data-q="When are practices?">When are practices?</button>
     <button data-q="How do I register?">How do I register?</button>
+    <button data-q="Where does my registration fee actually go?">Where do my fees go?</button>
     <button data-q="How can I donate to the club?">How can I donate?</button>
   </div>
   <div class="bchat-inputrow">
@@ -603,7 +726,7 @@ CHAT_WIDGET = """
     if(!on&&t){t.remove();}}
 
   function open(){panel.classList.add('open'); input.focus();
-    if(!greeted){greeted=true; add('bot',"Hi! I'm the Barrie Rugby Club assistant. Ask me about programs, practice times, registration, donations, or anything else about the club.");}}
+    if(!greeted){greeted=true; add('bot',"Hi! I'm the Barrie Rugby Club assistant. Ask me about programs, practice times, registration, fees, donations, or anything else about the club.");}}
   fab.addEventListener('click',function(){panel.classList.contains('open')?panel.classList.remove('open'):open();});
   document.getElementById('bchatClose').addEventListener('click',function(){panel.classList.remove('open');});
   chips.addEventListener('click',function(e){var b=e.target.closest('button'); if(b){send(b.getAttribute('data-q'));}});
@@ -1254,6 +1377,10 @@ resources_body = f"""
 
     <div class="res-group-label">The Club</div>
     <div class="res-grid">
+      <a class="res-link" href="fees.html">
+        <div><div class="t">Where Your Registration Fee Goes</div><div class="d">How the 2026 fees split &mdash; and what the club's share covers</div></div>
+        <span class="arrow">&rarr;</span>
+      </a>
       <a class="res-link" href="index.html#about">
         <div><div class="t">About Us</div><div class="d">Club history &amp; leadership</div></div>
         <span class="arrow">&rarr;</span>
@@ -1279,6 +1406,385 @@ resources_body = f"""
 # shifts under the scroll position and the target lands off-screen. After full
 # load, re-snap to the hash target instantly (suppressing smooth-scroll so the
 # correction isn't a visible animation).
+# ---------------------------------------------------------------------------
+# REGISTRATION FEES PAGE (fees.html)
+#
+# Every dollar figure below comes from the club's 2026 registration fee
+# workbook. FEES is generated from that workbook, not typed by hand; the
+# assertion under it re-checks that the three shares still add up to the
+# advertised total, so a bad edit fails the build instead of shipping.
+# ---------------------------------------------------------------------------
+FEES = [
+    dict(group='Minis & Youth', label='U6 &middot; U8 &middot; U10', sub='Flag rugby, non-contact', rc=30.00, ro=32.54, club=273.46, total=336.00),
+    dict(group='Minis & Youth', label='U12', sub='Intro to contact', rc=40.00, ro=32.54, club=288.46, total=361.00),
+    dict(group='Junior', label='U14', sub='Intro to contact', rc=82.50, ro=59.37, club=310.13, total=452.00),
+    dict(group='Junior', label='U16 Girls', sub='Contact', rc=116.05, ro=59.37, club=274.58, total=450.00),
+    dict(group='Junior', label='U16 Boys', sub='Contact', rc=116.05, ro=59.37, club=304.58, total=480.00),
+    dict(group='Junior', label='U18 Girls', sub='Contact', rc=116.05, ro=59.37, club=274.58, total=450.00),
+    dict(group='Junior', label='U18 Boys', sub='Contact', rc=116.05, ro=59.37, club=304.58, total=480.00),
+    dict(group='Senior', label='Senior Women', sub='Contact', rc=129.50, ro=89.80, club=230.70, total=450.00),
+    dict(group='Senior', label='Senior Men &mdash; student', sub='Contact', rc=129.50, ro=89.80, club=230.70, total=450.00),
+    dict(group='Senior', label='Senior Men', sub='Contact', rc=129.50, ro=89.80, club=290.70, total=510.00),
+    dict(group='Short-term', label='Two-week trial', sub='Junior or senior contact', rc=49.50, ro=22.72, club=52.78, total=125.00),
+]
+
+# 2025 -> 2026 movement, from the same workbook.
+FEE_MINI_RISE = 1.00
+FEE_TOTAL_RISE = 50.00
+FEE_RO_DROP_JR = 5.89
+FEE_RO_DROP_SR = 8.91
+FEE_CLUB_RISE_SR = 58.91
+
+for _f in FEES:
+    assert abs(_f['rc'] + _f['ro'] + _f['club'] - _f['total']) < 0.011, \
+        'fee split does not reconcile: ' + _f['label']
+    _f['rc_p'] = _f['rc'] / _f['total'] * 100
+    _f['ro_p'] = _f['ro'] / _f['total'] * 100
+    _f['club_p'] = _f['club'] / _f['total'] * 100
+    _f['club_pct'] = round(_f['club'] / _f['total'] * 100)
+
+FEE_DEFAULT = next(i for i, f in enumerate(FEES) if f['label'] == 'U14')
+FEE_MIN_CLUB = min(f['club_pct'] for f in FEES if f['label'] != 'Two-week trial')
+FEE_MAX_CLUB = max(f['club_pct'] for f in FEES)
+FEE_RC_MIN, FEE_RC_MAX = min(f['rc'] for f in FEES), max(f['rc'] for f in FEES)
+FEE_RO_MIN, FEE_RO_MAX = min(f['ro'] for f in FEES), max(f['ro'] for f in FEES)
+
+
+def _money(v):
+    return '$%s' % format(v, ',.2f')
+
+
+def _money0(v):
+    return '$%s' % (format(int(round(v)), ',d') if abs(v - round(v)) < 0.005 else format(v, ',.2f'))
+
+
+def _fee_plain(txt):
+    """Strip the HTML entities we use in labels so they read correctly inside
+    an aria-label attribute."""
+    return txt.replace('&middot;', '-').replace('&mdash;', '-').replace('&amp;', 'and')
+
+
+def _fee_row(f):
+    label = _fee_plain(
+        '%s total %s: Rugby Canada %s, Rugby Ontario %s, Barrie Rugby Club %s (%d per cent)'
+        % (f['label'], _money0(f['total']), _money(f['rc']), _money(f['ro']),
+           _money(f['club']), f['club_pct']))
+    bar = ('<span class="fee-bar" role="img" aria-label="%s">'
+           '<span class="s rc" style="--w:%.3f%%"></span>'
+           '<span class="s ro" style="--w:%.3f%%"></span>'
+           '<span class="s club" style="--w:%.3f%%"></span></span>'
+           % (label, f['rc_p'], f['ro_p'], f['club_p']))
+    vals = ('<span class="fee-vals" aria-hidden="true">'
+            '<b class="r"><span class="nm">Rugby Canada</span>%s</b>'
+            '<b class="o"><span class="nm">Rugby Ontario</span>%s</b>'
+            '<b class="c"><span class="nm">Barrie Rugby Club</span>%s</b></span>'
+            % (_money(f['rc']), _money(f['ro']), _money(f['club'])))
+    return ('<tr>'
+            '<th scope="row" class="fee-c1"><span class="l">%s</span><span class="s">%s</span></th>'
+            '<td class="fee-c2">%s%s</td>'
+            '<td class="fee-c3"><span class="t">%s</span><span class="p">%d%% stays here</span></td>'
+            '</tr>' % (f['label'], f['sub'], bar, vals, _money0(f['total']), f['club_pct']))
+
+
+_rows, _plain_rows, _last = [], [], None
+for _f in FEES:
+    if _f['group'] != _last:
+        _rows.append('<tr class="grp"><th colspan="3" scope="colgroup">%s</th></tr>' % _f['group'])
+        _plain_rows.append('<tr class="grp"><th colspan="5" scope="colgroup">%s</th></tr>' % _f['group'])
+        _last = _f['group']
+    _rows.append(_fee_row(_f))
+    _plain_rows.append(
+        '<tr><td class="team">%s</td><td class="num">%s</td><td class="num">%s</td>'
+        '<td class="num">%s</td><td class="num">%s</td></tr>'
+        % (_f['label'], _money(_f['rc']), _money(_f['ro']), _money(_f['club']), _money0(_f['total'])))
+
+FEE_TABLE_ROWS = '\n        '.join(_rows)
+FEE_PLAIN_ROWS = '\n          '.join(_plain_rows)
+
+FEE_JSON = json.dumps([
+    dict(label=f['label'], sub=f['sub'], total=f['total'], rc=f['rc'], ro=f['ro'], club=f['club'],
+         rc_p=round(f['rc_p'], 3), ro_p=round(f['ro_p'], 3), club_p=round(f['club_p'], 3),
+         club_pct=f['club_pct'], aria=_fee_plain(
+             '%s total %s: Rugby Canada %s, Rugby Ontario %s, Barrie Rugby Club %s (%d per cent)'
+             % (f['label'], _money0(f['total']), _money(f['rc']), _money(f['ro']),
+                _money(f['club']), f['club_pct'])))
+    for f in FEES], separators=(',', ':'))
+
+FEES_SCRIPT = """
+<script>
+(function(){
+  var DATA = __FEE_JSON__, DEF = __FEE_DEFAULT__;
+  var chips = document.getElementById('feeChips');
+  if(!chips) return;
+  function el(id){ return document.getElementById(id); }
+  function money(v){ return '$' + v.toFixed(2).replace(/\\B(?=(\\d{3})+(?!\\d))/g,','); }
+  function money0(v){
+    var s = Math.abs(v - Math.round(v)) < 0.005 ? String(Math.round(v)) : v.toFixed(2);
+    return '$' + s.replace(/\\B(?=(\\d{3})+(?!\\d))/g,',');
+  }
+  var btns = DATA.map(function(d,i){
+    var b = document.createElement('button');
+    b.type='button'; b.className='fee-chip'; b.innerHTML=d.label;
+    b.setAttribute('aria-pressed','false');
+    b.addEventListener('click', function(){ select(i); });
+    chips.appendChild(b);
+    return b;
+  });
+  function seg(id, vid, pct, val){
+    el(id).style.setProperty('--w', pct + '%');
+    el(vid).textContent = money0(val);
+    el(vid).className = 'v' + (pct < 8 ? ' off' : '');
+  }
+  function select(i){
+    var d = DATA[i];
+    btns.forEach(function(b,j){ b.setAttribute('aria-pressed', j===i ? 'true' : 'false'); });
+    el('feeWho').innerHTML = d.label + '<small>' + d.sub + '</small>';
+    el('feeTotal').textContent = money0(d.total);
+    seg('feeSegRc','feeValRc',d.rc_p,d.rc);
+    seg('feeSegRo','feeValRo',d.ro_p,d.ro);
+    seg('feeSegClub','feeValClub',d.club_p,d.club);
+    el('feeLegRc').textContent = money(d.rc);
+    el('feeLegRo').textContent = money(d.ro);
+    el('feeLegClub').textContent = money(d.club);
+    el('feeSubRc').textContent = Math.round(d.rc_p) + '% \u2014 remitted in full';
+    el('feeSubRo').textContent = Math.round(d.ro_p) + '% \u2014 remitted in full';
+    el('feeSubClub').textContent = d.club_pct + '% \u2014 stays with the club';
+    el('feeBigBar').setAttribute('aria-label', d.aria);
+  }
+  chips.addEventListener('keydown', function(e){
+    var i = btns.indexOf(document.activeElement);
+    if(i < 0) return;
+    var n = null;
+    if(e.key==='ArrowRight'||e.key==='ArrowDown') n = (i+1) % btns.length;
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp') n = (i-1+btns.length) % btns.length;
+    if(n===null) return;
+    e.preventDefault(); btns[n].focus(); select(n);
+  });
+  select(DEF);
+})();
+</script>"""
+FEES_SCRIPT = FEES_SCRIPT.replace('__FEE_JSON__', FEE_JSON).replace('__FEE_DEFAULT__', str(FEE_DEFAULT))
+
+fees_body = f"""
+<section class="pagehero">
+  <div class="sash"><span></span><span></span></div>
+  <div class="wrap pagehero-inner">
+    <span class="eyebrow">Registration 2026</span>
+    <h1>Where your registration fee goes.</h1>
+    <p>Every registration is split three ways before a single ball is kicked. Here is exactly how the 2026 fees divide &mdash; and what the club's share has to carry once the season starts.</p>
+  </div>
+</section>
+
+<section style="padding-top:64px; padding-bottom:64px;">
+  <div class="wrap">
+    <div class="fee-panel">
+      <span class="lbl">Choose a registration</span>
+      <div class="fee-chips" id="feeChips" role="group" aria-label="Choose a registration category"></div>
+      <div class="fee-readout" aria-live="polite">
+        <div class="top">
+          <div class="who" id="feeWho">&mdash;</div>
+          <div class="amt" id="feeTotal">&mdash;</div>
+        </div>
+        <span class="fee-bar big" role="img" id="feeBigBar" aria-label="">
+          <span class="s rc" id="feeSegRc"><span class="v" id="feeValRc"></span></span>
+          <span class="s ro" id="feeSegRo"><span class="v" id="feeValRo"></span></span>
+          <span class="s club" id="feeSegClub"><span class="v" id="feeValClub"></span></span>
+        </span>
+        <ul class="fee-legend">
+          <li><span class="k">Rugby Canada</span><span class="n" id="feeLegRc">&mdash;</span><span class="s" id="feeSubRc">national registration</span></li>
+          <li><span class="k">Rugby Ontario</span><span class="n" id="feeLegRo">&mdash;</span><span class="s" id="feeSubRo">provincial registration</span></li>
+          <li><span class="k">Barrie Rugby Club</span><span class="n" id="feeLegClub">&mdash;</span><span class="s" id="feeSubClub">stays with the club</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The split</span>
+      <h2>One payment, three organisations.</h2>
+      <p class="lede">When you register a player you are paying three bodies at once. Two of the three amounts are set elsewhere and passed straight through by the club. The third is the only part Barrie Rugby Club ever sees.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card org-rc">
+        <span class="tag">National</span>
+        <h3>Rugby Canada</h3>
+        <div class="amt">{_money(FEE_RC_MIN)} &ndash; {_money(FEE_RC_MAX)}</div>
+        <div class="amt-l">per player, 2026</div>
+        <p>The national registration every rugby player in Canada pays, regardless of which club they join. Barrie collects it and remits it &mdash; none of it stays here.</p>
+      </div>
+      <div class="card org-ro">
+        <span class="tag">Provincial</span>
+        <h3>Rugby Ontario</h3>
+        <div class="amt">{_money(FEE_RO_MIN)} &ndash; {_money(FEE_RO_MAX)}</div>
+        <div class="amt-l">per player, 2026</div>
+        <p>The provincial registration that sanctions our teams to play in Ontario competition. Also collected and remitted in full &mdash; none of it stays here either.</p>
+      </div>
+      <div class="card org-club">
+        <span class="tag">The club</span>
+        <h3>Barrie Rugby Club</h3>
+        <div class="amt">{FEE_MIN_CLUB}% &ndash; {FEE_MAX_CLUB}%</div>
+        <div class="amt-l">of a full-season fee</div>
+        <p>The club's share. This is the money that actually puts a coached, insured, officiated, medically covered team on Jim Hamilton Field every week of the season &mdash; and kit on every player.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">2026 fee schedule</span>
+      <h2>Every category, broken down.</h2>
+      <p class="lede">Read each bar left to right: Rugby Canada first, then Rugby Ontario, then the club's share. The club's portion is the largest part of every fee on this page &mdash; and the only part that comes back into Barrie rugby.</p>
+    </div>
+    <div class="fee-key">
+      <span class="r">Rugby Canada</span><span class="o">Rugby Ontario</span><span class="c">Barrie Rugby Club</span>
+    </div>
+    <div class="fee-tablewrap">
+      <table class="fee-table">
+        <caption class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;">2026 Barrie Rugby Club registration fees, split between Rugby Canada, Rugby Ontario and the club</caption>
+        <tbody>
+        {FEE_TABLE_ROWS}
+        </tbody>
+      </table>
+    </div>
+    <details class="fee-plain">
+      <summary>View the same figures as a plain table</summary>
+      <div class="sched-wrap">
+        <table class="sched-table">
+          <thead><tr><th>Category</th><th class="num">Rugby Canada</th><th class="num">Rugby Ontario</th><th class="num">Barrie RC</th><th class="num">Total</th></tr></thead>
+          <tbody>
+          {FEE_PLAIN_ROWS}
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The club's share</span>
+      <h2>What the club portion has to cover.</h2>
+      <p class="lede">Registering a player is where the cost starts, not where it ends. Almost everything that makes a match happen is paid for out of club proceeds &mdash; not by the province, and not by the national body.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <span class="tag">Player safety</span>
+        <h3>Athletic therapy</h3>
+        <p>Qualified medical coverage on the sideline is not optional in contact rugby, and it is not funded from above. The cost of having an athletic therapist at our matches comes directly out of club proceeds.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Match day</span>
+        <h3>Match officials</h3>
+        <p>Every sanctioned match needs an accredited referee, and officials are paid and travelled for. Those costs sit with the club, on every home fixture, at every age grade.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Competition</span>
+        <h3>Running the games</h3>
+        <p>Almost all of the cost of running competition &mdash; including hosting branch qualifiers &mdash; falls to the clubs involved. When Barrie hosts, Barrie pays for it.</p>
+      </div>
+    </div>
+
+    <div class="sec-head" style="margin-top:56px; margin-bottom:0;">
+      <span class="eyebrow">In the kit bag</span>
+      <h2 style="font-size:clamp(24px,3vw,32px);">And some of it goes home with the player.</h2>
+      <p class="lede">Every registered player gets club kit as part of the fee &mdash; new, every season, at no extra charge.</p>
+    </div>
+    <div class="fee-kit">
+      <div class="card">
+        <div class="band">U6 <em>to</em> U12</div>
+        <ul><li>Club shorts</li><li>Club t-shirt</li><li>Flags</li></ul>
+        <p class="note">A full kit, included in the registration fee.</p>
+      </div>
+      <div class="card">
+        <div class="band">U14 <em>and up</em></div>
+        <ul><li>Premium match shorts</li><li>Warm-up t-shirt</li></ul>
+        <p class="note">Issued new every year, to every registered player.</p>
+      </div>
+    </div>
+
+    <div class="fee-note">
+      <h3>The club's share also carries</h3>
+      <ul>
+        <li>Field access and pitch preparation at Jim Hamilton Field</li>
+        <li>Match balls, training equipment, tackle shields and post padding</li>
+        <li>First aid supplies and sideline medical kit</li>
+        <li>Coach certification and match official development</li>
+        <li>League and tournament entry for every team</li>
+        <li>Festival and event hosting for the minis and youth programs</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Year over year</span>
+      <h2>What changed for 2026.</h2>
+      <p class="lede">Fees for the minis and youth program were effectively held &mdash; up {_money0(FEE_MINI_RISE)} on the year. From U14 up, registration rose {_money0(FEE_TOTAL_RISE)}. That increase did not go to the province &mdash; provincial fees actually came down &mdash; it went to the rising cost of putting teams on the field, and to kit that now goes home with every registered player.</p>
+    </div>
+    <div class="fee-change">
+      <div>
+        <div class="t">Minis &amp; youth</div>
+        <div class="n">+{_money0(FEE_MINI_RISE)}</div>
+        <div class="l">The whole change to a U6&ndash;U12 registration. Flag rugby and intro-to-contact were held where they were.</div>
+      </div>
+      <div>
+        <div class="t">Provincial fee</div>
+        <div class="n">&minus;{_money(FEE_RO_DROP_SR)}</div>
+        <div class="l">The senior Rugby Ontario fee actually fell in 2026, and the junior provincial fee fell {_money(FEE_RO_DROP_JR)} alongside it.</div>
+      </div>
+      <div>
+        <div class="t">Club share</div>
+        <div class="n">+{_money(FEE_CLUB_RISE_SR)}</div>
+        <div class="l">The rise in the club's share of a senior registration &mdash; more than the {_money0(FEE_TOTAL_RISE)} the fee itself went up, because the provincial saving was absorbed too.</div>
+      </div>
+    </div>
+    <p style="margin-top:26px; font-size:15.5px; line-height:1.75; color:#454d64; max-width:70ch;">In other words: <strong style="color:var(--navy);">every dollar of the 2026 increase, and then some, went to club-side costs</strong> &mdash; therapy coverage, officials, competition, the day-to-day cost of a season, and club kit for every registered player. None of it went to head office.</p>
+  </div>
+</section>
+
+<section class="fee-close">
+  <div class="sash"><span></span><span></span></div>
+  <div class="wrap fee-close-inner">
+    <div class="sec-head">
+      <span class="eyebrow">The gap</span>
+      <h2>Why the club fundraises.</h2>
+      <p class="lede">Barrie Rugby Club has been in this community since 1967, and the price of playing here has always been set with one thing in mind: a family should be able to say yes.</p>
+    </div>
+    <div class="prose">
+      <p>That choice has a consequence. Registration is priced to keep rugby reachable, not to recover what a season actually costs. Sideline medical coverage, match officials, competition hosting, equipment, kit and field time all move with the market; the fee does not move with them. <strong>The difference between what registration brings in and what a full season costs is real, and it has to be closed somewhere.</strong></p>
+      <p>It gets closed three ways.</p>
+    </div>
+    <div class="donate-grid">
+      <div class="donate-card">
+        <div class="n">Sponsors</div>
+        <p>Local businesses who put their name behind the club and cover costs a registration fee was never going to reach.</p>
+      </div>
+      <div class="donate-card">
+        <div class="n">Fundraising</div>
+        <p>Club events and campaigns through the season, aimed squarely at the gap between fees collected and a season delivered.</p>
+      </div>
+      <div class="donate-card">
+        <div class="n">Volunteers</div>
+        <p>The coaches, referees, managers, canteen crew and board members who are not paid for any of it &mdash; the largest unbilled cost of all.</p>
+      </div>
+    </div>
+    <div class="prose">
+      <p>That is what fundraising is actually for. It is not an extra on top of a fee that already covers everything. It is the part of the budget registration was never going to reach &mdash; and it is the reason the number on the registration form is as low as it is.</p>
+      <p style="font-size:13.5px; color:rgba(255,255,255,0.55); margin-top:22px;">Figures shown are 2026 registration fees. Questions about fees: <a href="mailto:info@barrierugbyclub.com" style="color:var(--sky); font-weight:700; text-decoration:underline;">info@barrierugbyclub.com</a></p>
+    </div>
+  </div>
+</section>
+""" + FEES_SCRIPT
+
+
 ANCHOR_FIX = """<script>
 (function(){
   if(!location.hash) return;
@@ -1369,6 +1875,13 @@ with open(f'{out_dir}/programs.html', 'w') as f:
         description="Every Barrie Rugby Club program — Youth & Minis (U6–U12), U14/U16/U18 boys and girls, and Senior Men's & Women's — plus the weekly practice and game day schedule.",
         path='/programs'))
 
+with open(f'{out_dir}/fees.html', 'w') as f:
+    f.write(page(
+        "Where Your Registration Fee Goes | Barrie Rugby Club",
+        "fees", fees_body,
+        description="Where a Barrie Rugby Club registration fee goes \u2014 the 2026 split between Rugby Canada, Rugby Ontario and the club, what the club's share covers, and the kit included in every registration.",
+        path='/fees'))
+
 with open(f'{out_dir}/alumni.html', 'w') as f:
     f.write(page(
         "Alumni | Barrie Rugby Club",
@@ -1450,10 +1963,12 @@ p{{color:rgba(255,255,255,0.82);font-size:16px;line-height:1.6;margin-bottom:28p
 </html>"""
 
 SITEMAP_LASTMOD = '2026-08-09'
+FEES_LASTMOD = '2026-08-22'   # fees.html is new this build
 SITEMAP = f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>{CANONICAL_HOST}/</loc><lastmod>{SITEMAP_LASTMOD}</lastmod></url>
   <url><loc>{CANONICAL_HOST}/programs</loc><lastmod>{SITEMAP_LASTMOD}</lastmod></url>
+  <url><loc>{CANONICAL_HOST}/fees</loc><lastmod>{FEES_LASTMOD}</lastmod></url>
   <url><loc>{CANONICAL_HOST}/alumni</loc><lastmod>{SITEMAP_LASTMOD}</lastmod></url>
   <url><loc>{CANONICAL_HOST}/resources</loc><lastmod>{SITEMAP_LASTMOD}</lastmod></url>
 </urlset>
@@ -1504,8 +2019,8 @@ with open(f'{out_dir}/robots.txt', 'w') as f:
 with open(f'{out_dir}/_redirects', 'w') as f:
     f.write(REDIRECTS)
 
-print("Built index.html, programs.html, alumni.html, resources.html")
+print("Built index.html, programs.html, fees.html, alumni.html, resources.html")
 print("Built 404.html, sitemap.xml, robots.txt, _redirects")
-for fn in ['index.html','programs.html','alumni.html','resources.html']:
+for fn in ['index.html','programs.html','fees.html','alumni.html','resources.html']:
     p = f'{out_dir}/{fn}'
     print(fn, round(os.path.getsize(p)/1024,1), 'KB')
