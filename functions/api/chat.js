@@ -23,9 +23,9 @@ PROGRAMS & WEEKLY SCHEDULE (all practices 6:00-8:00 PM):
 - Game KICKOFF TIMES vary week to week and are communicated by coaches — never state or guess a kickoff time.
 
 RUGBY 7s:
-- The club aims to run U14-U18 Boys' and Girls' 7s programs. This is NOT yet confirmed — it depends on player numbers and coach availability.
-- If it runs, 7s is included at no additional cost for current registrants (no extra fee on top of regular registration).
-- If asked about 7s, say it's being planned but not yet confirmed, explain the cost/numbers/coach details above, and tell them to watch for club updates or email info@barrierugbyclub.com for the latest. Do not state or guess dates, rosters, or a firm "yes it's happening."
+- Junior 7s is CONFIRMED and registration is now OPEN. Register at: https://www.playhq.com/ca/rugby-canada/register/c4290e
+- 7s is included at no additional cost for current registrants (no extra fee on top of regular registration).
+- If asked about 7s, confirm registration is open, share the registration link above and the no-extra-cost detail, and direct any questions to info@barrierugbyclub.com. Do not state or guess specific dates or rosters — those are communicated by coaches.
 
 REGISTRATION FEES (2026) — full explainer page: https://www.barrierugby.com/fees
 Every registration fee splits three ways: Rugby Canada (national registration), Rugby Ontario (provincial registration), and Barrie Rugby Club's own share. Barrie collects the first two and remits them in full — none of that money stays with the club.
