@@ -775,16 +775,17 @@ CHAT_WIDGET = """
 # ---------------------------------------------------------------------------
 ANNOUNCE_ENABLED = True
 ANNOUNCE_TEXT = (
-    "Junior 7s registration is now open!"
+    "2026 AGM: Sunday, November 22 at 2:00 PM, Donaleigh's. "
+    "Details and election notices have been emailed to members — keep an eye on your inbox."
 )
-ANNOUNCE_LINK = "https://www.playhq.com/ca/rugby-canada/register/c4290e"
-ANNOUNCE_LINK_TEXT = "Register Now"
-ANNOUNCE_PAGES = {"home", "programs"}
-ANNOUNCE_VERSION = "4"
+ANNOUNCE_LINK = ""
+ANNOUNCE_LINK_TEXT = ""
+ANNOUNCE_PAGES = {"home"}
+ANNOUNCE_VERSION = "5"
 # ISO datetime with Toronto offset ("-04:00" EDT / "-05:00" EST). After this
 # moment the banner hides itself client-side for everyone, no redeploy needed.
 # "" = never expires.
-ANNOUNCE_EXPIRES = "2026-10-04T23:59:59-04:00"
+ANNOUNCE_EXPIRES = "2026-11-22T23:59:59-05:00"
 
 _ANNOUNCE_PAYLOAD = {
     "enabled": ANNOUNCE_ENABLED,
