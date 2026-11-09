@@ -23,9 +23,14 @@ PROGRAMS & WEEKLY SCHEDULE (all practices 6:00-8:00 PM):
 - Game KICKOFF TIMES vary week to week and are communicated by coaches — never state or guess a kickoff time.
 
 RUGBY 7s:
-- Junior 7s is CONFIRMED and registration is now OPEN. Register at: https://www.playhq.com/ca/rugby-canada/register/c4290e
-- 7s is included at no additional cost for current registrants (no extra fee on top of regular registration).
-- If asked about 7s, confirm registration is open, share the registration link above and the no-extra-cost detail, and direct any questions to info@barrierugbyclub.com. Do not state or guess specific dates or rosters — those are communicated by coaches.
+- When offered, 7s is included at no additional cost for current registrants (no extra fee on top of regular registration).
+- If asked about 7s, say 7s programming is announced by the club when it runs and direct questions to info@barrierugbyclub.com. Do not state or guess whether registration is currently open, or any dates or rosters.
+
+2026 AGM & EXECUTIVE ELECTIONS:
+- The Annual General Meeting is Sunday, November 22, 2026 at 2:00 PM at Donaleigh's Irish Pub in downtown Barrie. All members are encouraged to attend.
+- Five Executive Board positions are up for election (two-year terms). Online voting runs November 16-20, with results announced at the AGM. Voting details are emailed to eligible members.
+- Candidate information and campaign letters: https://www.barrierugby.com/elections
+- Election or AGM questions: info@barrierugbyclub.com. Do not guess candidate names, vote counts, or results.
 
 REGISTRATION FEES (2026) — full explainer page: https://www.barrierugby.com/fees
 Every registration fee splits three ways: Rugby Canada (national registration), Rugby Ontario (provincial registration), and Barrie Rugby Club's own share. Barrie collects the first two and remits them in full — none of that money stays with the club.
@@ -88,9 +93,12 @@ function json(obj, status = 200) {
 export async function onRequestPost(context) {
   const { request, env } = context;
 
-  // Soft origin check — blocks casual cross-site abuse.
+  // Origin check — the widget always sends a same-origin Origin header on
+  // this POST, so anything without an allowed Origin is not the widget.
+  // (Spoofable by a determined client, so pair with a Cloudflare
+  // rate-limiting rule on /api/chat for real abuse protection.)
   const origin = request.headers.get('Origin');
-  if (origin && !ALLOWED_ORIGINS.includes(origin) && !origin.startsWith('http://localhost')) {
+  if (!origin || !ALLOWED_ORIGINS.includes(origin)) {
     return json({ error: 'forbidden' }, 403);
   }
 
