@@ -548,6 +548,18 @@ table.sched-table td.num, table.sched-table th.num{text-align:right;}
 .fee-close .prose p + p{margin-top:16px;}
 .fee-close .prose strong{color:#fff;}
 .fee-close .donate-card .n{color:var(--sky);}
+
+/* ----- 2026 elections page ----- */
+.elect-letter{background:#fff; border:1px solid var(--line); border-radius:4px; padding:34px 32px; margin-top:26px; position:relative; overflow:hidden;}
+.elect-letter::before{content:""; position:absolute; top:0; left:0; width:4px; height:100%; background:linear-gradient(180deg, var(--sky), var(--sky-deep));}
+.elect-letter .who{font-family:'Anton', sans-serif; font-size:22px; color:var(--navy); text-transform:uppercase; letter-spacing:0.02em;}
+.elect-letter .role{font-family:'Anton', sans-serif; font-size:11.5px; letter-spacing:0.16em; color:var(--sky-deep); text-transform:uppercase; margin-top:5px;}
+.elect-letter p{font-size:15px; line-height:1.78; color:#454d64; margin-top:15px; max-width:78ch;}
+.elect-letter h4{font-family:'Anton', sans-serif; font-size:13.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--navy); margin-top:28px;}
+.elect-letter .xp{margin-top:16px; max-width:78ch;}
+.elect-letter .xp .t{font-weight:700; color:var(--navy); font-size:15px; line-height:1.5;}
+.elect-letter .xp p{margin-top:5px;}
+.elect-note{margin-top:26px; background:rgba(124,197,234,0.1); border:1px solid rgba(79,163,209,0.3); border-radius:4px; padding:18px 22px; font-size:14.5px; line-height:1.65; color:#454d64; max-width:860px;}
 </style>
 
 </head>
@@ -563,7 +575,7 @@ table.sched-table td.num, table.sched-table th.num{text-align:right;}
 <script>
 (function(){
   var PAGE_KEY = "fees";
-  var BAKED = {"enabled": true, "text": "2026 AGM: Sunday, November 22 at 2:00 PM, Donaleigh's. Details and election notices have been emailed to members \u2014 keep an eye on your inbox.", "link": "", "linkText": "", "pages": ["home"], "version": "5", "expires": "2026-11-22T23:59:59-05:00"};
+  var BAKED = {"enabled": true, "text": "2026 Elections: AGM Sunday, November 22 at 2:00 PM, Donaleigh's. Election details will be emailed to club members.", "link": "/elections", "linkText": "Election Info", "pages": ["home"], "version": "6", "expires": "2026-11-22T23:59:59-05:00"};
   var bar = document.getElementById('announceBar');
   var msg = document.getElementById('announceMsg');
   var cta = document.getElementById('announceCta');
@@ -1003,7 +1015,7 @@ table.sched-table td.num, table.sched-table th.num{text-align:right;}
   if(brandImg){document.getElementById('bchatCrest').src=brandImg.src;}
 
   function esc(s){var d=document.createElement('div'); d.textContent=s; return d.innerHTML;}
-  function linkify(s){return esc(s).replace(/(https?:\/\/[^\s<]+[^\s<.,)])/g,'<a href="$1" target="_blank" rel="noopener">$1</a>')
+  function linkify(s){return esc(s).replace(/(https?:\/\/[^\s<"']+[^\s<"'.,)])/g,'<a href="$1" target="_blank" rel="noopener">$1</a>')
     .replace(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g,'<a href="mailto:$1">$1</a>');}
   function add(role,text){var el=document.createElement('div'); el.className='bchat-msg '+role;
     el.innerHTML=role==='bot'?linkify(text):esc(text); msgs.appendChild(el); msgs.scrollTop=msgs.scrollHeight; return el;}

@@ -550,6 +550,18 @@ table.sched-table td.num, table.sched-table th.num{text-align:right;}
 .fee-close .prose p + p{margin-top:16px;}
 .fee-close .prose strong{color:#fff;}
 .fee-close .donate-card .n{color:var(--sky);}
+
+/* ----- 2026 elections page ----- */
+.elect-letter{background:#fff; border:1px solid var(--line); border-radius:4px; padding:34px 32px; margin-top:26px; position:relative; overflow:hidden;}
+.elect-letter::before{content:""; position:absolute; top:0; left:0; width:4px; height:100%; background:linear-gradient(180deg, var(--sky), var(--sky-deep));}
+.elect-letter .who{font-family:'Anton', sans-serif; font-size:22px; color:var(--navy); text-transform:uppercase; letter-spacing:0.02em;}
+.elect-letter .role{font-family:'Anton', sans-serif; font-size:11.5px; letter-spacing:0.16em; color:var(--sky-deep); text-transform:uppercase; margin-top:5px;}
+.elect-letter p{font-size:15px; line-height:1.78; color:#454d64; margin-top:15px; max-width:78ch;}
+.elect-letter h4{font-family:'Anton', sans-serif; font-size:13.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--navy); margin-top:28px;}
+.elect-letter .xp{margin-top:16px; max-width:78ch;}
+.elect-letter .xp .t{font-weight:700; color:var(--navy); font-size:15px; line-height:1.5;}
+.elect-letter .xp p{margin-top:5px;}
+.elect-note{margin-top:26px; background:rgba(124,197,234,0.1); border:1px solid rgba(79,163,209,0.3); border-radius:4px; padding:18px 22px; font-size:14.5px; line-height:1.65; color:#454d64; max-width:860px;}
 """
 
 HEAD = """<head>
@@ -716,7 +728,7 @@ CHAT_WIDGET = """
   if(brandImg){document.getElementById('bchatCrest').src=brandImg.src;}
 
   function esc(s){var d=document.createElement('div'); d.textContent=s; return d.innerHTML;}
-  function linkify(s){return esc(s).replace(/(https?:\\/\\/[^\\s<]+[^\\s<.,)])/g,'<a href="$1" target="_blank" rel="noopener">$1</a>')
+  function linkify(s){return esc(s).replace(/(https?:\\/\\/[^\\s<"']+[^\\s<"'.,)])/g,'<a href="$1" target="_blank" rel="noopener">$1</a>')
     .replace(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})/g,'<a href="mailto:$1">$1</a>');}
   function add(role,text){var el=document.createElement('div'); el.className='bchat-msg '+role;
     el.innerHTML=role==='bot'?linkify(text):esc(text); msgs.appendChild(el); msgs.scrollTop=msgs.scrollHeight; return el;}
@@ -775,13 +787,13 @@ CHAT_WIDGET = """
 # ---------------------------------------------------------------------------
 ANNOUNCE_ENABLED = True
 ANNOUNCE_TEXT = (
-    "2026 AGM: Sunday, November 22 at 2:00 PM, Donaleigh's. "
-    "Details and election notices have been emailed to members — keep an eye on your inbox."
+    "2026 Elections: AGM Sunday, November 22 at 2:00 PM, Donaleigh's. "
+    "Election details will be emailed to club members."
 )
-ANNOUNCE_LINK = ""
-ANNOUNCE_LINK_TEXT = ""
+ANNOUNCE_LINK = "/elections"
+ANNOUNCE_LINK_TEXT = "Election Info"
 ANNOUNCE_PAGES = {"home"}
-ANNOUNCE_VERSION = "5"
+ANNOUNCE_VERSION = "6"
 # ISO datetime with Toronto offset ("-04:00" EDT / "-05:00" EST). After this
 # moment the banner hides itself client-side for everyone, no redeploy needed.
 # "" = never expires.
@@ -1784,6 +1796,273 @@ fees_body = f"""
 """ + FEES_SCRIPT
 
 
+# ---------------------------------------------------------------------------
+# 2026 ELECTIONS PAGE (elections.html) — temporary page for the 2026 Executive
+# election cycle. Facts sourced from the club's election notices (Oct 8 Notice
+# of Intent, Oct 31 candidate confirmation, Nov 8 acclamation update). Remove
+# or archive after the Nov 22 AGM.
+# ---------------------------------------------------------------------------
+
+elections_body = """
+<section class="pagehero">
+  <div class="sash"><span></span><span></span></div>
+  <div class="wrap pagehero-inner">
+    <span class="eyebrow">Club Governance &middot; 2026</span>
+    <h1>2026 Executive elections.</h1>
+    <p>Five Executive Board positions are up for election this year, each serving a two-year term. Voting is electronic, and the results are announced at the Annual General Meeting &mdash; Sunday, November 22 at 2:00 PM, Donaleigh's Irish Pub.</p>
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Key dates</span>
+      <h2>How and when to vote.</h2>
+      <p class="lede">The Board received seven Notices of Intent for the five available positions. Voting is conducted through an electronic voting system &mdash; eligible club members cast their votes online, with voting details emailed to members.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <span class="tag">Step one</span>
+        <h3>Voting opens</h3>
+        <div class="amt">Monday, November 16</div>
+        <p>Eligible members receive an electronic ballot by email. Keep an eye on your inbox.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Step two</span>
+        <h3>Voting closes</h3>
+        <div class="amt">Friday, November 20</div>
+        <p>Online voting closes ahead of the AGM. Votes cannot be cast after this date.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Step three</span>
+        <h3>Results announced</h3>
+        <div class="amt">Sunday, November 22</div>
+        <p>Results are announced at the AGM &mdash; 2:00 PM at Donaleigh's Irish Pub, downtown Barrie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The ballot</span>
+      <h2>Five positions, two-year terms.</h2>
+      <p class="lede">Three positions drew a single candidate each and have been filled by acclamation. Two positions drew multiple candidates and will be decided by the membership's electronic vote.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <span class="tag">Acclaimed</span>
+        <h3>Vice President</h3>
+        <p><strong>Jordy Whitesell</strong> &mdash; acclaimed, having been the sole candidate for the position.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Acclaimed</span>
+        <h3>Men's Director</h3>
+        <p><strong>Josh Morgan</strong> &mdash; acclaimed, having been the sole candidate for the position.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Acclaimed</span>
+        <h3>Field &amp; Fixtures Director</h3>
+        <p><strong>Jill Murphy</strong> &mdash; acclaimed, having been the sole candidate for the position.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Contested &middot; Member vote</span>
+        <h3>Junior Director</h3>
+        <p>Two candidates have declared for this position. It will be decided by the membership's electronic vote, November 16&ndash;20.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Contested &middot; Member vote</span>
+        <h3>Minis Director</h3>
+        <p>Multiple candidates have declared for this position. It will be decided by the membership's electronic vote, November 16&ndash;20.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Candidate letters</span>
+      <h2>Hear from the candidates.</h2>
+      <p class="lede">Candidates were invited to share a letter outlining their background, experience, and goals for the club. Letters are posted here as they are received.</p>
+    </div>
+
+    <div class="elect-letter">
+      <div class="who">Enrico Traini</div>
+      <div class="role">Minis Director &middot; Candidate</div>
+      <h4>Goals and objectives</h4>
+      <p>My goal in joining the Barrie Rugby Club Board of Directors is to contribute to the long-term growth and success of the club, with a strong focus on youth development and creating opportunities for the next generation of athletes.</p>
+      <p>I believe a successful club is built on a strong foundation of youth participation, quality coaching, positive culture, and effective leadership. I would like to help create an environment where young athletes can develop their skills, build confidence, foster a love for the game, and have opportunities to progress through the sport.</p>
+      <p>I also hope to contribute to the continued growth of the club by supporting initiatives that attract and retain young athletes, develop coaches, volunteers, and strengthen the club's connection with the Barrie community. Ensuring the club has the resources, infrastructure, and long-term vision to support future generations is something I feel strongly about.</p>
+      <p>Having spent many years involved in competitive sport, athlete development, and board governance, I believe I can bring valuable experience and perspective to help build a strong, sustainable club that provides meaningful opportunities for young athletes and families in the Barrie community.</p>
+      <h4>Experience</h4>
+      <div class="xp">
+        <div class="t">Owner, E. Traini Construction &mdash; 2006&ndash;Present</div>
+        <p>Built and operate a residential construction business that has employed 15&ndash;20 staff. We specialize in building exclusive residences throughout the GTA and Georgian Bay area.</p>
+      </div>
+      <div class="xp">
+        <div class="t">Athlete, Canadian National Cycling Team &mdash; 1999&ndash;2003</div>
+        <p>Trained and raced with the Canadian National Cycling Team out of the PacificSport Training Centre in Victoria, BC.</p>
+      </div>
+      <div class="xp">
+        <div class="t">Coach / Team Manager, Jet Fuel Cycling &mdash; 2010&ndash;2014</div>
+        <p>Managed Canada's number-one elite cycling team. Coached numerous athletes on the team to national titles.</p>
+      </div>
+      <div class="xp">
+        <div class="t">Coach / Team Manager, FCV Cycling Team &mdash; 2015&ndash;2019</div>
+        <p>Helped create one of Canada's top youth development programs. Trained and developed numerous national and world champions, as well as several athletes who went on to represent Canada at the Olympics.</p>
+      </div>
+      <div class="xp">
+        <div class="t">Board Member, Ontario Cycling Association &mdash; 2012&ndash;2022</div>
+        <p>Served on the Board of Directors of the Ontario Cycling Association for ten years, gaining extensive knowledge and experience in organizational governance, strategic planning, financial oversight, and policy development.</p>
+        <p>Developed a strong understanding of the challenges and opportunities within the cycling industry, including athlete development, sport administration, community engagement, and stakeholder relations. Strengthened leadership, communication, collaboration, and decision-making skills while contributing to the long-term growth and success of the organization.</p>
+      </div>
+      <h4>Skills</h4>
+      <p>Served on discipline, policy, and athlete selection committees for both Provincial Sport Organizations (PSOs) and National Sport Organizations (NSOs).</p>
+      <p>Coached youth sports teams at all levels, from house league to elite competition. Managed and operated house league programs across multiple sports.</p>
+    </div>
+
+    <div class="elect-letter">
+      <div class="who">Elizabeth Farquharson</div>
+      <div class="role">Junior Director &middot; Candidate</div>
+      <p>I have been involved with Barrie Rugby, as a parent, team manager, member of the operational team and member of the Board of Directors for the past 5 years. I joined the club in 2021, as a member of the &ldquo;Mini Committee&rdquo;, running the U6&ndash;12 program, under Director Andrew Davies. From there, I moved into a director position, first with the Minis and now Juniors.</p>
+      <p>In my time with the club, I have been directly involved in the planning and execution of several highly successful events and initiatives, including the ever-popular annual &ldquo;Try Rugby&rdquo; events, which has helped to increase enrolment in our Minis program year over year. In 2023, alongside the Minis Director, I developed and launched the Source for Sports merchandise line. During the 2026 season, we ran 4 Youth and Junior tournaments that required a tremendous amount of planning, leading up to the events and the day of, including the first U14 TRU Provincial Qualifier. October's Provincial 7s Qualifier, of which I was the primary organizer, was the largest event that Barrie Rugby has hosted, with 30 teams and 100 games per day. Through organizing these events, I have developed strong relationships with other clubs, community partners and Rugby Ontario, that will continue to help our club in its development and growth.</p>
+      <p>As a member of the Board, I bring a strong background in event organization, administration, relationship building and attention to detail that contributes to our team achieving its strategic short- and long-term goals. We have a plan to develop the Barrie Rugby Football Club into one of the strongest clubs in the province, and we are well on our way to that goal. If elected, I will continue to develop this club and its players, strengthen our community and sport partnerships and ensure that we can provide quality rugby programming for all players.</p>
+      <p>I strongly believe that our rugby community here in Barrie is extremely special. I have loved being a part of this Rugby Family and want to continue to grow and support our athletes as they develop, allowing them to compete at the highest level possible.</p>
+    </div>
+
+    <div class="elect-letter">
+      <div class="who">Michelle Greenwood</div>
+      <div class="role">Junior Director &amp; Minis Director &middot; Candidate</div>
+      <p>Michelle's campaign letter will be posted here shortly.</p>
+    </div>
+
+    <div class="elect-letter">
+      <div class="who">Meagan Jacko</div>
+      <div class="role">Minis Director &middot; Candidate</div>
+      <p>I am excited to put my name forward for the position of Minis Director with the Barrie Rugby Club.</p>
+      <p>As the wife of a rugby player and parent of youth and minis players &mdash; rugby has always been an important part of our family's life. I believe in the value of youth rugby, and I see an opportunity to continue growing and strengthening the program for the benefit of the players, families, coaches, and volunteers.</p>
+      <p>I believe I bring a valuable combination of experience and perspective to this role. As a rugby parent, I understand the importance of creating a positive experience for families and young athletes. Through my hands-on involvement as a team manager, I have experienced firsthand the organization, communication, coordination, and commitment required to support a successful team. In addition, my previous experience as Executive Director of Scramble Flag Football League has given me valuable leadership and sports administration experience, along with an understanding of what it takes to organize, develop, and manage successful sports programs.</p>
+      <p>These experiences have given me an appreciation for the many people and moving parts that make a youth sports program successful. More importantly, they have reinforced my belief that strong programs are built through teamwork, communication, community involvement, and a shared commitment to putting youth first.</p>
+      <p>My vision is simple: to build a stronger, more connected youth rugby community where every player, parent, coach, and volunteer feels valued and supported. If elected, I would like to focus on several key areas:</p>
+      <h4>1. Growing and strengthening our youth program</h4>
+      <p>I want to help attract more young players to rugby while creating an environment that encourages them to stay, develop, and enjoy the sport. I believe there are opportunities to increase awareness, engage more families, and continue building a program that welcomes players of all ages and abilities.</p>
+      <h4>2. Strengthening communication</h4>
+      <p>Strong communication is essential to a successful youth program. I would like to encourage better communication between the club, coaches, team managers, parents, and players. Families should feel informed, included, and comfortable sharing questions, ideas, and concerns.</p>
+      <h4>3. Supporting our coaches and volunteers</h4>
+      <p>Our coaches and volunteers are the backbone of our youth program. Their time, dedication, and commitment deserve recognition and support. I want to help ensure they have the resources, communication, and organizational support needed to provide the best possible experience for our young athletes.</p>
+      <h4>4. Creating a positive youth experience</h4>
+      <p>Rugby is about so much more than winning games. It teaches teamwork, respect, discipline, resilience, confidence, and leadership. I want every player, regardless of their experience or ability, to have the opportunity to develop these qualities and feel that they belong.</p>
+      <h4>5. Building a stronger club community</h4>
+      <p>A successful youth program is built on relationships. I want to encourage greater family involvement, create opportunities for people to share ideas, and strengthen the connection between our youth program and the broader club.</p>
+      <p>I recognize that there is always room to grow, improve, and find new ways to do things. I also understand that positive change happens when people work together, listen to one another, and share a common goal. I am not running because I think I have all the answers. I am running because I care about our youth, and I want to be part of making our program even better.</p>
+      <p>I would bring enthusiasm, dedication, an open mind, and a willingness to listen and work hard on behalf of our players, families, coaches, and volunteers. Our young athletes are the future of this club, and they deserve a youth program that gives them every opportunity to learn, grow, succeed, and develop a lifelong love of rugby.</p>
+      <p>I would be honoured to have your support and the opportunity to serve as your next Minis Director.</p>
+    </div>
+
+    <div class="elect-letter">
+      <div class="who">Josh Morgan</div>
+      <div class="role">Men's Director &middot; Acclaimed</div>
+      <p>My name is Josh Morgan and since 2022, I have fulfilled the role of Men's Rugby Director for the Barrie Rugby Football Club. Before this, I was an assistant coach for the Barrie RFC Men's program from 2015&ndash;2019. Over the last decade, I have made supporting rugby one of the central pieces of my career, and personal time.</p>
+      <p>As a full-time career, I am the Centralized Athletics Coordinator for the Simcoe County District School Board. This role means that I am responsible for all extra-curricular athletics in SCDSB secondary schools. I am responsible for the organization and execution of the GBSSA (local high school) rugby season. This role has helped me form strong relationships with local referees, facilities, and businesses.</p>
+      <p>In addition to my commitment to rugby through my career, I have been with the Georgian College Men's Rugby Program since 2015. I served as an assistant coach from 2015 to 2023 and was promoted to Head Coach of the rugby program in 2024.</p>
+      <p>Through the club, college, and high schools, I, along with the relationships I have built, have strived to build a strong relationship between the three conduits for rugby. When Barrie Rugby was ascending pre-pandemic, our communication between the three hubs ensured that athletes understood the pathways to continue with the game of rugby into post-secondary, and adult life.</p>
+      <p>Through the relationships I have built through the club, college, and school board, I have had the opportunity to work closely with the City of Barrie in their sport tourism sector. I sit on two committees with the city (Sport Tourism Working Group and Sport Tourism Action Committee) where my role is to advise the City of Barrie on upcoming events and opportunities to increase sport tourism revenue. Through these relationships with the City of Barrie and with the current Barrie RFC Executive, we have been able to receive grants to host Rugby Ontario 7s Championships and OFSAA Rugby Championships.</p>
+      <p>I have had the privilege of playing rugby for some incredible local coaches such as Ron Andrews, Steve Porter, and John Daggett. My coaches taught me the power of rugby as more than just a game, but a way to bring people within a community together. I relish the opportunity to carry on the tradition of creating a space where athletes of all skill levels and walks of life can join our club and be positive members of our community.</p>
+    </div>
+
+    <div class="elect-letter">
+      <div class="who">Jill Murphy</div>
+      <div class="role">Field &amp; Fixtures Director &middot; Acclaimed</div>
+      <p>I have been actively involved with the Barrie Rugby Club for over nine years, beginning as a parent with children participating in the Minis and Junior programs. Over that time, I have developed a strong connection to the club, its members, volunteers, players, and families. Being part of the club for so many years has given me an appreciation for the important role Barrie Rugby plays in our community, not only in developing rugby players but also in teaching teamwork, sportsmanship, leadership, and building lifelong friendships.</p>
+      <p>My involvement has grown beyond that of a parent, as I have always believed in giving back to the organization that has provided so much to our family. I volunteered as a team manager for three years, where I gained valuable experience supporting coaches, players, and families while helping ensure teams had the resources and organization needed for a successful season. This role gave me a better understanding of the day-to-day operations of the club and the importance of having dedicated volunteers working together to create a positive experience for everyone involved.</p>
+      <p>For the past two years, I have had the opportunity to serve on the Barrie Rugby Club Board of Directors, with responsibility for Fields and Fixtures. This position has allowed me to become more involved in the operational side of the club, including field coordination, scheduling, and ensuring our teams have access to suitable facilities to support their seasons. I have gained a greater understanding of the planning, communication, and collaboration required to keep a club of our size operating effectively. It has also reinforced the importance of having strong relationships and open communication between the board, coaches, volunteers, players, and families.</p>
+      <p>An area I have placed particular importance on is developing and maintaining strong relationships with our municipal partners. Through my role, I have worked on building relationships with the City of Barrie and the Township of Springwater, developing positive working relationships with our municipal counterparts. I believe these partnerships are essential to the continued success and growth of Barrie Rugby Club, particularly when it comes to field access, facility needs, scheduling, and future opportunities. Establishing trust, maintaining open lines of communication, and working collaboratively with our municipal partners will continue to be important as the club grows and its facility requirements evolve.</p>
+      <p>As I look to continue serving on the Board of Directors, I bring over nine years of experience as a club parent, three years of team management experience, and two years of board-level involvement. I have a strong understanding of the club from both a family and operational perspective, and I am committed to continuing the work needed to make Barrie Rugby Club a welcoming, well-organized, and sustainable organization. I want to help build on the foundation that has already been established, support our volunteers and coaches, strengthen our community partnerships, and ensure we continue to provide quality rugby opportunities for current and future generations of players.</p>
+    </div>
+
+    <div class="elect-note">Letters from any remaining candidates will be posted here as they are received.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">At the AGM</span>
+      <h2>Governance motions on the floor.</h2>
+      <p class="lede">Before the election results are announced, members will be asked to consider and vote on four motions intended to support the club's growth, governance, and operational effectiveness. This year's election proceeds under the current structure, with candidates standing for specific positions.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <span class="tag">Motion one</span>
+        <h3>Director-based board positions</h3>
+        <p>Establish all elected Executive positions as general Director positions, with portfolios assigned by the Board based on each member's experience and strengths. If passed, future elections would be conducted under this model.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Motion two</span>
+        <h3>One Junior Director</h3>
+        <p>Merge the Boys Junior Director and Girls Junior Director positions into a single Junior Director, streamlining oversight of the club's junior programming.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Motion three</span>
+        <h3>Executive eligibility</h3>
+        <p>Require that anyone seeking election to the Executive be a member in good standing with the club.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Motion four</span>
+        <h3>Marketing restructure</h3>
+        <p>Remove the Marketing Director position from the Executive, with marketing becoming an operational function under the Director of Fundraising.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">2026 in review</span>
+      <h2>A year worth celebrating.</h2>
+      <p class="lede">The AGM is also where the club takes stock of the season behind it &mdash; and 2026 gave Barrie Rugby plenty to be proud of, on the field and off.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <span class="tag">On tour</span>
+        <h3>Barrie goes international</h3>
+        <p>Our U18 Girls toured Portugal and our U18 Boys toured France in 2026 &mdash; experiences of a lifetime that showcased Barrie rugby on the world stage.</p>
+      </div>
+      <div class="card">
+        <span class="tag">On the podium</span>
+        <h3>Juniors on the podium</h3>
+        <p>Our junior programs delivered a standout 2026, with teams earning podium finishes in both 7s and 15s competition throughout the season.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Hosting</span>
+        <h3>Biggest event in club history</h3>
+        <p>October's Provincial 7s Qualifier was the largest event Barrie Rugby has ever hosted &mdash; 30 teams and roughly 100 games a day at our home grounds.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Hosting</span>
+        <h3>Four tournaments, one first</h3>
+        <p>The club ran four Youth and Junior tournaments in 2026, including the first-ever U14 TRU Provincial Qualifier.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Partnerships</span>
+        <h3>Backed by the city</h3>
+        <p>Working with the City of Barrie's sport tourism program, the club secured grants to host Rugby Ontario 7s Championships and OFSAA Rugby Championships.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Growth</span>
+        <h3>Minis on the rise</h3>
+        <p>The ever-popular Try Rugby events keep introducing new families to the game, helping Minis enrolment grow year over year.</p>
+      </div>
+    </div>
+    <p style="margin-top:32px; font-size:15.5px; line-height:1.75; color:#454d64; max-width:70ch;">All members are encouraged to attend the AGM and take part in these decisions. Questions about the election or the AGM: <a href="mailto:info@barrierugbyclub.com" style="color:var(--sky-deep); font-weight:700; text-decoration:underline;">info@barrierugbyclub.com</a></p>
+  </div>
+</section>
+"""
+
+
 ANCHOR_FIX = """<script>
 (function(){
   if(!location.hash) return;
@@ -1895,6 +2174,13 @@ with open(f'{out_dir}/resources.html', 'w') as f:
         description="Club documents, registration links, kit and merch stores, and key resources for Barrie Rugby Club players, parents, and supporters.",
         path='/resources'))
 
+with open(f'{out_dir}/elections.html', 'w') as f:
+    f.write(page(
+        "2026 Executive Elections | Barrie Rugby Club",
+        "elections", elections_body,
+        description="Barrie Rugby Club 2026 Executive elections — key voting dates, the positions on the ballot, candidate letters, and the governance motions before the AGM on November 22.",
+        path='/elections'))
+
 # hero background video is an external file (can't be base64-embedded like the
 # photos without bloating every load) — copy it alongside the generated HTML.
 video_src = os.path.join(ASSET_DIR, 'hero-lineout.mp4')
@@ -1953,6 +2239,7 @@ p{{color:rgba(255,255,255,0.82);font-size:16px;line-height:1.6;margin-bottom:28p
   <nav class="links">
     <a href="/">Home</a>
     <a href="/programs">Programs</a>
+    <a href="/fees">Fees</a>
     <a href="/alumni">Alumni</a>
     <a href="/resources">Resources</a>
     <a class="ghost" href="/#contact">Contact</a>
@@ -1961,8 +2248,8 @@ p{{color:rgba(255,255,255,0.82);font-size:16px;line-height:1.6;margin-bottom:28p
 </body>
 </html>"""
 
-SITEMAP_LASTMOD = '2026-08-09'
-FEES_LASTMOD = '2026-08-22'   # fees.html is new this build
+SITEMAP_LASTMOD = '2026-11-08'  # banner v6 + elections cycle touched every page
+FEES_LASTMOD = '2026-11-08'
 SITEMAP = f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>{CANONICAL_HOST}/</loc><lastmod>{SITEMAP_LASTMOD}</lastmod></url>
@@ -2009,6 +2296,19 @@ REDIRECTS = """# Old Wix site -> new site (301 permanent)
 /register https://www.playhq.com/ca/rugby-canada/register/c4290e 302
 """
 
+# Security headers (Cloudflare Pages _headers file). No full CSP: the pages
+# rely on inline scripts/styles and data: images, so a CSP would need
+# 'unsafe-inline' everywhere and add little — frame-ancestors is the part
+# that can't break rendering, so it ships alone alongside the classics.
+HEADERS = """/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+"""
+
 with open(f'{out_dir}/404.html', 'w') as f:
     f.write(NOT_FOUND)
 with open(f'{out_dir}/sitemap.xml', 'w') as f:
@@ -2017,9 +2317,11 @@ with open(f'{out_dir}/robots.txt', 'w') as f:
     f.write(ROBOTS)
 with open(f'{out_dir}/_redirects', 'w') as f:
     f.write(REDIRECTS)
+with open(f'{out_dir}/_headers', 'w') as f:
+    f.write(HEADERS)
 
-print("Built index.html, programs.html, fees.html, alumni.html, resources.html")
-print("Built 404.html, sitemap.xml, robots.txt, _redirects")
-for fn in ['index.html','programs.html','fees.html','alumni.html','resources.html']:
+print("Built index.html, programs.html, fees.html, alumni.html, resources.html, elections.html")
+print("Built 404.html, sitemap.xml, robots.txt, _redirects, _headers")
+for fn in ['index.html','programs.html','fees.html','alumni.html','resources.html','elections.html']:
     p = f'{out_dir}/{fn}'
     print(fn, round(os.path.getsize(p)/1024,1), 'KB')
