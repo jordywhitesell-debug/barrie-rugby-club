@@ -1874,7 +1874,7 @@ elections_body = """
       <div class="card">
         <span class="tag">Contested &middot; Member vote</span>
         <h3>Minis Director</h3>
-        <p>Multiple candidates have declared for this position. It will be decided by the membership's electronic vote, November 16&ndash;20.</p>
+        <p>Two candidates have declared for this position. It will be decided by the membership's electronic vote, November 16&ndash;20.</p>
       </div>
     </div>
   </div>
@@ -1934,7 +1934,7 @@ elections_body = """
 
     <div class="elect-letter">
       <div class="who">Michelle Greenwood</div>
-      <div class="role">Junior Director &amp; Minis Director &middot; Candidate</div>
+      <div class="role">Junior Director &middot; Candidate</div>
       <p>I am writing to formally express my interest in the position of Junior Rugby Director and hope that you will consider me for this position when you cast your vote.</p>
       <p>I have three children who currently play rugby with the Barrie Rugby Club, and who have done so for the past two seasons. While our family is relatively new to the sport, we have all fallen in love with both the game and the culture which surrounds it. We have learned that at its heart, rugby is defined by a deep sense of community, camaraderie, and mutual support, both on and off the field. I believe that there is room to continue to grow this unique culture within our own club, and my goal as Junior Rugby Director would be to support our younger age groups to integrate and grow within this framework and the broader fabric of the Barrie Rugby Club.</p>
       <p>I believe that building a cohesive club environment will help to grow the local rugby community and is essential to boosting grassroots recruitment and retention at all ages. I would like to see the Barrie Rugby Club work towards developing initiatives that encourage greater interaction and support amongst our own teams, and which create opportunities that allow and encourage our older junior athletes to step into leadership roles that inspire our younger players.</p>
