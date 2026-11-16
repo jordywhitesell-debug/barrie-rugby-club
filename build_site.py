@@ -871,6 +871,81 @@ def announce_bar(page_key):
 # INDEX.HTML
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# HOLIDAY STORE PROMO (temporary, home page only)
+# Limited-time Barrie Holiday Store. Renders a promo band under the hero and a
+# featured card at the top of the Shop section. Everything tagged data-holiday
+# hides itself client-side after HOLIDAY_EXPIRES, no redeploy needed.
+# To retire it properly: set HOLIDAY_ENABLED = False and rebuild.
+# ---------------------------------------------------------------------------
+HOLIDAY_ENABLED = True
+HOLIDAY_URL = "https://barrieholiday.itemorder.com/shop/home/"
+# Store page states the deadline as Nov. 29, 2026, 11:59 PM EST.
+HOLIDAY_DEADLINE_TEXT = "November 29 at 11:59 PM"
+HOLIDAY_EXPIRES = "2026-11-29T23:59:59-05:00"
+
+_HOLIDAY_STYLE = """<style>
+.holiday-band{position:relative; overflow:hidden; padding:0; background-color:#0c1a30; color:#fff; border-top:4px solid #c8102e; border-bottom:1px solid rgba(255,255,255,0.08);
+  background-image:radial-gradient(rgba(255,255,255,0.55) 1.2px, transparent 1.6px), radial-gradient(rgba(124,197,234,0.45) 1.6px, transparent 2px), linear-gradient(120deg, #142645 0%, #0c1a30 60%);
+  background-size:46px 46px, 78px 78px, 100% 100%; background-position:0 0, 22px 31px, 0 0;}
+.holiday-band::after{content:""; position:absolute; inset:0; background:linear-gradient(90deg, rgba(12,26,48,0.94) 0%, rgba(12,26,48,0.82) 55%, rgba(12,26,48,0.45) 100%); pointer-events:none;}
+.holiday-inner{position:relative; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:36px; padding-top:44px; padding-bottom:44px;}
+.holiday-copy{max-width:720px;}
+.holiday-tag{display:inline-block; font-family:'Anton', sans-serif; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; background:#c8102e; color:#fff; padding:6px 12px; border-radius:3px;}
+.holiday-band h2{font-family:'Anton', sans-serif; font-weight:400; font-size:clamp(30px,4.4vw,50px); line-height:1.02; letter-spacing:0.01em; text-transform:uppercase; margin:16px 0 12px; color:#fff;}
+.holiday-band h2 em{font-style:normal; color:#7cc5ea;}
+.holiday-band p{font-size:16px; line-height:1.6; color:rgba(255,255,255,0.86); margin:0;}
+.holiday-band p strong{color:#fff;}
+.holiday-cta{flex-shrink:0; display:inline-block; font-family:'Anton', sans-serif; font-size:15px; letter-spacing:0.06em; text-transform:uppercase; background:#c8102e; color:#fff !important; padding:17px 30px; border-radius:4px; white-space:nowrap; box-shadow:0 10px 24px rgba(0,0,0,0.35); transition:transform .15s ease, background .15s ease;}
+.holiday-cta:hover{background:#e0213f; transform:translateY(-2px);}
+.holiday-cta:focus-visible, .shop-card.holiday .go:focus-visible{outline:2px solid #7cc5ea; outline-offset:3px;}
+@media (max-width:820px){ .holiday-inner{flex-direction:column; align-items:flex-start; gap:24px; padding-top:34px; padding-bottom:36px;} .holiday-cta{width:100%; text-align:center;} }
+.shop-card.holiday{grid-column:1 / -1; border-color:rgba(200,16,46,0.35);}
+.shop-card.holiday .swatch{background:linear-gradient(90deg, #c8102e, #142645);}
+.shop-card.holiday .tag{color:#c8102e;}
+.shop-card.holiday .go{background:#c8102e;}
+.shop-card.holiday .go:hover{background:#142645;}
+[data-holiday][hidden]{display:none !important;}
+</style>"""
+
+_HOLIDAY_SCRIPT = """<script>
+(function(){
+  var exp = Date.parse('__EXPIRES__');
+  if (!isNaN(exp) && Date.now() > exp) {
+    var els = document.querySelectorAll('[data-holiday]');
+    for (var i = 0; i < els.length; i++) els[i].hidden = true;
+  }
+})();
+</script>""".replace('__EXPIRES__', HOLIDAY_EXPIRES)
+
+if HOLIDAY_ENABLED:
+    HOLIDAY_BAND = _HOLIDAY_STYLE + f"""
+<section class="holiday-band" data-holiday aria-label="Barrie Holiday Store">
+  <div class="wrap holiday-inner">
+    <div class="holiday-copy">
+      <span class="holiday-tag">Christmas Special &middot; Limited Time</span>
+      <h2>The Barrie <em>Holiday Store</em> is open.</h2>
+      <p>Club gear for players and fans, shipped to your home in time for gift giving. <strong>Orders close {HOLIDAY_DEADLINE_TEXT}.</strong></p>
+    </div>
+    <a class="holiday-cta" href="{HOLIDAY_URL}" target="_blank" rel="noopener">Shop The Holiday Store &rarr;</a>
+  </div>
+</section>
+"""
+    HOLIDAY_LEDE = '<span data-holiday> &mdash; plus a limited-time Holiday Store for Christmas</span>'
+    HOLIDAY_CARD = f"""      <div class="shop-card holiday" data-holiday>
+        <div class="swatch"></div>
+        <div class="body">
+          <span class="tag">Christmas Special &middot; Limited Time</span>
+          <h3>Barrie Holiday Store</h3>
+          <p>A limited-time holiday collection for players and fans, shipped to your home in time for gift giving. Orders close {HOLIDAY_DEADLINE_TEXT}.</p>
+          <a class="go" href="{HOLIDAY_URL}" target="_blank" rel="noopener">Shop Holiday Store &rarr;</a>
+        </div>
+      </div>
+"""
+    HOLIDAY_TAIL = _HOLIDAY_SCRIPT + "\n"
+else:
+    HOLIDAY_BAND = HOLIDAY_LEDE = HOLIDAY_CARD = HOLIDAY_TAIL = ""
+
 index_body = f"""
 <section class="hero">
   <video class="hero-video" autoplay muted loop playsinline poster="data:image/jpeg;base64,{BG_HERO_POSTER_B64}">
@@ -895,7 +970,7 @@ index_body = f"""
     </div>
   </div>
 </section>
-
+{HOLIDAY_BAND}
 <div class="strip">
   <div class="track">
     <span class="dot">EST. 1967</span><span class="dot">JIM HAMILTON FIELD</span><span class="dot">U6 &rarr; SENIOR</span><span class="dot">MEN'S &amp; WOMEN'S</span><span class="dot">BARRIE, ON</span>
@@ -1078,10 +1153,10 @@ index_body = f"""
     <div class="sec-head">
       <span class="eyebrow">Gear Up</span>
       <h2>Shop the club.</h2>
-      <p class="lede">Two official stores &mdash; one for everyday fan wear, one for on-field kit.</p>
+      <p class="lede">Two official stores &mdash; one for everyday fan wear, one for on-field kit{HOLIDAY_LEDE}.</p>
     </div>
     <div class="shop-grid">
-      <div class="shop-card">
+{HOLIDAY_CARD}      <div class="shop-card">
         <div class="swatch"></div>
         <div class="body">
           <span class="tag">Fan Store</span>
@@ -1102,7 +1177,7 @@ index_body = f"""
     </div>
   </div>
 </section>
-
+{HOLIDAY_TAIL}
 {CONTACT_SECTION}
 """
 
@@ -2279,10 +2354,11 @@ p{{color:rgba(255,255,255,0.82);font-size:16px;line-height:1.6;margin-bottom:28p
 </html>"""
 
 SITEMAP_LASTMOD = '2026-11-08'  # banner v6 + elections cycle touched every page
+HOME_LASTMOD = '2026-11-16'  # holiday store promo on home page
 FEES_LASTMOD = '2026-11-08'
 SITEMAP = f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>{CANONICAL_HOST}/</loc><lastmod>{SITEMAP_LASTMOD}</lastmod></url>
+  <url><loc>{CANONICAL_HOST}/</loc><lastmod>{HOME_LASTMOD}</lastmod></url>
   <url><loc>{CANONICAL_HOST}/programs</loc><lastmod>{SITEMAP_LASTMOD}</lastmod></url>
   <url><loc>{CANONICAL_HOST}/fees</loc><lastmod>{FEES_LASTMOD}</lastmod></url>
   <url><loc>{CANONICAL_HOST}/alumni</loc><lastmod>{SITEMAP_LASTMOD}</lastmod></url>
