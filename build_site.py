@@ -1994,7 +1994,19 @@ elections_body = """
     <div class="sec-head">
       <span class="eyebrow">At the AGM</span>
       <h2>Governance motions on the floor.</h2>
-      <p class="lede">Before the election results are announced, members will be asked to consider and vote on four motions intended to support the club's growth, governance, and operational effectiveness. This year's election proceeds under the current structure, with candidates standing for specific positions.</p>
+      <p class="lede">Before the election results are announced, members will be asked to consider and vote on seven proposed changes to the Club's Bylaws, intended to support the club's growth, governance, and operational effectiveness. This year's election proceeds under the current structure, with candidates standing for specific positions.</p>
+      <p class="lede">Motions are voted on in person at the AGM, by show of hands, and each needs two-thirds of the votes cast to pass. Each registered Member has one vote; a parent or guardian votes on behalf of a player under 18.</p>
+    </div>
+    <div class="res-group-label" style="margin-top:0;">AGM documents</div>
+    <div class="res-grid" style="margin-bottom:40px;">
+      <a class="res-link" href="agm-2026-bylaw-motions-notice.pdf" target="_blank" rel="noopener">
+        <div><div class="t">Proposed Bylaw Motions &mdash; Notice</div><div class="d">One-page summary of the seven motions and how the vote works (PDF)</div></div>
+        <span class="arrow">&rarr;</span>
+      </a>
+      <a class="res-link" href="agm-2026-schedule-1-bylaw-amendments.pdf" target="_blank" rel="noopener">
+        <div><div class="t">Schedule 1 &mdash; Proposed Bylaw Amendments</div><div class="d">Full proposed Bylaw wording for each of the seven motions (PDF)</div></div>
+        <span class="arrow">&rarr;</span>
+      </a>
     </div>
     <div class="card-grid">
       <div class="card">
@@ -2016,6 +2028,21 @@ elections_body = """
         <span class="tag">Motion four</span>
         <h3>Marketing restructure</h3>
         <p>Remove the Marketing Director position from the Executive, with marketing becoming an operational function under the Director of Fundraising.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Motion five</span>
+        <h3>Board reduces to seven Directors</h3>
+        <p>The Board focuses on risk, finance and strategy, with committees and Coordinators running day-to-day operations. Reached by 2028, with no one removed early.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Motion six</span>
+        <h3>A written election procedure</h3>
+        <p>Nominations, acclamation, secret ballot, scrutineers and tie-breaks, with electronic voting over the five days before the AGM.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Motion seven</span>
+        <h3>Housekeeping fixes</h3>
+        <p>Four small corrections to bring the Bylaws in line with current practice.</p>
       </div>
     </div>
   </div>
