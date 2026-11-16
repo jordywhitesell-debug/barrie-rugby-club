@@ -64,6 +64,7 @@ DONATIONS:
 SHOP:
 - Fan merch: https://4hundredsfs.com/collections/barrie-rugby
 - On-field kit (Gilbert): https://gilbertrugbycanada.com/collections/barrie-rugby-club
+- Barrie Holiday Store (Christmas special, limited time): https://barrieholiday.itemorder.com/shop/home/ — holiday collection for players and fans, shipped to your home in time for gift giving. Orders close November 29, 2026 at 11:59 PM Eastern. After that date the holiday store is closed; point people to the two regular stores.
 
 SPONSORS: Western (Platinum), Donaleigh's and Barrie Mitsubishi (Title), Todd Smith Mortgages, Mind to Muscle Strength & Conditioning Centre, and Jones Consulting Group Ltd. (Direct). Sponsorship inquiries: info@barrierugbyclub.com.
 
