@@ -1348,7 +1348,7 @@ alumni_body = f"""
     <div class="sec-head">
       <span class="eyebrow">Notable Names</span>
       <h2>A few from the honour roll.</h2>
-      <p class="lede">Pulled from the club's own written history &mdash; a small sample of the players who wore the crest before you.</p>
+      <p class="lede">Pulled from the club's own written history and the public record &mdash; a small sample of the players and builders who wore the crest before you.</p>
     </div>
     <div class="alumni-grid">
       <div class="alum-card">
@@ -1374,6 +1374,30 @@ alumni_body = f"""
       <div class="alum-card">
         <div class="mono">06</div>
         <div><h3>Jack LeSage</h3><p>Club co-founder who introduced rugby to Barrie's high schools, planting the seed for the youth pathway the club still runs today.</p></div>
+      </div>
+      <div class="alum-card">
+        <div class="mono">07</div>
+        <div><h3>Jim Hamilton</h3><p>Helped establish the club, played for 15 years and captained the side twice, then co-coached the 1985 Toronto and District elite division champions. The club's home pitch, Jim Hamilton Field, carries his name.</p></div>
+      </div>
+      <div class="alum-card">
+        <div class="mono">08</div>
+        <div><h3>Len Day</h3><p>Four decades with the club &mdash; from playing at the old fairgrounds after his Innisdale school days to a long run as club president.</p></div>
+      </div>
+      <div class="alum-card">
+        <div class="mono">09</div>
+        <div><h3>Ron Andrews</h3><p>Founded the club's Minis program in 2004 and saw it win Ontario gold within a year. A Barrie Sports Hall of Fame builder who also coached Canada's Under-19s.</p></div>
+      </div>
+      <div class="alum-card">
+        <div class="mono">10</div>
+        <div><h3>Byron Boville</h3><p>Represented Canada's Under-18 sevens side at the 2011 Commonwealth Youth Games as a Barrie RFC player, then was named Ontario university rugby's Most Valuable Player in 2012 with Guelph.</p></div>
+      </div>
+      <div class="alum-card">
+        <div class="mono">11</div>
+        <div><h3>Jesse Kilgour</h3><p>A Barrie RFC player who moved on to the Pacific Pride academy, he earned his first senior cap for Canada against Romania in November 2024 and has since been named to Canada's men's sevens squad.</p></div>
+      </div>
+      <div class="alum-card">
+        <div class="mono">12</div>
+        <div><h3>Reece Thompson</h3><p>Came through Barrie RFC and Barrie North Collegiate to play for Canada's Under-18s in 2023 and the Under-20s at the 2025 Oceania Rugby U20s Challenge, while studying at the University of Victoria.</p></div>
       </div>
     </div>
 
@@ -2355,13 +2379,14 @@ p{{color:rgba(255,255,255,0.82);font-size:16px;line-height:1.6;margin-bottom:28p
 
 SITEMAP_LASTMOD = '2026-11-08'  # banner v6 + elections cycle touched every page
 HOME_LASTMOD = '2026-11-16'  # holiday store promo on home page
+ALUMNI_LASTMOD = '2026-11-16'  # honour roll additions
 FEES_LASTMOD = '2026-11-08'
 SITEMAP = f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>{CANONICAL_HOST}/</loc><lastmod>{HOME_LASTMOD}</lastmod></url>
   <url><loc>{CANONICAL_HOST}/programs</loc><lastmod>{SITEMAP_LASTMOD}</lastmod></url>
   <url><loc>{CANONICAL_HOST}/fees</loc><lastmod>{FEES_LASTMOD}</lastmod></url>
-  <url><loc>{CANONICAL_HOST}/alumni</loc><lastmod>{SITEMAP_LASTMOD}</lastmod></url>
+  <url><loc>{CANONICAL_HOST}/alumni</loc><lastmod>{ALUMNI_LASTMOD}</lastmod></url>
   <url><loc>{CANONICAL_HOST}/resources</loc><lastmod>{SITEMAP_LASTMOD}</lastmod></url>
 </urlset>
 """
