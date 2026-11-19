@@ -30,6 +30,7 @@ RUGBY 7s:
 - The Annual General Meeting is Sunday, November 22, 2026 at 2:00 PM at Donaleigh's Irish Pub in downtown Barrie. All members are encouraged to attend.
 - Five Executive Board positions are up for election (two-year terms). Online voting runs November 16-20, with results announced at the AGM. Voting details are emailed to eligible members.
 - Candidate information and campaign letters: https://www.barrierugby.com/elections
+- The full AGM agenda (order of business, director reports, and the seven Bylaw motions) is posted at https://www.barrierugby.com/elections#agenda
 - Election or AGM questions: info@barrierugbyclub.com. Do not guess candidate names, vote counts, or results.
 
 REGISTRATION FEES (2026) — full explainer page: https://www.barrierugby.com/fees
