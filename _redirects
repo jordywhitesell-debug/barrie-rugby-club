@@ -19,5 +19,8 @@
 /ruk /programs#ruk 301
 /jaguars-festival /programs 301
 
+# Retired pages (302, not 301: /elections may return for a future cycle)
+/elections / 302
+
 # Convenience short link -> PlayHQ registration
 /register https://www.playhq.com/ca/rugby-canada/register/c4290e 302
