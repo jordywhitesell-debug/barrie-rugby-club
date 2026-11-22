@@ -786,18 +786,15 @@ CHAT_WIDGET = """
 # dismissed the previous banner are shown the new one.
 # ---------------------------------------------------------------------------
 ANNOUNCE_ENABLED = True
-ANNOUNCE_TEXT = (
-    "2026 Elections: AGM Sunday, November 22 at 2:00 PM, Donaleigh's. "
-    "Election details will be emailed to club members."
-)
-ANNOUNCE_LINK = "/elections"
-ANNOUNCE_LINK_TEXT = "Election Info"
+ANNOUNCE_TEXT = "2026 Barrie RFC election results are now available."
+ANNOUNCE_LINK = "https://vote.electionrunner.com/election/rCBdw/results"
+ANNOUNCE_LINK_TEXT = "View Results"
 ANNOUNCE_PAGES = {"home"}
-ANNOUNCE_VERSION = "6"
+ANNOUNCE_VERSION = "7"
 # ISO datetime with Toronto offset ("-04:00" EDT / "-05:00" EST). After this
 # moment the banner hides itself client-side for everyone, no redeploy needed.
 # "" = never expires.
-ANNOUNCE_EXPIRES = "2026-11-22T23:59:59-05:00"
+ANNOUNCE_EXPIRES = "2026-11-29T23:59:59-05:00"
 
 _ANNOUNCE_PAYLOAD = {
     "enabled": ANNOUNCE_ENABLED,
@@ -1908,7 +1905,7 @@ elections_body = """
   <div class="wrap pagehero-inner">
     <span class="eyebrow">Club Governance &middot; 2026</span>
     <h1>2026 Executive elections.</h1>
-    <p>Five Executive Board positions are up for election this year, each serving a two-year term. Voting is electronic, and the results are announced at the Annual General Meeting &mdash; Sunday, November 22 at 2:00 PM, Donaleigh's Irish Pub. <a href="#agenda" style="color:#fff; font-weight:700; text-decoration:underline;">See the AGM agenda</a></p>
+    <p>Five Executive Board positions are up for election this year, each serving a two-year term. Voting was electronic, and the results were announced at the Annual General Meeting on Sunday, November 22. <a href="https://vote.electionrunner.com/election/rCBdw/results" target="_blank" rel="noopener" style="color:#fff; font-weight:700; text-decoration:underline;">View the election results</a> &middot; <a href="#agenda" style="color:#fff; font-weight:700; text-decoration:underline;">See the AGM agenda</a></p>
   </div>
 </section>
 
@@ -1936,7 +1933,7 @@ elections_body = """
         <span class="tag">Step three</span>
         <h3>Results announced</h3>
         <div class="amt">Sunday, November 22</div>
-        <p>Results are announced at the AGM &mdash; 2:00 PM at Donaleigh's Irish Pub, downtown Barrie.</p>
+        <p>Results were announced at the AGM. <a href="https://vote.electionrunner.com/election/rCBdw/results" target="_blank" rel="noopener" style="font-weight:700; text-decoration:underline;">View the election results</a></p>
       </div>
     </div>
   </div>
@@ -2563,7 +2560,7 @@ p{{color:rgba(255,255,255,0.82);font-size:16px;line-height:1.6;margin-bottom:28p
 </body>
 </html>"""
 
-SITEMAP_LASTMOD = '2026-11-08'  # banner v6 + elections cycle touched every page
+SITEMAP_LASTMOD = '2026-11-22'  # banner v7 (election results link) touched every page
 HOME_LASTMOD = '2026-11-16'  # holiday store promo on home page
 ALUMNI_LASTMOD = '2026-11-16'  # honour roll additions
 FEES_LASTMOD = '2026-11-08'
