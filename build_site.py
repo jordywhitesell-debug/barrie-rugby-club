@@ -1968,14 +1968,14 @@ tour_body = TOUR_STYLE + f"""
         <span class="tag">Not included</span>
         <ul class="tour-list">
           <li>Flights</li>
-          <li>Accommodation</li>
+          <li>Accommodation (a group rate will be negotiated with a hotel)</li>
           <li>Meals away from the field</li>
           <li>Passport and travel documents</li>
           <li>Personal spending money</li>
         </ul>
       </div>
     </div>
-    <p class="tour-note">Players travelling to the United States need a valid passport. Club registration is required to take part.</p>
+    <p class="tour-note">Accommodation is not part of the estimate, but a rate will be negotiated with a hotel for the tour group. Players travelling to the United States need a valid passport. Club registration is required to take part.</p>
   </div>
 </section>
 
