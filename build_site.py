@@ -1882,6 +1882,119 @@ fees_body = f"""
 
 
 
+# ---------------------------------------------------------------------------
+# TOUR PAGE (tour.html) -- Tropical 7s 2027 expression of interest.
+# UNLISTED: no nav/footer link, not in the sitemap, noindex. Shared by direct
+# link only. Sign-ups go to a Google Form (responses stay in Google, nothing is
+# stored on this site). Tournament facts verified against tropical7s.com on
+# 2026-11-25; the cost figure is a club estimate, not a quote.
+# ---------------------------------------------------------------------------
+TOUR_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdqAyv_OUJ_2eI2cz_rxNBHZGhLREBFOQ2zscSi6w6fBHvbcw/viewform"
+TOUR_COST = "$800"
+TOUR_NOINDEX = '<meta name="robots" content="noindex">'
+
+TOUR_STYLE = """<style>
+.tour-list{margin:0; padding-left:20px;}
+.tour-list li{font-size:15px; line-height:1.7; color:#39415a;}
+.tour-cols{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+@media (max-width:760px){ .tour-cols{grid-template-columns:1fr;} }
+.tour-note{margin-top:22px; font-size:13.5px; line-height:1.6; color:#6b7284; max-width:720px;}
+.tour-btn{display:inline-block; background:var(--navy); color:#fff !important; font-family:'Anton', sans-serif; letter-spacing:0.05em; font-size:14px; text-transform:uppercase; padding:14px 26px; border-radius:3px; text-decoration:none;}
+.tour-btn:hover{background:var(--navy-deep);}
+.tour-btn:focus-visible{outline:2px solid var(--sky); outline-offset:3px;}
+.tour-form{margin-top:28px; background:#fff; border:1px solid var(--line); border-radius:4px; overflow:hidden;}
+.tour-form iframe{display:block; width:100%; height:1500px; border:0;}
+@media (max-width:640px){ .tour-form iframe{height:1650px;} }
+</style>"""
+
+tour_body = TOUR_STYLE + f"""
+<section class="pagehero">
+  <div class="sash"><span></span><span></span></div>
+  <div class="wrap pagehero-inner">
+    <span class="eyebrow">Northern Storm girls tour &middot; Expression of interest</span>
+    <h1>Tropical 7s. Tampa, Florida. March 2027.</h1>
+    <p>We are gauging interest in taking U16 and U18 girls to North America's largest rugby sevens festival, touring as Northern Storm. The tour is open to all girls, not only Barrie players. Tell us if you are interested. This is not a commitment and no payment is due.</p>
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The tour</span>
+      <h2>Two days of training, two days of tournament.</h2>
+      <p class="lede">Each age group gets two days of training in Florida and two days of tournament play. Which days depends on the player's division.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <span class="tag">When</span>
+        <h3>23 to 28 March 2027</h3>
+        <p>Tour dates, Tuesday to Sunday. The tournament itself runs 25 to 28 March at the Tournament Sportsplex of Tampa Bay.</p>
+      </div>
+      <div class="card">
+        <span class="tag">U16 girls</span>
+        <h3>Thursday 25 and Friday 26 March</h3>
+        <p>Tournament play, after two days of training in Florida. Open to players born on or after 1 September 2010.</p>
+      </div>
+      <div class="card">
+        <span class="tag">U18 girls</span>
+        <h3>Friday 26 and Saturday 27 March</h3>
+        <p>Tournament play, after two days of training in Florida. Open to players born on or after 1 September 2008.</p>
+      </div>
+    </div>
+    <p class="tour-note">Tropical 7s uses a 1 September birthday cut-off, not the calendar year used in Ontario, so some players will sit in a different age group than they do at home. That is why the form asks for a date of birth. Squads are limited to 15 players per team. Tournament details: <a href="https://www.tropical7s.com/overview" target="_blank" rel="noopener">tropical7s.com</a>. Follow the team: <a href="https://www.instagram.com/northernstormrugby/" target="_blank" rel="noopener">Northern Storm on Instagram</a>.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Cost estimate</span>
+      <h2>About {TOUR_COST} per player, plus travel.</h2>
+      <p class="lede">This is an early estimate in Canadian dollars. The final figure depends on how many players sign up and on the exchange rate.</p>
+    </div>
+    <div class="tour-cols">
+      <div class="card">
+        <span class="tag">Included in the estimate</span>
+        <ul class="tour-list">
+          <li>Tour kit</li>
+          <li>Tournament registration</li>
+          <li>Athletic therapist with the team</li>
+          <li>Field snacks and hydration</li>
+          <li>Transport to the field for practices and games</li>
+          <li>Tent coverage at the field</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="tag">Not included</span>
+        <ul class="tour-list">
+          <li>Flights</li>
+          <li>Accommodation</li>
+          <li>Meals away from the field</li>
+          <li>Passport and travel documents</li>
+          <li>Personal spending money</li>
+        </ul>
+      </div>
+    </div>
+    <p class="tour-note">Players travelling to the United States need a valid passport. Club registration is required to take part.</p>
+  </div>
+</section>
+
+<section class="about" id="interest">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Expression of interest</span>
+      <h2>Tell us if you are interested.</h2>
+      <p class="lede">A parent or guardian should complete the form for any player under 18. Answers go only to the tour organisers at Barrie Rugby Club and are used only to plan this tour.</p>
+    </div>
+    <a class="tour-btn" href="{TOUR_FORM_URL}" target="_blank" rel="noopener">Open the form in a new tab</a>
+    <div class="tour-form">
+      <iframe src="{TOUR_FORM_URL}?embedded=true" title="Tropical 7s 2027 expression of interest form" loading="lazy">Loading the form&hellip;</iframe>
+    </div>
+    <p class="tour-note">Questions about the tour? <a href="index.html#contact">Contact the club</a>.</p>
+  </div>
+</section>
+"""
+
 ANCHOR_FIX = """<script>
 (function(){
   if(!location.hash) return;
@@ -1992,6 +2105,15 @@ with open(f'{out_dir}/resources.html', 'w') as f:
         "resources", resources_body, bg_b64=BG_RESOURCES_B64,
         description="Club documents, registration links, kit and merch stores, and key resources for Barrie Rugby Club players, parents, and supporters.",
         path='/resources'))
+
+# Unlisted tour page: jsonld slot carries the noindex tag; deliberately absent
+# from nav, footer and SITEMAP.
+with open(f'{out_dir}/tour.html', 'w') as f:
+    f.write(page(
+        "Tropical 7s Tour 2027: Expression of Interest | Barrie Rugby Club",
+        "tour", tour_body,
+        description="Northern Storm girls tour to the Tropical 7s in Tampa, Florida, 23 to 28 March 2027. Open to all U16 and U18 girls. Expression of interest.",
+        path='/tour', jsonld=TOUR_NOINDEX))
 
 # hero background video is an external file (can't be base64-embedded like the
 # photos without bloating every load) — copy it alongside the generated HTML.
